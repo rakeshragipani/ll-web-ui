@@ -1,0 +1,168 @@
+<!-- Dialog modal -->
+<div
+    *ngIf="loginThreeAttempts || pointOne || pointTwo || pointThree || modifyEmailaws || userStatus || cancelSubscription">
+    <span class="material-icons cancelIcon" (click)="closeDialog()">clear</span>
+</div>
+<!-- <br> -->
+<div *ngIf="errMesg">
+    <h5>{{errorType ? errorType : 'Error message' | titlecase }}</h5>
+    <h6 style="color: red;">{{errMesg}}</h6>
+</div>
+
+<div *ngIf='paymentSuccess'>
+    <h5>Payment Successful</h5>
+    <h6>{{paymentSuccess}}</h6>
+</div>
+
+<div *ngIf="data.paymentFailure">
+    <h5 class="paymentFailed">Payment Failed</h5>
+    <h6>{{data.paymentFailure}}</h6>
+     <div mat-dialog-actions align="end">
+        <button mat-raised-button color="primary" (click)="closeDialog()">OK</button>
+    </div>
+</div>
+
+<div *ngIf="data.subscribeToAddCard">
+    <h6>{{data.subscribeToAddCard}}</h6>
+<div mat-dialog-actions align="end">
+        <button mat-raised-button color="primary" (click)="closeDialog()">OK</button>
+    </div>
+</div>
+
+<div *ngIf='changeSubscriptionSuccess'>
+    <h5>Change Subscription</h5>
+    <h6>{{changeSubscriptionSuccess}}</h6>
+</div>
+
+<div *ngIf='incorrectPassword'>
+    <h5>Incorrect Password</h5>
+    <h6>{{incorrectPassword}}</h6>
+</div>
+
+<!-- No provider list POP-UP -->
+<div *ngIf='pointOne && pointTwo && pointThree'>
+    <h3 class="popUpYodleeHeader">How do I find my Retirement Account Institution?</h3>
+    <br><br>
+    <!-- <div class="line-btw"></div>
+   <div class="fa-stack fa-2x text-center">
+       <i class="fa-stack-2x"></i>
+       <div class="step-background"><b>3</b></div>
+   </div> -->
+    <div class="row" *ngIf='pointOne && pointTwo && pointThree'>
+        <div class="col-sm-4">
+            <div align="center" class="YodleePoints">
+                <span class="step-background YodleePointsNumbers">1</span>
+            </div>
+            <div class="YodleeContent">
+                {{pointOne}}
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div align="center" class="YodleePoints">
+                <span class="step-background YodleePointsNumbers">2</span>
+            </div>
+            <div class="YodleeContent">
+                {{pointTwo}}
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div align="center" class="YodleePoints">
+                <span class="step-background YodleePointsNumbers">3</span>
+            </div>
+            <div class="YodleeContent">
+                {{pointThree}}
+            </div>
+        </div>
+    </div>
+    <br>
+    <hr style="color:lightgrey;">
+    <div mat-dialog-actions align="end" *ngIf='pointOne && pointTwo && pointThree'>
+        <button mat-raised-button (click)="closeDialog()" class="gotItBtn button">Got It!</button>
+    </div>
+    <br>
+</div>
+
+<!-- Login  3-Email-Attempts POP-UP -->
+<div *ngIf="loginThreeAttempts">
+    <br>
+    <div style="text-align:center">
+        <span class="material-icons-outlined cancel_icon">
+            cancel
+        </span>
+        <h4>Email not Verified</h4>
+    </div>
+    <p class="text_color">{{loginThreeAttempts}}</p>
+    <div mat-dialog-actions>
+        <button mat-stroked-button color="primary" (click)="emailVerify()">Proceed with the same Email</button>
+        <button mat-stroked-button color="primary" class="modifiy_email_btn" (click)="modifyEmail()">Modifiy your
+            Email</button>
+    </div>
+    <p *ngIf="emailVerifyLink" style="color: green;text-align: center;margin-top: 15px;">
+        {{emailVerifyLink}}</p>
+    <p *ngIf="emailVerifyLinkError" style="color: red;text-align: center;margin-top: 15px;">
+        {{emailVerifyLinkError}}</p>
+</div>
+<!-- Modifiy Email  POP-UP -->
+<div *ngIf="modifyEmailaws">
+    <h5><b>{{modifyEmailaws}}</b></h5>
+    <h5 *ngIf='emailChanged' style="color: green;font-size: 14px;text-align: center;">{{emailChanged}}</h5>
+    <h5 *ngIf='registerEmailId' style="color: red;font-size: 14px;text-align: center;">{{registerEmailId}}</h5>
+    <form #pageHeight [formGroup]="modifyEmailForm">
+        <div class="form-group mb-3">
+            <!-- <h6><b>Email</b></h6> -->
+            <div class="left-border">
+                <input type="email" formControlName="email" class="form-control" placeholder="Enter new email id here"
+                    [ngClass]="{ 'is-invalid':submitted && modifyEmailFormErr.email.errors }" required
+                    (focus)="registerEmailId = null" />
+            </div>
+            <div *ngIf="submitted && modifyEmailFormErr.email.errors" class="text-danger">
+                <div *ngIf="modifyEmailFormErr.email.errors.required" style="color:red">Please enter valid email id
+                </div>
+                <div *ngIf="modifyEmailFormErr.email.errors.email || modifyEmailFormErr.email.errors.pattern"
+                    style="color:red">Please
+                    enter valid email id
+                </div>
+            </div>
+        </div>
+        <div mat-dialog-actions align="center">
+            <button mat-raised-button color="primary" (click)="updateEmail()">Verify Email</button>
+        </div>
+    </form>
+</div>
+<!-- Cancel Subscription -->
+<div *ngIf="cancelSubscription">
+    <h5>Cancel Subscription</h5>
+    <br>
+    <p style="margin-bottom: 0rem !important;">{{cancelSubscription}}</p>
+    <p style="margin-bottom:0rem !important">{{cancelSubscriptionConfirmation}}</p>
+    <div mat-dialog-actions align="end">
+        <a mat-button (click)="closeDialog()">NO</a>
+        <button mat-raised-button color="primary" (click)="deleteSubscription()">YES</button>
+    </div>
+</div>
+
+<div *ngIf="deleteRetirementAccountConfirmation">
+    <h5>UnRegister RegisteredRetirementAccount</h5>
+    <br>
+    <p style="margin-bottom:0rem !important">{{deleteRetirementAccountConfirmation}}</p>
+    <div mat-dialog-actions align="end">
+        <a mat-button (click)="closeDialog()">NO</a>
+        <button mat-raised-button color="primary" (click)="deleteRetirementAccount()">YES</button>
+    </div>
+</div>
+
+<div *ngIf="data.state">
+    <p style="margin-bottom: 0rem !important;" *ngIf="data.state != 'signedup'">You cannot subscribe to our services without adding a retirement account.
+        Please add a Retirement account and come back here for the subscription.</p>
+    <p style="margin-bottom: 0rem !important;" *ngIf="data.state == 'signedup'">You cannot subscribe to our services without adding a retirement savings.
+            Please add a Retirement savings and come back here for the subscription.</p>
+    <div mat-dialog-actions align="end">
+        <button mat-raised-button color="primary" (click)="okAction()">OK</button>
+    </div>
+</div>
+
+<div mat-dialog-actions align="end"
+    *ngIf='!data.state && !paymentSuccess && !deleteRetirementAccountConfirmation && !data.paymentFailure && !data.subscribeToAddCard && !changeSubscriptionSuccess && !pointOne && !pointTwo && !pointThree && !loginThreeAttempts && !modifyEmailaws && !cancelSubscription'>
+    <button mat-raised-button color="primary" (click)="closeDialog()">close</button>
+</div>
+

@@ -1,0 +1,321 @@
+{
+    "accounts": [
+      {
+        "ll_account_id": 123456,
+        "lastUpdated": "2020-04-08T23:11:56Z",
+        "ret_account_type": "401K",
+        "provider_website": "https://my.voya.com/voyasso/index.html?domain=voyaretirement.voya.com#/login-pweb",
+        "provider_id": "5",
+        "provider_name": "Voya Financial",
+        "provider_name_pretty": "Voya (formerly Ing) - Your Retirement Plan",
+        "institution_image": "voya.png",
+        "includeInNetWorth": true,
+        "ret_account_holder_name": "Some Awesome Corporation",
+        "ret_account_plan_sponsor_name": "Some Awesome Corporation",
+        "account_number_masked": "xx4621",
+        "created_at": "2019-05-03T12:51:04.123-06:00",
+        "updated_at": "2020-06-27T13:15:59.123-05:00",
+        "managed": true,
+        "ll_user_statuses": [ "signedup", "riskanalyzed", "registeredaccounts", "accountanalysis", "subscribed" ],
+        "ret_account_statuses": [ "pending_analysis", "analysis_in_progress", "analysis_complete", "pending_optimization", "optimized" ],
+        "ret_account_status": "pending_optimization",
+        "refreshed_at": "2020-06-27T15:12:00.000-05:00",
+        "ret_account_balance_formatted": "$73,019",
+        "ret_account_balance_asofdate_formatted": "6/27/2020",
+        "ret_account_holding_balance": 73018.89,
+        "ret_account_holding_balance_formatted": "$73,019",
+        "last_refreshed_at_formatted": "6/27/2020",
+        "analyzed": true,
+        "account_order": 0,
+        "hidden": false,
+        "managed_account": false,
+        "show_approval_confirm": true,
+        "currency": "$",
+        "optimization_details": {
+          "summary": {
+            "text": "Please review account optimization instructions",
+            "analysis_id": "A12345",
+            "analysis_run_at": "2020-06-27T15:12:00.000-05:00",
+            "optimization_id": "A12345",
+            "optimization_pending": false,
+            "optimization_approved": false,
+            "optimization_auto_approved": false,
+            "optimization_scheduled_at": "2020-06-27T15:12:00.000-05:00",
+            "optimization_pending_userconfirm": true
+          },
+          "optimization_breakdown": {
+            "allocation_summary": {
+              "type": "allocation",
+              "icon": "allocation.gif",
+              "label": "ACCOUNT OPTIMIZATION ALLOCATION CHART",
+              "allocation_detail_page": {
+                "header_mesg": "tbd",
+                "current": {
+                  "header": {
+                    "allocation_label": "FUND NAME",
+                    "percent_label": "PERCENTAGE",
+                    "amount_label": "AMOUNT"
+                  },
+                  "values": [
+                    {
+                      "category": "STOCKS",
+                      "percent": 89,
+                      "amount": 89000
+                    },
+                    {
+                      "category": "BONDS",
+                      "percent": 10,
+                      "amount": 10000
+                    },
+                    {
+                      "category": "CASH",
+                      "percent": 1,
+                      "amount": 1000
+                    }
+                  ],
+                  "totals": {
+                    "category": "TOTAL",
+                    "percent": 100,
+                    "amount": 100000
+                  }
+                },
+                "recommended": {
+                  "header": {
+                    "allocation_label": "FUND NAME",
+                    "percent_label": "PERCENTAGE",
+                    "amount_label": "AMOUNT"
+                  },
+                  "values": [
+                    {
+                      "category": "STOCKS",
+                      "percent": 65,
+                      "amount": 65000
+                    },
+                    {
+                      "category": "BONDS",
+                      "percent": 30,
+                      "amount": 30000
+                    },
+                    {
+                      "category": "CASH",
+                      "percent": 5,
+                      "amount": 5000
+                    }
+                  ],
+                  "totals": {
+                    "category": "TOTAL",
+                    "percent": 100,
+                    "amount": 100000
+                  },
+                  "footer": {
+                    "message": "Analysis Run at "
+                  }
+  
+                }
+              }
+            },
+            "diversification_summary": {
+              "type": "diversification",
+              "icon": "diversification.gif",
+              "label": "ACCOUNT OPTIMIZATION DIVERSIFICATION CHART",
+              "diversification_detail_page": {
+                "header_mesg": "tbd",
+                "current": {
+                  "header": {
+                    "diversification_label": "FUND NAME",
+                    "percent_label": "PERCENTAGE",
+                    "amount_label": "AMOUNT"
+                  },
+                  "values_detail": [
+                    {
+                      "category": "STOCKS",
+                      "sub_category": [
+                        {
+                          "sub_label": "LargeCap",
+                          "percent": 65,
+                          "amount": 57200
+                        },
+                        {
+                          "sub_label": "MidCap",
+                          "percent": 15,
+                          "amount": 13200
+                        },
+                        {
+                          "sub_label": "SmallCap",
+                          "percent": 20,
+                          "amount": 17600
+                        }
+                      ]
+                    },
+                    {
+                      "category": "BONDS",
+                      "percent": 10,
+                      "amount": 10000
+                    },
+                    {
+                      "category": "CASH",
+                      "percent": 1,
+                      "amount": 1000
+                    }
+                  ],
+                  "totals": {
+                    "category": "TOTAL",
+                    "percent": 100,
+                    "amount": 100000
+                  }
+                },
+                "recommended": {
+                  "header": {
+                    "diversification_label": "FUND NAME",
+                    "percent_label": "PERCENTAGE",
+                    "amount_label": "AMOUNT"
+                  },
+                  "values_detail": [
+                    {
+                      "category": "STOCKS",
+                      "sub_category": [
+                        {
+                          "sub_label": "LargeCap",
+                          "percent": 50,
+                          "amount": 32500
+                        },
+                        {
+                          "sub_label": "MidCap",
+                          "percent": 30,
+                          "amount": 19500
+                        },
+                        {
+                          "sub_label": "SmallCap",
+                          "percent": 20,
+                          "amount": 13000
+                        }
+                      ]
+                    },
+                    {
+                      "category": "BONDS",
+                      "percent": 10,
+                      "amount": 10000
+                    },
+                    {
+                      "category": "CASH",
+                      "percent": 1,
+                      "amount": 1000
+                    }
+                  ],
+                  "totals": {
+                    "category": "TOTAL",
+                    "percent": 100,
+                    "amount": 100000
+                  },
+                  "footer": {
+                    "message": "Analysis Run at "
+                  }
+                }
+              }
+            },
+            "rebalance_summary": {
+              "type": "investments_rebalance",
+              "icon": "diversification.gif",
+              "label": "ACCOUNT OPTIMIZATION INVESTMENTS CHART",
+              "rebalance_detail_page": {
+                "header_mesg": "Your account has been auto-optimized",
+                "values_detail": [
+                  {
+                    "display_idx": 0,
+                    "cusip": "X10001",
+                    "fund_name": "VANGUARD TARGET RETIREMENT 2055 FUND",
+                    "current_percent": 25,
+                    "current_amount": 25000,
+                    "recommended_percent": 30,
+                    "recommended_amount": 30000
+                  },
+                  {
+                    "display_idx": 1,
+                    "cusip": "X200001",
+                    "fund_name": "VANGUARD TARGET RETIREMENT INCOME FUND",
+                    "current_percent": 15,
+                    "current_amount": 15000,
+                    "recommended_percent": 30,
+                    "recommended_amount": 30000
+                  },
+                  {
+                    "display_idx": 2,
+                    "cusip": "X300001",
+                    "fund_name": "VANGUARD TARGET RETIREMENT 2015 FUND",
+                    "current_percent": 9,
+                    "current_amount": 9000,
+                    "recommended_percent": 0,
+                    "recommended_amount": 0
+                  },
+                  {
+                    "display_idx": 3,
+                    "cusip": "X300001",
+                    "fund_name": "VANGUARD TARGET RETIREMENT 2060 FUND",
+                    "current_percent": 8,
+                    "current_amount": 8000,
+                    "recommended_percent": 0,
+                    "recommended_amount": 0
+                  },
+                  {
+                    "display_idx": 4,
+                    "cusip": "X400001",
+                    "fund_name": "VANGUARD TARGET RETIREMENT 2065 FUND",
+                    "current_percent": 20,
+                    "current_amount": 20000,
+                    "recommended_percent": 0,
+                    "recommended_amount": 0
+                  },
+                  {
+                    "display_idx": 5,
+                    "cusip": "X500001",
+                    "fund_name": "FIDELITY INVESTMENTS LARGE GROWTH CIT",
+                    "current_percent": 4,
+                    "current_amount": 4000,
+                    "recommended_percent": 4,
+                    "recommended_amount": 40000
+                  },
+                  {
+                    "display_idx": 6,
+                    "cusip": "X600001",
+                    "fund_name": "FIDELITY INVESTMENTS MID CAP VALUE CIT",
+                    "current_percent": 7,
+                    "current_amount": 7000,
+                    "recommended_percent": 0,
+                    "recommended_amount": 0
+                  },
+                  {
+                    "display_idx": 7,
+                    "cusip": "X700001",
+                    "fund_name": "FIDELITY BALANCED FUND",
+                    "current_percent": 3,
+                    "current_amount": 3000,
+                    "recommended_percent": 20,
+                    "recommended_amount": 20000
+                  },
+                  {
+                    "display_idx": 8,
+                    "cusip": "X800001",
+                    "fund_name": "DODGE & COX INTERNATIONAL STOCK FUND",
+                    "current_percent": 4,
+                    "current_amount": 4000,
+                    "recommended_percent": 16,
+                    "recommended_amount": 16000
+                  }
+                ],
+                "totals": {
+                  "category": "TOTAL",
+                  "current_percent": 100,
+                  "current_amount": 100000,
+                  "recommended_percent": 100,
+                  "recommended_amount": 100000
+                },
+                "footer": {
+                  "message": "Analysis Run at "
+                }             
+              }            
+            }
+          }
+        }
+      }
+    ]
+  }

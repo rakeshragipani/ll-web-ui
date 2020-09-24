@@ -1,0 +1,46 @@
+<mat-spinner strokeWidth="3" [diameter]="25" class="mat_spinner" *ngIf="showLoader"></mat-spinner>
+<form #pageHeight autocomplete="off" *ngIf='!showLoader' [formGroup]="retirementSavingForm" (ngSubmit)="next()">
+    <div class="row" *ngIf="riskQuestion">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <label class="label-color">{{ riskQuestion.text | translate}}</label>
+        </div>
+    </div>
+    <div class="row ml-2 mt-3 md-5">
+        <div class="col-md-7 col-xs-12">
+            <img alt="page3" src="assets/images/page3.png" class="img-fluid" style="height: 230px;">
+        </div>
+        <!-- <img alt="AngularExample Logo" class="retirement-image" src="assets/images/page3.png"> -->
+    </div>
+    <div class="row ml-1 md-5 mt-4">
+        <label class="label-color-retirement">Amount saved</label>
+    </div>
+    <div class="row md-5">
+        <div class="col-xs-7 col-sm-7 col-md-9 col-lg-9 col-xl-7">
+            <!-- <span class="currency">$</span> -->
+            <div class="left-border">
+                <input class="form-control form-control-lg" type="text" name="amountsaved" formControlName="amountsaved"
+                    [ngClass]="{ 'is-invalid': isSubmitted && f.amountsavedHidden.errors }"
+                    (keyup)="amountChange($event.target.value)" required />
+            </div>
+            <div>
+                <input class="input-length amount-text-color" type="hidden" name="amountsavedHidden"
+                    formControlName="amountsavedHidden"
+                    [ngClass]="{ 'is-invalid': isSubmitted && f.amountsavedHidden.errors }" required />
+            </div>
+            <div *ngIf="isSubmitted && f.amountsavedHidden.errors" class="text-danger">
+                <div *ngIf="f.amountsavedHidden.errors.required || retirementSavingForm.value.amountsavedHidden === 0">
+                    Please enter Retirement Savings.</div>
+                <!-- <div *ngIf="retirementSavingForm.value.amountsavedHidden === 0">Please enter Retirement Savings.</div> -->
+                <div
+                    *ngIf="f.amountsavedHidden.errors.min && !f.amountsavedHidden.errors.pattern && retirementSavingForm.value.amountsavedHidden !== 0">
+                    Minimum Amount should be at least 100.
+                </div>
+                <div *ngIf="f.amountsavedHidden.errors.max && !f.amountsavedHidden.errors.pattern">
+                    Maximum Amount allowed is 9,999,999.
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <button class="button" type="submit">{{'NextButton' | translate}}</button>
+</form>

@@ -1,0 +1,87 @@
+<div id="intro">
+   <div class="container h-100">
+      <div class="row h-100">
+         <div class="col-md-12 my-auto">
+            <div class="card-login">
+               <header>
+                  <img src="assets/images/left_lane_logo.png" alt="LeftLane" class="brand" />
+               </header>
+               <section class="p-md-4">
+                  <mat-spinner strokeWidth="4" [diameter]="25" class="mat_spinner" *ngIf="showLoader"></mat-spinner>
+                  <p *ngIf="userNameOrPasswordErr" class="errMesg">
+                     {{userNameOrPasswordErr}}</p>
+                  <form #pageHeight [formGroup]="loginForm">
+                     <div class="form-group mb-3">
+                        <label class="label-color">Email</label>
+                        <div class="left-border">
+                           <input type="email" formControlName="email" class="form-control"
+                              placeholder="Enter email here"
+                              [ngClass]="{ 'is-invalid':submitted && loginFormErr.email.errors }" required
+                              (click)="userNameOrPasswordErr = null || verificationFailed = null" />
+                        </div>
+                        <div *ngIf="submitted && loginFormErr.email.errors" class="text-danger">
+                           <div *ngIf="loginFormErr.email.errors.required" style="color:red">Please enter valid email id
+                           </div>
+                           <div *ngIf="loginFormErr.email.errors.email || loginFormErr.email.errors.pattern"
+                              style="color:red">Please enter valid email id
+                           </div>
+                        </div>
+                     </div>
+
+                     <div class="form-group mb-2">
+                        <label class="label-color">Password</label>
+                        <div class="left-border password-wrapper">
+                           <input [type]="hidePassword ? 'password' : 'text'" formControlName="password"
+                              class="form-control" placeholder="Enter password here" [ngClass]="{ 'is-invalid':submitted &&
+                              loginFormErr.password.errors
+                              }" required (click)="userNameOrPasswordErr = null" />
+                           <i (click)="hidePassword = !hidePassword"
+                              class="material-icons mat-icon">{{hidePassword ? 'visibility_off' : 'visibility'}}</i>
+                        </div>
+                        <div *ngIf="submitted && loginFormErr.password.errors" class="text-danger">
+                           <div *ngIf="loginFormErr.password.errors.required" style="color:red"> Please enter Password
+                           </div>
+                        </div>
+                     </div>
+                     <div class="form-group mb-1">
+                        <div class="checkbox">
+                           <label class="text-color-blue font-weight-bold font-size-note">
+                              <input type="checkbox" value="" class="mr-1" (change)='rememberUser($event)'
+                                 [checked]="checked">Remember me
+                           </label>
+                        </div>
+                     </div>
+                     <ngx-invisible-recaptcha #captchaElem [siteKey]="'6LetP7sZAAAAAN7a_ZAMdTdbhuwqzSCUXTgZ1e-C'"
+                        (reset)="handleReset()" (load)="handleLoad()" [useGlobalDomain]="false" [type]="type"
+                        [badge]="badge" formControlName="recaptcha">
+                     </ngx-invisible-recaptcha>
+                     <!-- <ngx-recaptcha2 #captchaElem [siteKey]="'6Leq1voUAAAAAB2GiZeSVHuUGgZ3Sf6AB_ZWR-8S'"
+                        (success)="handleSuccess($event)" [useGlobalDomain]="false" (reset)="handleReset()"
+                        (expire)="handleExpire()" (load)="handleLoad()" [size]="size" [hl]="lang" [theme]="theme"
+                        [type]="type" formControlName="recaptcha" [ngClass]="{ 'is-invalid':submitted &&
+                        loginFormErr.recaptcha.errors
+                        }">
+                     </ngx-recaptcha2> -->
+                     <!-- <div *ngIf="submitted && loginFormErr.recaptcha.errors" class="text-danger">
+                        <div *ngIf="loginFormErr.recaptcha.errors.required" style="color:red">please select captcha
+                        </div>
+                     </div> -->
+                     <!-- <br> -->
+                     <div class="row m-0">
+                        <div class="col-7 font-size-note p-0">
+                           <a [routerLink]="['/forgot-password']" class="text-gray">Need help with your password?</a>
+                           <br />
+                           <a [routerLink]="['/signup']" class="text-color-blue font-weight-bold">Don't have an
+                              account? Sign up!</a>
+                        </div>
+                        <div class="col-5 text-right p-0">
+                           <button class="button prime" type="submit" (click)="signIn()">Login</button>
+                        </div>
+                     </div>
+                  </form>
+               </section>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

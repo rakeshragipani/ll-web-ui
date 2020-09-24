@@ -1,0 +1,22 @@
+// @import "partials/colors";
+
+:host mat-toolbar {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  padding-top: .4rem;
+}
+
+.ll-header-logo {
+  padding: .7rem;
+  max-width: 100%;
+  min-width: 3rem;
+//   width: 17vw;
+}
+
+.header-row {
+    height: 100px;
+    // background: transparent;
+    border-bottom: 2px solid lightgrey;
+}

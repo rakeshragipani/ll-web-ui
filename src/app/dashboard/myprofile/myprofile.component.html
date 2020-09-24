@@ -1,0 +1,1274 @@
+<header class="profile-menu-header">
+  <h1>MY PROFILE</h1>
+</header>
+<mat-spinner strokeWidth="3" [diameter]="25" *ngIf="isLoading"></mat-spinner>
+<article *ngIf="!isLoading">
+  <div class="clearfix mb-2 imgalignment">
+    <div class="row md-5">
+      <div class="col ml-2 imgalignment">
+        <button class="segment" (click)="segmentChange(0)" [ngClass]="{ highlight: selectedSegmentIndex == 0 }">
+          Your Information
+        </button>
+        <button class="segment" (click)="segmentChange(1)" [ngClass]="{ highlight: selectedSegmentIndex == 1 }">
+          Your Settings
+        </button>
+        <button class="segment" (click)="segmentChange(2)" [ngClass]="{ highlight: selectedSegmentIndex == 2 }">
+          Financial Information
+        </button>
+      </div>
+      <span style="float: right;" *ngIf="SessionData.accountid">Account_Id&nbsp;:&nbsp;{{
+          SessionData.accountid ? SessionData.accountid : "AC_1023"
+        }}</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-10 hr-table-line lline">
+      <b>
+        <hr class="table-line" /></b>
+    </div>
+  </div>
+  <div class="row ml-2 imgalignment" *ngIf="selectedSegmentIndex == 0">
+    <div>
+      <div class="hoverable float-left mr-3">
+        <img [src]="profileimage ? profileimage : 'assets/images/profileImage.jpg'" alt="Gravatar" />
+      </div>
+    </div>
+    <div class="col">
+      <div>
+        <input #fileInput id="fileInput" type="file" accept="image/*" (change)="onSelectFile($event)" />
+        <img src="assets/images/icon/pencilIcon.svg" alt="Current" class="pencilIcon" (click)="openDialog()" />
+        <br /><br />
+        <i *ngIf="profileimage" class="fa fa-trash trash-icon trashIcon" aria-hidden="true" (click)="delete()"></i>
+      </div>
+      <div class="ml-2">
+        <p *ngIf="errorMsg" style="color: red;">
+          Kindly upload picture either in jpeg or png format
+        </p>
+        <p *ngIf="invalidImageDimations" style="color: red;">
+          Profile image dimensions should not be more than 768 x 1024
+        </p>
+      </div>
+    </div>
+  </div>
+  <section>
+    <form [formGroup]="profileInfoForm" (ngSubmit)="updateProfileInfo()">
+      <div formGroupName="general" *ngIf="selectedSegmentIndex == 0">
+        <div class="row col-md-12 firstrow">
+          <div class="col-md-4 col-sm-12">
+            <label class="label-color">First name</label>
+            <div class="left-border">
+              <input type="text" class="form-control" formControlName="firstName" placeholder="Riccardo" [ngClass]="{
+                  'is-invalid':
+                    isSubmitted &&
+                    profileInfoForm.get('general.firstName').errors
+                }" required />
+            </div>
+            <div *ngIf="
+                isSubmitted && profileInfoForm.get('general.firstName').errors
+              " class="text-danger">
+              <div *ngIf="profileInfoForm.get('general.firstName').errors.required">
+                Please enter First Name.
+              </div>
+              <div *ngIf="profileInfoForm.get('general.firstName').errors.pattern">
+                Please enter valid First Name.
+              </div>
+              <div *ngIf="
+                  profileInfoForm.get('general.firstName').errors.minlength &&
+                  !profileInfoForm.get('general.firstName').errors.pattern
+                ">
+                Please input First Name with a minimum of 3 characters/First
+                Name is too short.
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <label class="label-color">Last name</label>
+            <div class="left-border">
+              <input type="text" formControlName="lastName" class="form-control" placeholder="Smith" [ngClass]="{
+                  'is-invalid':
+                    isSubmitted &&
+                    profileInfoForm.get('general.lastName').errors
+                }" required />
+            </div>
+            <div *ngIf="
+                isSubmitted && profileInfoForm.get('general.lastName').errors
+              " class="text-danger">
+              <div *ngIf="profileInfoForm.get('general.lastName').errors.required">
+                Please enter Last Name.
+              </div>
+              <div *ngIf="profileInfoForm.get('general.lastName').errors.pattern">
+                Please enter valid Last Name.
+              </div>
+              <div *ngIf="
+                  profileInfoForm.get('general.lastName').errors.minlength &&
+                  !profileInfoForm.get('general.lastName').errors.pattern
+                ">
+                Please input Last Name with a minimum of 3 characters/Last Name
+                is too short.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row col-md-12 secondrow">
+          <div class="col-md-4 col-sm-12">
+            <label class="label-color">Email address</label>
+            <div class="left-border">
+              <input type="emailAddress" formControlName="emailAddress" class="form-control"
+                placeholder="riccardo.smith@email.com" [ngClass]="{
+                  'is-invalid':
+                    isSubmitted &&
+                    profileInfoForm.get('general.emailAddress').errors
+                }" required (focus)="emailVerifyLinkError = null" />
+            </div>
+            <div *ngIf="
+                isSubmitted &&
+                profileInfoForm.get('general.emailAddress').errors
+              " class="text-danger">
+              <div *ngIf="
+                  profileInfoForm.get('general.emailAddress').errors.required
+                ">
+                Please enter Email address.
+              </div>
+              <div *ngIf="
+                  profileInfoForm.get('general.emailAddress').errors.pattern
+                ">
+                Please enter valid Email address.
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <label class="label-color">Mobile Number</label>
+            <div class="left-border">
+              <span class="form-control textfontSize" [ngClass]="{
+                  'is-invalid':
+                    isSubmitted &&
+                    profileInfoForm.get('general.mobileNumber').errors
+                }">
+                +1
+                <input type="text" formControlName="mobileNumber" class="textborder" placeholder="698-611-8558" (keyup)="
+                    $event.target.value = formatPhone($event.target.value)
+                  " maxlength="12" required />
+              </span>
+            </div>
+            <div *ngIf="
+                isSubmitted &&
+                profileInfoForm.get('general.mobileNumber').errors
+              " class="text-danger">
+              <div *ngIf="
+                  profileInfoForm.get('general.mobileNumber').errors.required
+                ">
+                Please enter Mobile Number
+              </div>
+              <div *ngIf="
+                  profileInfoForm.get('general.mobileNumber').errors.pattern
+                ">
+                Please enter Valid Mobile Number
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row col-md-12 thirdrow">
+          <div class="col-md-4 col-sm-12">
+            <label class="label-color">Street address</label>
+            <div class="left-border">
+              <input type="streetAddress" formControlName="streetAddress" class="form-control" placeholder="15 Ave S"
+                [ngClass]="{
+                  'is-invalid':
+                    isSubmitted &&
+                    profileInfoForm.get('general.streetAddress').errors
+                }" required />
+            </div>
+            <div *ngIf="
+                isSubmitted &&
+                profileInfoForm.get('general.streetAddress').errors
+              " class="text-danger">
+              <div *ngIf="
+                  profileInfoForm.get('general.streetAddress').errors.required
+                ">
+                Please enter Street Address
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <label class="label-color">Apt., Suit,etc.</label>
+            <div class="left-border">
+              <input type="suitAddress" formControlName="suitAddress" class="form-control" placeholder="Apt 10"
+                [ngClass]="{
+                  'is-invalid':
+                    isSubmitted &&
+                    profileInfoForm.get('general.suitAddress').errors
+                }" required />
+            </div>
+            <div *ngIf="
+                isSubmitted && profileInfoForm.get('general.suitAddress').errors
+              " class="text-danger">
+              <div *ngIf="
+                  profileInfoForm.get('general.suitAddress').errors.required
+                ">
+                Please enter Apt., suite, etc
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row col-md-12 fourthrow">
+          <div class="col-md-4 col-sm-12">
+            <label class="label-color">City</label>
+            <div class="left-border">
+              <input type="streetAddress" formControlName="city" class="form-control" placeholder="Chicago" [ngClass]="{
+                  'is-invalid':
+                    isSubmitted && profileInfoForm.get('general.city').errors
+                }" required />
+            </div>
+            <div *ngIf="isSubmitted && profileInfoForm.get('general.city').errors" class="text-danger">
+              <div *ngIf="profileInfoForm.get('general.city').errors.required">
+                Please Enter city
+              </div>
+              <div *ngIf="profileInfoForm.get('general.city').errors.pattern">
+                Please Enter Valid city
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-12">
+            <label class="label-color">State</label>
+            <div class="left-border">
+              <input type="state" formControlName="state" class="form-control" placeholder="IL" [ngClass]="{
+                  'is-invalid':
+                    isSubmitted && profileInfoForm.get('general.state').errors
+                }" required />
+            </div>
+            <div *ngIf="isSubmitted && profileInfoForm.get('general.state').errors" class="text-danger">
+              <div *ngIf="profileInfoForm.get('general.state').errors.required">
+                Please enter state
+              </div>
+              <div *ngIf="profileInfoForm.get('general.state').errors.pattern">
+                Please enter valid state
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-12">
+            <label class="label-color">Zipcode</label>
+            <div class="left-border">
+              <input type="zipcode" formControlName="zipCode" class="form-control" placeholder="60608" [ngClass]="{
+                  'is-invalid':
+                    isSubmitted && profileInfoForm.get('general.zipCode').errors
+                }" required />
+            </div>
+            <div *ngIf="
+                isSubmitted && profileInfoForm.get('general.zipCode').errors
+              " class="text-danger">
+              <div *ngIf="profileInfoForm.get('general.zipCode').errors.required">
+                Please enter Zip code
+              </div>
+              <div *ngIf="profileInfoForm.get('general.zipCode').errors.pattern">
+                Please enter valid Zip code
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-10 hr-table-line lline mb-2">
+            <b>
+              <hr class="table-lined" /></b>
+          </div>
+        </div>
+        <div class="row col-md-12 fifthrow">
+          <div class="col-md-2 col-sm-12 col-xs-12">
+            <label class="label-color">Retirement Age</label>
+            <div class="left-border">
+              <input type="text" formControlName="retirementAge" class="form-control" placeholder="70" [ngClass]="{
+                  'is-invalid':
+                    (isSubmitted &&
+                      profileInfoForm.get('general.retirementAge').errors) ||
+                    comparingAges
+                }" (keyup)="modifyAge('rAge')" required />
+            </div>
+            <div *ngIf="
+                isSubmitted &&
+                profileInfoForm.get('general.retirementAge').errors
+              " class="text-danger">
+              <div *ngIf="
+                  profileInfoForm.get('general.retirementAge').errors.required
+                ">
+                Please enter Retirement Age.
+              </div>
+              <div *ngIf="
+                  profileInfoForm.get('general.retirementAge').errors.pattern
+                ">
+                Please enter Retirement Age in digits
+              </div>
+              <div *ngIf="
+                  profileInfoForm.get('general.retirementAge').errors.min &&
+                  !profileInfoForm.get('general.retirementAge').errors.pattern
+                ">
+                Minimum value for Retirement Age should be at least 55
+              </div>
+              <div *ngIf="
+                  profileInfoForm.get('general.retirementAge').errors.max &&
+                  !profileInfoForm.get('general.retirementAge').errors.pattern
+                ">
+                Maximum value for Retirement Age should be 100.
+              </div>
+            </div>
+            <!-- <div *ngIf="isSubmitted && profileInfoForm.get('general.retirementAge').errors" class="text-danger">
+                     <div *ngIf="profileInfoForm.get('general.retirementAge').errors.required">Please enter Retirement
+                        Age.</div>
+                     <div *ngIf="profileInfoForm.get('general.retirementAge').errors.pattern">Please enter Retirement
+                        Age in digits</div>
+                     <div
+                        *ngIf="profileInfoForm.get('general.retirementAge').errors.min  && !profileInfoForm.get('general.retirementAge').errors.pattern">
+                        Minimum value
+                        for Retirement Age should be at least 55</div>
+                     <div
+                        *ngIf="profileInfoForm.get('general.retirementAge').errors.max && !profileInfoForm.get('general.retirementAge').errors.pattern">
+                        Maximum value for
+                        Retirement Age should be 100.</div>
+                  </div> -->
+          </div>
+          <div class="col-md-3 col-sm-12 col-xs-12">
+            <label class="label-color">Birth Date</label>
+            <!-- <div class="left-border">
+                     <input type="zipcode" disabled placeholder="June15" class="form-control">
+                     <span class="input_img"><i class="fa fa-pencil"></i></span> -->
+            <div class="left-border-calender-userprofile">
+              <input type="text" placeholder="MM/DD/YYYY" formControlName="dateOfBirth" class="form-control"
+                ngbDatepicker #d="ngbDatepicker" [minDate]="minDate" [maxDate]="maxDate" />
+              <span class="input_img">
+                <i class="fa fa-pencil" aria-hidden="true" (click)="d.toggle()"></i>
+              </span>
+            </div>
+            <!-- <div
+              *ngIf="
+                isSubmitted && profileInfoForm.get('general.dateOfBirth').errors
+              "
+              class="text-danger"
+            >
+              <div
+                *ngIf="
+                  profileInfoForm.get('general.dateOfBirth').errors.required
+                "
+              >
+                Please enter Date of Birth
+              </div>
+            </div> -->
+            <div *ngIf="calenderFormatErrMsg" class="text-danger">
+              Please enter date in MM/DD/YYYY format.
+            </div>
+            <div *ngIf="
+                !calenderFormatErrMsg &&
+                profileInfoForm.get('general.age').errors?.min &&
+                !profileInfoForm.get('general.age').errors?.pattern &&
+                profileInfoForm.get('general.age').errors?.max &&
+                !profileInfoForm.get('general.age').errors?.pattern
+              " class="text-danger">
+              Please enter valid date
+            </div>
+
+            <!-- <div class="left-border-calender-userprofile">
+                     <div class="calenderInput">
+                     <input type="text" placeholder="MM/DD/YYYY" formControlName="dateOfBirth" class="form-control" ngbDatepicker #d="ngbDatepicker" [minDate]='minDate' [maxDate]='maxDate'>
+                     <span class="input_img">
+                         <i class="fa fa-pencil" aria-hidden="true" (click)="d.toggle()"></i>
+                     </span>
+                     </div>
+                  </div> -->
+          </div>
+          <div class="col-md-2 col-sm-12 col-xs-12 age_alignment">
+            <label class="label-color">Actual Age</label>
+            <div class="left-border">
+              <input type="text" class="form-control" formControlName="age" placeholder="67" [ngClass]="{
+                  'is-invalid':
+                    (isSubmitted &&
+                      profileInfoForm.get('general.age').errors) ||
+                    comparingAges
+                }" (keyup)="modifyAge('age')" required />
+            </div>
+
+            <div *ngIf="isSubmitted && profileInfoForm.get('general.age').errors" class="text-danger">
+              <div *ngIf="profileInfoForm.get('general.age').errors.required">
+                Please enter Date of Birth or Age.
+              </div>
+              <div *ngIf="profileInfoForm.get('general.age').errors.pattern">
+                Please enter Age in digits
+              </div>
+              <div *ngIf="
+                  profileInfoForm.get('general.age').errors.min &&
+                  !profileInfoForm.get('general.age').errors.pattern
+                ">
+                Minimum value for Age should be >= 21
+              </div>
+              <div *ngIf="
+                  profileInfoForm.get('general.age').errors.max &&
+                  !profileInfoForm.get('general.age').errors.pattern
+                ">
+                Maximum value for Age Should be 130
+              </div>
+            </div>
+            <div *ngIf="
+                isSubmitted &&
+                !profileInfoForm.get('general.age').errors &&
+                comparingAges
+              " class="text-danger">
+              Age must not be greater than Retirement Age.
+            </div>
+            <!-- <div *ngIf="isSubmitted && profileInfoForm.get('general.age').errors" class="text-danger">
+                     <div *ngIf="profileInfoForm.get('general.age').errors.required">Please enter Actual Age.</div>
+                     <div *ngIf="profileInfoForm.get('general.age').errors.pattern">Please enter Age in digits</div>
+                     <div
+                        *ngIf="profileInfoForm.get('general.age').errors.min && !profileInfoForm.get('general.age').errors.pattern">
+                        Minimum value for Age should be >= 21
+                     </div>
+                     <div
+                        *ngIf="profileInfoForm.get('general.age').errors.max && !profileInfoForm.get('general.age').errors.pattern">
+                        Maximum value for Age Should be 130
+                     </div>
+                  </div>
+                  <div *ngIf="isSubmitted && !profileInfoForm.get('general.age').errors && comparingAges"
+                     class="text-danger">
+                     Age must not be greater than Retirement Age.
+                  </div> -->
+          </div>
+          <div *ngIf="
+              profileInfoForm.get('general.retirementAge').dirty ||
+              profileInfoForm.get('general.age').dirty
+            " class="col-sm-12">
+            <span class="font-weight-bolder text-danger">Changing Actual age, Birth Date and Retirement Age will trigger
+              the recalculation of risk analysis process</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-10 hr-table-line lline">
+            <b>
+              <hr class="table-lined" /></b>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-10 ml-2 imgalignment">
+            <p>
+              <span style="opacity: 0.8;">This information is for LeftLane use ONLY. We will never sell
+                your profile information to third parties. See our
+              </span>
+              <a href="https://www.google.com" target="_blank">Privacy Policy</a><span style="opacity: 0.8;">
+                for how we use this information.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div formGroupName="communication" *ngIf="selectedSegmentIndex == 1">
+        <div class="row col-sm-12 sixthrow">
+          <div class="col-md-5 col-sm-6">
+            <p><b>You can text me about my account</b></p>
+          </div>
+          <div class="col-md-1 col-sm-6">
+            <label class="switch">
+              <input type="checkbox" formControlName="accountInfo" class="form-control" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+        <div class="row col-sm-12 seventhrow">
+          <div class="col-md-5 col-sm-6">
+            <p><b>I want more secure login (MFA)</b></p>
+          </div>
+          <div class="col-md-1 col-sm-6">
+            <label class="switch">
+              <input type="checkbox" formControlName="secureLogin" class="form-control" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+        <div class="row col-sm-12 eleventhrow">
+          <div class="col-md-5 col-sm-6">
+            <p><b>I'd like to receive periodic newsletters</b></p>
+          </div>
+          <div class="col-md-1 col-sm-6">
+            <label class="switch">
+              <input type="checkbox" formControlName="newsLetters" class="form-control" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+        <div class="row col-sm-12 twelthrow">
+          <div class="col-md-5 col-sm-6">
+            <p><b>I'd like to be involved with new ideas and features</b></p>
+          </div>
+          <div class="col-md-1 col-sm-6">
+            <label class="switch">
+              <input type="checkbox" formControlName="newFeatures" class="form-control" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+        <div class="row col-sm-12 eighthrow">
+          <div class="col-md-5 col-sm-6">
+            <p><b>I'd like to be involved in beta programs</b></p>
+          </div>
+          <div class="col-md-1 col-sm-6">
+            <label class="switch">
+              <input type="checkbox" formControlName="betaPrograms" class="form-control" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-10 hr-table-line lline">
+            <b>
+              <hr class="table-lined" /></b>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-10 ml-2 imgalignment">
+            <p>
+              <a data-toggle="modal" data-target="#changePasswordModal">Need to change your password ?</a>&nbsp;
+              <button type="button" class="btn btn-blue add-close-btn" (click)="openCloseUser(closeUser)">Close</button>
+              &nbsp;
+              <button type="button" class="btn btn-blue add-close-forget-btn"
+                (click)="openCloseUser(closeAndForgetUser)">Close And Forget</button>
+
+            </p>
+            <ng-template class="modal fade" #closeUser let-modal>
+              <div class="modal-header">
+                <h3 class="modal-title" id="modal-basic-title">Close</h3>
+              </div>
+              <div class="modal-body" *ngIf="nextPayementDate">
+                Your current subscription ends on {{nextPayementDate}}. Your subscription will be cancelled with
+                immediate effect, You’ll not be able to login to our website with the current email after this
+                operation. Are you sure, you want to proceed?
+              </div>
+              <div class="modal-body" *ngIf="!nextPayementDate">
+                Your subscription will be cancelled with
+                immediate effect, You’ll not be able to login to our website with the current email after this
+                operation. Are you sure, you want to proceed?
+              </div>
+              <div class="modal-footer">
+                <mat-spinner strokeWidth="3" [diameter]="25" *ngIf="modalLoading"></mat-spinner>
+                <button type="button" class="btn btn-blue btn-sm button pull-right"
+                  (click)="cancelUser('SOFT')">Yes</button>
+                <button type="button" class="btn btn-blue btn-sm button pull-right" (click)="modal.close()">NO</button>
+              </div>
+            </ng-template>
+            <ng-template #closeAndForgetUser let-modal>
+              <div class="modal-header">
+                <h3 class="modal-title" id="modal-basic-title">Close And Forget</h3>
+              </div>
+              <div class="modal-body" *ngIf="nextPayementDate">
+                Your current subscription ends on {{nextPayementDate}}. Your subscription will be cancelled with
+                immediate effect, Your data will be permanently deleted. You’ll not be able to login to our website with
+                the current email after this operation. Are you sure, you want to proceed?
+              </div>
+              <div class="modal-body" *ngIf="!nextPayementDate">
+                Your subscription will be cancelled with
+                immediate effect, Your data will be permanently deleted. You’ll not be able to login to our website with
+                the current email after this operation. Are you sure, you want to proceed?
+              </div>
+              <div class="modal-footer">
+                <mat-spinner strokeWidth="3" [diameter]="25" *ngIf="modalLoading"></mat-spinner>
+                <button type="button" class="btn btn-blue btn-sm button" (click)="cancelUser('HARD')">Yes</button>
+                <button type="button" class="btn btn-blue btn-sm button pull-right" (click)="modal.close()">NO</button>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+      <div formGroupName="optional" *ngIf="selectedSegmentIndex == 2">
+        <div class="row col-sm-12 ninthrow">
+          <div class="col-md-5 col-sm-6">
+            <div class="bgcolor">
+              <h6><b>Family Status</b></h6>
+              <hr class="collapseLine" />
+            </div>
+            <div class="ninthrow"><b>Are you married?</b><br /></div>
+            <!-- <div class="ninthrow">
+                     <span class="tenthrow">
+                        <input type="radio" id="married" formControlName="areyoumarried" name="areyoumarried" 
+                           class="form-control" value="yes"> -->
+            <!-- [ngClass]="{ 'is-invalid': isSubmitted && profileInfoForm.get('optional.areyoumarried').errors }" required  > -->
+            <!-- </span>
+                     <span class="tenthrow">
+                        <label for="married">Yes</label>
+                     </span> -->
+            <!-- <span *ngIf="isSubmitted && profileInfoForm.get('optional.areyoumarried').errors" class="text-danger">
+                        <div *ngIf="profileInfoForm.get('optional.areyoumarried').errors.required">Please answer married
+                           </div>
+                     </span> -->
+            <!-- <span class="tenthrow">
+                        <input type="radio" id="unmarried" formControlName="areyoumarried" name="areyoumarried" 
+                           class="form-control" value="no"> -->
+            <!-- [ngClass]="{ 'is-invalid': isSubmitted && profileInfoForm.get('optional.areyoumarried').errors }" required >  -->
+            <!-- </span>
+                     <span class="tenthrow">
+                        <label for="unmarried">No</label>
+                     </span>
+                     <span *ngIf="isSubmitted && profileInfoForm.get('optional.areyoumarried').errors" class="text-danger">
+                        <div *ngIf="profileInfoForm.get('optional.areyoumarried').errors.required">Please answer married
+                           </div>
+                     </span>
+                  </div> -->
+
+            <div class="ninthrow">
+              <span class="tenthrow">
+                <input type="radio" id="married" name="areYouMarried" formControlName="areYouMarried" value="yes" />
+              </span>
+              <span class="tenthrow">
+                <label for="married">Yes</label>
+              </span>
+              <span class="tenthrow">
+                <input type="radio" id="unmarried" name="areYouMarried" formControlName="areYouMarried" value="no" />
+              </span>
+              <span class="tenthrow">
+                <label for="unmarried">No</label>
+              </span>
+              <span *ngIf="
+                  isSubmitted &&
+                  profileInfoForm.get('optional.areYouMarried').errors
+                " class="text-danger">
+                <div *ngIf="
+                    profileInfoForm.get('optional.areYouMarried').errors
+                      .required
+                  ">
+                  Please answer Are you married?
+                </div>
+              </span>
+            </div>
+
+            <div class="ninthrow"><b>Number of kids</b><br /></div>
+            <div class="ninthrow">
+              <span class="tenthrow">
+                <input type="radio" id="1kid" formControlName="numberOfKids" name="numberOfKids" value="1" />
+              </span>
+              <span class="tenthrow">
+                <label for="1kid">1</label>
+              </span>
+              <span class="tenthrow">
+                <input type="radio" id="2kids" formControlName="numberOfKids" name="numberOfKids" value="2" />
+              </span>
+              <span class="tenthrow">
+                <label for="2kids">2</label>
+              </span>
+              <span class="tenthrow">
+                <input type="radio" id="3kids" formControlName="numberOfKids" name="numberOfKids" value="3" />
+              </span>
+              <span class="tenthrow">
+                <label for="3kids">3</label>
+              </span>
+              <span class="tenthrow">
+                <input type="radio" id="4kids" formControlName="numberOfKids" name="numberOfKids" value="4" />
+              </span>
+              <span class="tenthrow">
+                <label for="4kids">4</label>
+              </span>
+              <span class="tenthrow">
+                <input type="radio" id="morekids" formControlName="numberOfKids" name="numberOfKids" value="More" />
+              </span>
+              <span class="tenthrow">
+                <label for="morekids">More</label>
+              </span>
+              <span *ngIf="
+                  isSubmitted &&
+                  profileInfoForm.get('optional.numberOfKids').errors
+                " class="text-danger">
+                <div *ngIf="
+                    profileInfoForm.get('optional.numberOfKids').errors.required
+                  ">
+                  Please answer Number of Kids
+                </div>
+              </span>
+            </div>
+            <div class="ninthrow">
+              <div class="margintopalignment10 bgcolor">
+                <h6><b>Employment</b></h6>
+                <hr class="collapseLine" />
+              </div>
+              <div class="ninthrow">
+                <b>Are you currently employed?</b><br />
+              </div>
+              <div class="ninthrow">
+                <span class="tenthrow">
+                  <input type="radio" id="employed" name="areYouEmployed" formControlName="areYouEmployed"
+                    value="yes" />
+                </span>
+                <span class="tenthrow">
+                  <label for="employed">Yes</label>
+                </span>
+                <span class="tenthrow">
+                  <input type="radio" id="unemployed" name="areYouEmployed" formControlName="areYouEmployed"
+                    value="no" />
+                </span>
+                <span class="tenthrow">
+                  <label for="unemployed">No</label>
+                </span>
+                <span *ngIf="
+                    isSubmitted &&
+                    profileInfoForm.get('optional.areYouEmployed').errors
+                  " class="text-danger">
+                  <div *ngIf="
+                      profileInfoForm.get('optional.areYouEmployed').errors
+                        .required
+                    ">
+                    Please answer Are You currently employed?
+                  </div>
+                </span>
+              </div>
+              <div class="ninthrow">
+                <div *ngIf="profileInfoForm.get('optional.annualIncome').value">
+                  <b>Annual Income</b>
+                </div>
+                <input type="text" formControlName="annualIncome" class="form-control inputfields"
+                  placeholder="What is your annual income?" [ngClass]="{
+                    'is-invalid':
+                      isSubmitted &&
+                      (profileInfoForm.get('optional.annualIncome').errors ||
+                        profileInfoForm.get('optional.areYouEmployed').errors)
+                  }" (keyup)="annualIncomeChange($event.target.value)" />
+                <div *ngIf="
+                    isSubmitted &&
+                    profileInfoForm.get('optional.annualIncome').errors
+                  " class="text-danger">
+                  <div *ngIf="
+                      profileInfoForm.get('optional.annualIncome').errors
+                        .required
+                    ">
+                    Please enter your annual income
+                  </div>
+                  <div *ngIf="
+                      profileInfoForm.get('optional.annualIncome').errors
+                        .pattern
+                    ">
+                    Please enter Valid Annual Income
+                  </div>
+                </div>
+              </div>
+              <div class="margintopalignment8 bgcolor">
+                <h6><b>Contributions</b></h6>
+                <hr class="collapseLine" />
+              </div>
+              <div class="ninthrow">
+                <div class="labelAlignment" *ngIf="
+                    profileInfoForm.get(
+                      'optional.percentageContributionToRetirementPlan'
+                    ).value
+                  ">
+                  <b>Percentage Contribution To Retirement Plan</b>
+                </div>
+                <input type="text" formControlName="percentageContributionToRetirementPlan"
+                  class="form-control margintop inputfields" placeholder="Percentage Contribution to Retirement Plan"
+                  [ngClass]="{
+                    'is-invalid':
+                      isSubmitted &&
+                      profileInfoForm.get(
+                        'optional.percentageContributionToRetirementPlan'
+                      ).errors
+                  }" (keyup)="
+                    percentageContributionToRetirementPlanChange(
+                      $event.target.value
+                    )
+                  " required />
+                <div *ngIf="
+                    isSubmitted &&
+                    profileInfoForm.get(
+                      'optional.percentageContributionToRetirementPlan'
+                    ).errors
+                  " class="text-danger">
+                  <div *ngIf="
+                      profileInfoForm.get(
+                        'optional.percentageContributionToRetirementPlan'
+                      ).errors.required
+                    ">
+                    Please answer Percentage Contribution to Retirement Plan
+                  </div>
+                  <div *ngIf="
+                      profileInfoForm.get(
+                        'optional.percentageContributionToRetirementPlan'
+                      ).errors.pattern
+                    ">
+                    Please enter Valid Percentage Contribution to Retirement
+                    Plan
+                  </div>
+                </div>
+                <div class="labelAlignment" *ngIf="
+                    profileInfoForm.get('optional.PercentageToEmployerMatch')
+                      .value
+                  ">
+                  <b>What percent of your income will your employer match?</b>
+                </div>
+                <input type="text" formControlName="PercentageToEmployerMatch"
+                  class="form-control margintop inputfields"
+                  placeholder="What percent of your income will your employer match?" [ngClass]="{
+                    'is-invalid':
+                      isSubmitted &&
+                      profileInfoForm.get('optional.PercentageToEmployerMatch')
+                        .errors
+                  }" (keyup)="percentageToEmployerMatchChange($event.target.value)" required />
+                <div *ngIf="
+                    isSubmitted &&
+                    profileInfoForm.get('optional.PercentageToEmployerMatch')
+                      .errors
+                  " class="text-danger">
+                  <div *ngIf="
+                      profileInfoForm.get('optional.PercentageToEmployerMatch')
+                        .errors.required
+                    ">
+                    Please answer What percent of your income will your employer
+                    match?
+                  </div>
+                  <div *ngIf="
+                      profileInfoForm.get('optional.PercentageToEmployerMatch')
+                        .errors.pattern
+                    ">
+                    Please enter Valid percent of your income will your employer
+                    match
+                  </div>
+                </div>
+              </div>
+              <div class="margintopalignment8 bgcolor">
+                <h6><b>Savings</b></h6>
+                <hr class="collapseLine" />
+              </div>
+              <div class="ninthrow">
+                <b>Do you have 3 to 6 months of living expenses saved?</b><br />
+              </div>
+              <div class="ninthrow">
+                <span class="tenthrow">
+                  <input type="radio" id="livingexpensesSaved" name="livingExpenses" formControlName="livingExpenses"
+                    value="yes" />
+                </span>
+                <span class="tenthrow">
+                  <label for="livingexpensesSaved">Yes</label>
+                </span>
+                <span class="tenthrow">
+                  <input type="radio" id="livingexpensesunSaved" name="livingExpenses" formControlName="livingExpenses"
+                    value="no" />
+                </span>
+                <span class="tenthrow">
+                  <label for="livingexpensesunSaved">No</label>
+                </span>
+                <span *ngIf="
+                    isSubmitted &&
+                    profileInfoForm.get('optional.livingExpenses').errors
+                  " class="text-danger">
+                  <div *ngIf="
+                      profileInfoForm.get('optional.livingExpenses').errors
+                        .required
+                    ">
+                    Please answer Do you have 3 to 6 months of living expenses
+                    saved?
+                  </div>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-5 col-sm-6">
+            <div class="bgcolor">
+              <h6><b>Home</b></h6>
+              <hr class="collapseLine" />
+            </div>
+            <div class="ninthrow"><b>Do you rent or own?</b><br /></div>
+            <div class="ninthrow">
+              <span class="tenthrow">
+                <input type="radio" id="rent" name="rentOrOwn" formControlName="rentOrOwn" value="rent" />
+              </span>
+              <span class="tenthrow">
+                <label for="rent">Rent</label>
+              </span>
+              <span class="tenthrow">
+                <input type="radio" id="own" name="rentOrOwn" formControlName="rentOrOwn" value="own" />
+              </span>
+              <span class="tenthrow">
+                <label for="own">Own</label>
+              </span>
+              <span *ngIf="
+                  isSubmitted &&
+                  profileInfoForm.get('optional.rentOrOwn').errors
+                " class="text-danger">
+                <div *ngIf="
+                    profileInfoForm.get('optional.rentOrOwn').errors.required
+                  ">
+                  Please answer Do you rent or own?
+                </div>
+              </span>
+            </div>
+            <div class="ninthrow" *ngIf="profileInfoForm.get('optional.rentOrOwn').value == 'rent'">
+              <!-- <input type="text" formControlName="rentMoney" class="form-control inputfields"
+                           placeholder="what is"> -->
+              <div *ngIf="profileInfoForm.get('optional.rentAmount').value">
+                <b>Monthly Rent</b>
+              </div>
+              <input type="text" formControlName="rentAmount" class="form-control inputfields"
+                placeholder="Monthly Rent" [ngClass]="{
+                  'is-invalid':
+                    isSubmitted &&
+                    profileInfoForm.get('optional.rentAmount').errors
+                }" (keyup)="rentAmountChange($event.target.value)" />
+              <span *ngIf="
+                  isSubmitted &&
+                  profileInfoForm.get('optional.rentAmount').errors &&
+                  profileInfoForm.get('optional.rentOrOwn').value == 'rent'
+                " class="text-danger">
+                <div *ngIf="
+                    profileInfoForm.get('optional.rentAmount').errors.required
+                  ">
+                  Please answer Rent Amount
+                </div>
+                <div *ngIf="
+                    profileInfoForm.get('optional.rentAmount').errors.pattern
+                  ">
+                  Please enter Valid rent amount
+                </div>
+              </span>
+            </div>
+            <div class="ninthrow" *ngIf="profileInfoForm.get('optional.rentOrOwn').value == 'own'">
+              <div class="labelAlignment" *ngIf="profileInfoForm.get('optional.valueOfHouse').value">
+                <b>Value of House</b>
+              </div>
+              <input type="text" formControlName="valueOfHouse" class="form-control margintop inputfields"
+                placeholder="Value of House" [ngClass]="{
+                  'is-invalid':
+                    isSubmitted &&
+                    profileInfoForm.get('optional.valueOfHouse').errors
+                }" (keyup)="valueOfHouseChange($event.target.value)" />
+              <div *ngIf="
+                  isSubmitted &&
+                  profileInfoForm.get('optional.valueOfHouse').errors
+                " class="text-danger">
+                <div *ngIf="
+                    profileInfoForm.get('optional.valueOfHouse').errors.required
+                  ">
+                  Please enter a Value of House
+                </div>
+                <div *ngIf="
+                    profileInfoForm.get('optional.valueOfHouse').errors.pattern
+                  ">
+                  Please enter Valid Value of House
+                </div>
+              </div>
+              <div class="labelAlignment" *ngIf="profileInfoForm.get('optional.mortgageDebt').value">
+                <b>Mortgage Debt</b>
+              </div>
+              <input type="text" formControlName="mortgageDebt" class="form-control margintop inputfields"
+                placeholder="Mortgage Debt" [ngClass]="{
+                  'is-invalid':
+                    isSubmitted &&
+                    profileInfoForm.get('optional.mortgageDebt').errors
+                }" (keyup)="mortgageDebtChange($event.target.value)" />
+              <div *ngIf="
+                  isSubmitted &&
+                  profileInfoForm.get('optional.mortgageDebt').errors
+                " class="text-danger">
+                <div *ngIf="
+                    profileInfoForm.get('optional.mortgageDebt').errors.required
+                  ">
+                  Please enter a Mortgage Debt
+                </div>
+                <div *ngIf="
+                    profileInfoForm.get('optional.mortgageDebt').errors.pattern
+                  ">
+                  Please enter Valid Mortgage Debt
+                </div>
+              </div>
+              <div class="labelAlignment" *ngIf="
+                  profileInfoForm.get('optional.mortgageInterestRate').value
+                ">
+                <b>Mortgage Interest Rate</b>
+              </div>
+              <input type="text" formControlName="mortgageInterestRate" class="form-control margintop inputfields"
+                placeholder="Mortgage Interest Rate" [ngClass]="{
+                  'is-invalid':
+                    isSubmitted &&
+                    profileInfoForm.get('optional.mortgageInterestRate').errors
+                }" (keyup)="mortgageInterestRateChange($event.target.value)" />
+              <div *ngIf="
+                  isSubmitted &&
+                  profileInfoForm.get('optional.mortgageInterestRate').errors
+                " class="text-danger">
+                <div *ngIf="
+                    profileInfoForm.get('optional.mortgageInterestRate').errors
+                      .required
+                  ">
+                  Please enter a Mortgage Interest Rate
+                </div>
+                <div *ngIf="
+                    profileInfoForm.get('optional.mortgageInterestRate').errors
+                      .pattern
+                  ">
+                  Please enter Valid Mortgage Interest Rate
+                </div>
+              </div>
+            </div>
+            <div class="ninthrow" *ngIf="profileInfoForm.get('optional.rentOrOwn').value == 'own'">
+              <b>Fixed or Adjustable Rate</b><br />
+            </div>
+            <div class="ninthrow" *ngIf="profileInfoForm.get('optional.rentOrOwn').value == 'own'">
+              <span class="tenthrow">
+                <input type="radio" id="fixed" name="fixedOrAdjustable" formControlName="fixedOrAdjustable"
+                  value="fixed" />
+              </span>
+              <span class="tenthrow">
+                <label for="fixed">Fixed</label>
+              </span>
+              <span class="tenthrow">
+                <input type="radio" id="adjustable" name="fixedOrAdjustable" formControlName="fixedOrAdjustable"
+                  value="adjustable" />
+              </span>
+              <span class="tenthrow">
+                <label for="adjustable">Adjustable</label>
+              </span>
+              <span *ngIf="
+                  isSubmitted &&
+                  profileInfoForm.get('optional.fixedOrAdjustable').errors
+                " class="text-danger">
+                <div *ngIf="
+                    profileInfoForm.get('optional.fixedOrAdjustable').errors
+                      .required
+                  ">
+                  Please answer Fixed or Adjustable Rate
+                </div>
+              </span>
+            </div>
+            <div class="ninthrow" *ngIf="profileInfoForm.get('optional.rentOrOwn').value == 'own'">
+              <b>Mortgage Term</b><br />
+            </div>
+            <div class="ninthrow" *ngIf="profileInfoForm.get('optional.rentOrOwn').value == 'own'">
+              <span class="tenthrow">
+                <input type="radio" id="15year" name="mortgageTerm" formControlName="mortgageTerm" value="15year" />
+              </span>
+              <span class="tenthrow">
+                <label for="15year">15 Year</label>
+              </span>
+              <span class="tenthrow">
+                <input type="radio" id="30year" name="mortgageTerm" formControlName="mortgageTerm" value="30year" />
+              </span>
+              <span class="tenthrow">
+                <label for="30year">30 Year</label>
+              </span>
+              <span class="tenthrow">
+                <input type="radio" id="other" name="mortgageTerm" formControlName="mortgageTerm" value="other" />
+              </span>
+              <span class="tenthrow">
+                <label for="other">Other</label>
+              </span>
+              <span *ngIf="
+                  isSubmitted &&
+                  profileInfoForm.get('optional.mortgageTerm').errors
+                " class="text-danger">
+                <div *ngIf="
+                    profileInfoForm.get('optional.mortgageTerm').errors.required
+                  ">
+                  Please answer Mortgage term
+                </div>
+              </span>
+            </div>
+            <div class="margintopalignment5 bgcolor">
+              <h6><b>Debt</b></h6>
+              <hr class="collapseLine" />
+            </div>
+            <div class="ninthrow">
+              <div class="labelAlignment" *ngIf="profileInfoForm.get('optional.studentLoanDebt').value">
+                <b>Student Loan Debt</b>
+              </div>
+              <input type="text" formControlName="studentLoanDebt" class="form-control margintop inputfields"
+                placeholder="Student Loan Debt" [ngClass]="{
+                  'is-invalid':
+                    isSubmitted &&
+                    profileInfoForm.get('optional.studentLoanDebt').errors
+                }" (keyup)="studentLoanDebtChange($event.target.value)" required />
+              <div *ngIf="
+                  isSubmitted &&
+                  profileInfoForm.get('optional.studentLoanDebt').errors
+                " class="text-danger">
+                <div *ngIf="
+                    profileInfoForm.get('optional.studentLoanDebt').errors
+                      .required
+                  ">
+                  Please answer Student Loan Debt
+                </div>
+                <div *ngIf="
+                    profileInfoForm.get('optional.studentLoanDebt').errors
+                      .pattern
+                  ">
+                  Please enter Valid Student Loan Debt Amount
+                </div>
+              </div>
+              <div class="labelAlignment" *ngIf="profileInfoForm.get('optional.creditCardDebt').value">
+                <b>Credit Card Debt</b>
+              </div>
+              <input type="text" formControlName="creditCardDebt" class="form-control margintop inputfields"
+                placeholder="Credit Card Debt" [ngClass]="{
+                  'is-invalid':
+                    isSubmitted &&
+                    profileInfoForm.get('optional.creditCardDebt').errors
+                }" (keyup)="creditCardDebtChange($event.target.value)" required />
+              <div *ngIf="
+                  isSubmitted &&
+                  profileInfoForm.get('optional.creditCardDebt').errors
+                " class="text-danger">
+                <div *ngIf="
+                    profileInfoForm.get('optional.creditCardDebt').errors
+                      .required
+                  ">
+                  Please answer Credit Card Debt
+                </div>
+                <div *ngIf="
+                    profileInfoForm.get('optional.creditCardDebt').errors
+                      .pattern
+                  ">
+                  Please enter Valid creditCard Debt Amount
+                </div>
+              </div>
+              <div class="labelAlignment" *ngIf="profileInfoForm.get('optional.otherDebt').value">
+                <b>Other Debt</b>
+              </div>
+              <input type="text" formControlName="otherDebt" class="form-control margintop inputfields"
+                placeholder="Other Debt" [ngClass]="{
+                  'is-invalid':
+                    isSubmitted &&
+                    profileInfoForm.get('optional.otherDebt').errors
+                }" (keyup)="otherDebtChange($event.target.value)" required />
+              <div *ngIf="
+                  isSubmitted &&
+                  profileInfoForm.get('optional.otherDebt').errors
+                " class="text-danger">
+                <div *ngIf="
+                    profileInfoForm.get('optional.otherDebt').errors.required
+                  ">
+                  Please answer Other Debt
+                </div>
+                <div *ngIf="
+                    profileInfoForm.get('optional.otherDebt').errors.pattern
+                  ">
+                  Please enter Valid Debt Amount
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-10 hr-table-line lline">
+            <b>
+              <hr class="table-lined" /></b>
+          </div>
+        </div>
+      </div>
+      <div class="uploadContainer" style="margin-bottom: 20px;" *ngIf="selectedSegmentIndex == 2">
+        <div class="row">
+          <p style="color: red;" *ngIf="emailVerifyLinkError">
+            {{ emailVerifyLinkError }}
+          </p>
+          <p style="color: green;" *ngIf="emailVerifyLink">{{ emailVerifyLink }}</p>
+          <div class="col-md-10 ml-2 mt-4 imgalignment">
+            <div class="row float-right">
+              <mat-spinner class="spinner" strokeWidth="3" [diameter]="25" *ngIf="isUpdateInProgress">
+              </mat-spinner>
+              <div *ngIf="!isUpdateInProgress">
+                <span *ngIf="success">Your details have been updated successfully.</span>
+                <span *ngIf="error">Something went wrong. Please try again.</span>
+              </div>
+              <button class="button grayButton ml-2" [disabled]="isUpdateInProgress" type="button"
+                (click)="cancelFormEdit()">
+                Cancel
+              </button>
+              <button class="button ml-2" [disabled]="isUpdateInProgress" type="submit">
+                SAVE
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </section>
+</article>
+
+<!-- modal -->
+
+<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModal"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document" style="width: 40%;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <i data-dismiss="modal" class="fa fa-times-circle modal-close-button" aria-hidden="true"></i>
+      </div>
+      <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword()">
+        <div class="row firstrow">
+          <div class="col-md-5 my-auto">
+            <p style="font-size: 18px; margin: 0px !important;">New Password</p>
+          </div>
+          <div class="col-md-7 textArea">
+            <input type="text" formControlName="newPassword" class="form-control margintop inputfields"
+              [type]="hideNewPassword ? 'password' : 'text'" [ngClass]="{
+                'is-invalid':
+                  (isChagnePasswordSubmitted &&
+                    changePasswordError.newPassword.errors) ||
+                  (isChagnePasswordSubmitted &&
+                    !changePasswordError.newPassword.errors &&
+                    test(changePasswordForm.value.newPassword) === true)
+              }" required />
+            <span>
+              <i class="material-icons mat-icon"
+                (click)="hideNewPassword = !hideNewPassword">{{ hideNewPassword ? "visibility_off" : "visibility" }}</i>
+            </span>
+          </div>
+        </div>
+        <div *ngIf="
+            isChagnePasswordSubmitted && changePasswordError.newPassword.errors
+          " class="text-danger">
+          <div *ngIf="changePasswordError.newPassword.errors.required" style="color: red; text-align: right;">
+            Please enter new Password.
+          </div>
+          <div *ngIf="changePasswordError.newPassword.errors.pattern" style="color: red;" class="text-danger">
+            Password should be a minimum of 8 characters and include at least 1
+            each of: Upper case, Lower case, Special character (~!@#%^&*-+=),
+            Number and Non-repeating/recurring characters or numbers (AAAA,
+            ABCD, or 1234, 1111, etc.).
+          </div>
+        </div>
+        <div *ngIf="
+            isChagnePasswordSubmitted &&
+            !changePasswordError.newPassword.errors &&
+            test(changePasswordForm.value.newPassword) === true
+          " style="color: red; text-align: center;" class="text-danger">
+          Password should be a minimum of 8 characters and include at least 1
+          each of: Upper case, Lower case, Special character (~!@#%^&*-+=),
+          Number and Non-repeating/recurring characters or numbers(AAAA, ABCD,
+          or 1234, 1111, etc.).
+        </div>
+        <br />
+        <div class="row secondrow">
+          <div class="col-md-5 my-auto">
+            <p style="font-size: 18px; margin: 0px !important;">
+              Confirm new Password
+            </p>
+          </div>
+          <div class="col-md-7 textArea">
+            <input type="text" formControlName="confirmNewPassword" class="form-control margintop inputfields"
+              [type]="hideConfirmPassword ? 'password' : 'text'" [ngClass]="{
+                'is-invalid':
+                  isChagnePasswordSubmitted &&
+                  changePasswordError.confirmNewPassword.errors
+              }" required />
+            <span><i (click)="hideConfirmPassword = !hideConfirmPassword"
+                class="material-icons mat-icon">{{ hideConfirmPassword ? "visibility_off" : "visibility" }}</i>
+            </span>
+          </div>
+        </div>
+        <div *ngIf="
+            isChagnePasswordSubmitted &&
+            changePasswordError.confirmNewPassword.errors
+          " class="text-danger">
+          <div *ngIf="changePasswordError.confirmNewPassword.errors.required" style="color: red; text-align: right;">
+            Please enter Confirm new Password.
+          </div>
+        </div>
+        <p *ngIf="mismatchPassword" style="color: red; text-align: right;">
+          {{ mismatchPassword }}
+        </p>
+        <br />
+        <div class="modal-footer" style="border-top: 0px !important;">
+          <button type="submit" style="margin-right: 0px !important; font-size: 18px !important;"
+            class="btn btn-primary">
+            Change Password
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,197 @@
+<div class="card" *ngIf="accountOptimizationData">
+  <div class="card-header bg-transparent p-2">
+    <h5 class="card-header-big my-1">
+      <img src="assets/images/icon/account-optimization.png" alt="Account Optimization" class="img-responsive mr-2"
+        style="max-width: 25px;" />
+      {{accountOptimizationData.label}}
+    </h5>
+  </div>
+  <div class="card-body px-lg">
+    <div class="row">
+      <div class="col-5">
+        <div class="card card-spl card-gray border-0">
+          <div class="card-header">
+            <h6 class="font-weight-bold m-0">
+              <img src="assets/images/icon/current.png" alt="Current" class="img-responsive mr-2"
+                style="max-height: 20px;" />
+              CURRENT</h6>
+          </div>
+          <div class="card-body p-0">
+            <table class="table table-striped m-0">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col" class="font-size-small">
+                    {{accountOptimizationData.diversification_detail_page.current.header.diversification_label}}</th>
+                  <th scope="col" class="font-size-small col-num">
+                    {{accountOptimizationData.diversification_detail_page.current.header.percent_label}}</th>
+                  <th scope="col" class="font-size-small col-num">
+                    {{accountOptimizationData.diversification_detail_page.current.header.amount_label}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row" font-size-small>
+                    <i class="fa fa-arrow-right"></i>
+                  </th>
+                  <th colspan="3">STOCKS</th>
+                </tr>
+                <!-- SUBDETAILS: BEGIN -->
+                <tr class="bgcolor space-bordered"
+                  *ngFor="let item of accountOptimizationData.diversification_detail_page.current.values_detail[0].sub_category">
+                  <th>{{item? item.sub_label:""}}</th>
+                  <th></th>
+                  <td class="col-td">{{item? item.percent:item.percent}}%</td>
+                  <td class="col-td">${{item? item.amount:item.amount}}</td>
+                </tr>
+                <!-- <tr class="font-size-medium space-bordered">
+                                    <th>MidCap</th>
+                                    <th></th>
+                                    <td class="col-td">15 %</td>
+                                    <td class="col-td">$ 13,200</td>
+                                  </tr>
+                                  <tr class="font-size-medium bgcolor space-bordered">
+                                    <th>SmallCap</th>
+                                    <th></th>
+                                    <td class="col-td">20 %</td>
+                                    <td class="col-td">$ 17,600</td>
+                                  </tr> -->
+                <!-- SUBDETAILS: END -->
+                <tr class="bgcolor"
+                  *ngFor="let item of accountOptimizationData.diversification_detail_page.current.values_detail |slice:1;index as i">
+                  <th scope="row" font-size-small>
+                    <i class="fa fa-arrow-right"></i>
+                  </th>
+                  <th>{{item.category}}</th>
+                  <td class="col-num">{{item.percent}} %</td>
+                  <td class="col-num">
+                    $ {{item.amount}}
+                  </td>
+                </tr>
+                <!-- <tr class="bgcolor">
+                  <th scope="row" font-size-small>
+                    <i class="fa fa-arrow-right"></i>
+                  </th>
+                  <th>CASH</th>
+                  <td class="col-num">2 %</td>
+                  <td class="col-num">
+                    $ 2,000
+                  </td>
+                </tr> -->
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th colspan="2">{{accountOptimizationData.diversification_detail_page.current.totals.category}}</th>
+                  <th class="col-num">{{accountOptimizationData.diversification_detail_page.current.totals.percent}} %</th>
+                  <th class="col-num">$ {{accountOptimizationData.diversification_detail_page.current.totals.amount}}</th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-2 p-0">
+        <div class="card align-middle h-100 border-0 text-center">
+          <img src="assets/images/icon/current-growth.png" alt="Current Growth" class="img-responsive m-auto"
+            style="max-width: 60px;" />
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="card card-spl card-blue border-0">
+          <div class="card-header">
+            <h6 class="font-weight-bold m-0">
+              <img src="assets/images/icon/current_blue.svg" alt="Current" class="img-responsive mr-2"
+                style="max-height: 20px;color:#2a368e ;" />
+              RECOMMENDED</h6>
+          </div>
+          <div class="card-body p-0">
+            <table class="table table-striped m-0 recommendedtable">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col" class="font-size-small">
+                    {{accountOptimizationData.diversification_detail_page.recommended.header.diversification_label}}
+                  </th>
+                  <th scope="col" class="font-size-small col-num">
+                    {{accountOptimizationData.diversification_detail_page.recommended.header.percent_label}}</th>
+                  <th scope="col" class="font-size-small col-num">
+                    {{accountOptimizationData.diversification_detail_page.recommended.header.amount_label}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row" font-size-small>
+                    <i class="fa fa-arrow-right"></i>
+                  </th>
+                  <th colspan="3">STOCKS</th>
+                </tr>
+                <!-- SUBDETAILS: BEGIN -->
+                <tr class="font-size-medium bgcolor space-bordered"
+                  *ngFor="let item of accountOptimizationData.diversification_detail_page.recommended.values_detail[0].sub_category">
+                  <th><b>{{item? item.sub_label:""}}</b></th>
+                  <th></th>
+                  <td class="col-td">{{item? item.percent:""}}%</td>
+                  <td class="col-td">$ {{item? item.amount:""}}</td>
+                </tr>
+                <!-- <tr class="font-size-medium space-bordered">
+                  <th><b>MidCap</b></th>
+                  <th></th>
+                  <td class="col-td">30 %</td>
+                  <td class="col-td">$ 19,500</td>
+                </tr>
+                <tr class="font-size-medium bgcolor space-bordered">
+                  <th><b>SmallCap</b></th>
+                  <th></th>
+                  <td class="col-td">20 %</td>
+                  <td class="col-td">$ 13,000</td>
+                </tr> -->
+                <!-- SUBDETAILS: END -->
+                <tr class="bgcolor"
+                *ngFor="let item of accountOptimizationData.diversification_detail_page.recommended.values_detail |slice:1;index as i">
+                  <th scope="row" font-size-small>
+                    <i class="fa fa-arrow-right"></i>
+                  </th>
+                  <th>{{item.category}}</th>
+                  <td class="col-num">{{item.percent}} %</td>
+                  <td class="col-num">
+                    $ {{item.amount}}
+                  </td>
+                </tr>
+                <!-- <tr class="bgcolor">
+                  <th scope="row" font-size-small>
+                    <i class="fa fa-arrow-right"></i>
+                  </th>
+                  <th>CASH</th>
+                  <td class="col-num">5 %</td>
+                  <td class="col-num">
+                    $ 5,000
+                  </td>
+                </tr> -->
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th colspan="2">{{accountOptimizationData.diversification_detail_page.recommended.totals.category}}</th>
+                  <th class="col-num">{{accountOptimizationData.diversification_detail_page.recommended.totals.percent}} %</th>
+                  <th class="col-num">${{accountOptimizationData.diversification_detail_page.recommended.totals.amount}}</th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+        <label class="font-size-small">Analysis 25776 Completed 05/12 08:52AM</label>
+      </div>
+    </div>
+    <div>
+      <button class="float-left btn btn-gray btn-size-lg radius-connect back" (click)="accountOptimization()">
+        <i class="fa fa-angle-left font-size-increase mr-1"></i>
+        Back
+      </button>
+      <button class="float-right btn btn-gray btn-size-lg radius-connect next"
+        (click)="accountOptimizationInvestmentsChart()"
+        *ngIf="hideNextButton()">
+        Next
+        <i class="fa fa-angle-right font-size-increase ml-1"></i>
+      </button>
+    </div>
+  </div>
+</div>

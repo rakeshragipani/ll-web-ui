@@ -1,0 +1,59 @@
+a.active {
+    background-image: linear-gradient(to left, #419AD5, #3D6796);
+    background-position: bottom left;
+    background-repeat: no-repeat;
+    background-size: 65% 3.5px;
+    transition: background-size .5s ease;
+    padding-left: 0px;
+}
+
+// .navbar-nav.active{
+//     color: #2a368e;
+// }
+
+.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+    color: #2a368e;
+}
+
+li.signup-btn {
+    margin: 0 10px 10px 0;
+    text-align: center;
+}
+
+li.login-btn {
+    margin: 0 10px 10px 0;
+    text-align: center;
+}
+
+li.signup-btn a {
+    color: #ffffff;
+    padding: 5px 30px;
+    // border: 1px solid;
+    border-radius: 5px;
+    font-size: 15px;
+    background: linear-gradient(to right, #419AD5, #3D6796);
+}
+
+.startnow-btn {
+    color: #ffffff;
+    // border-color: #2a368e;
+    border: none;
+    // background-color: #2a368e;
+    background: linear-gradient(to right, #419AD5, #2a368e);
+}
+
+li.login-btn a {
+    color: #419AD5;
+    padding: 5px 30px;
+    border: 1px solid;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+li.work-btn {
+    margin: 0 10px 10px 0;
+}
+
+li.philosophy-btn {
+    margin: 0 10px 10px 0;
+}

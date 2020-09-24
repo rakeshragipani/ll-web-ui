@@ -1,0 +1,41 @@
+<mat-spinner
+  strokeWidth="3"
+  [diameter]="25"
+  class="mat_spinner"
+  *ngIf="showLoader"
+></mat-spinner>
+<form #pageHeight  class="form-bottom">
+  <div class="row md-5 accountanalysis2-heading">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <label class="label-color "><span class="textUpperCase">{{userName.firstName}},</span> {{'AccountAnalysis2Header' | translate}}</label>
+      </div>
+  </div>
+  <div class="row mt-3 md-5" *ngIf="accountAnalysisData">
+      <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 col-xl-7 offset-5">
+        <span class="tag"><b>OPTIMAL</b></span>
+        <span class="AA2-span1"><b>${{accountAnalysisData.Current_value}}</b><b class="first_year">&nbsp;ﬁrst year</b></span>
+         <p class="optimal_percent">{{accountAnalysisData.Current_pct}} % first year</p>
+      </div>
+  </div>
+  <div class="row md-5 ml-1" *ngIf="accountAnalysisData">
+    <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 col-xl-7">
+        <span class="AA2-span2"><b>${{accountAnalysisData.Optimal_value}}</b><b class="first_year">&nbsp;ﬁrst year</b></span>
+        <span class="tag1"><b>CURRENT</b></span>
+        <p class="current_percent">{{accountAnalysisData.Optimal_pct}} % first year</p>
+    </div>
+</div>
+<div class="row justify-content-center text-center mt-4 border rounded md-5 ml-1" *ngIf="accountAnalysisData">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 aabordercolor">
+      <div class="mt-2">
+        <span class="aaSpan">$ {{accountAnalysisData.Projected_fees_savings}}</span>
+      </div>
+        
+        <p class="aaParagraph">{{accountAnalysisData.improvement_message == '[fee_detail_improvement_message]' ? feeDetailsImprovementMessage : feeDetailsImprovementMessage}}</p>
+    </div>
+</div>
+<div class="row md-5 ml-1 mt-3">
+  <span class="span-color">{{'AccountAnalysis2Span' | translate}}</span>
+</div>
+  <button type="button" class="goback-button" (click)="goBack()">{{'BackButton' | translate}}</button>
+  <button type="button" class="button"  (click)="next()">{{'NextButton' | translate}}</button>
+</form>

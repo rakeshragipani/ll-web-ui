@@ -1,0 +1,282 @@
+<mat-spinner strokeWidth="3" [diameter]="25" class="mat_spinner" *ngIf="showLoader"></mat-spinner>
+<div [ngClass]="{'common-content': pageSettings.isFromDashBoard}">
+    <form #pageHeight autocomplete="off" *ngIf="!showLoader" class="subscription1-form">
+        <header class="tabs">
+            <div class="row mb-2">
+                <div class="col">
+                    <h5 class="label-color mb-0 mt-0">Become a member and get your results.</h5>
+                    <div class="subscription-span-sub-heading">
+                        <span>With full membership we will proceed with all changes based on your
+                            parameters.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="subscription-tab">
+                <div class="tab11 tab-active">
+                    <h5 class="active">1. Select a plan</h5>
+                </div>
+                <div class="tab22" *ngIf="!isFromDashBoard">
+                    <h5>2. Payment</h5>
+                </div>
+            </div>
+        </header>
+        <div class="card-deck mb-3 text-center position-relative" *ngIf="productOne && productTwo && productThree">
+            <div class="card box-shadow card_hover" [ngClass]="{'grayout': !option1}">
+                <div class="card-body d-flex flex-column" (click)="selAllColumn(1,productOne)">
+                    <h4 class="type mt-4">{{ productOne.name}}</h4>
+                    <hr class="hr-padding">
+                    <h1 class="card-title pricing-card-title">${{(plan1.amount)/100}}/<small>
+                            {{plan1.interval}}</small></h1>
+                    <ul class="list-unstyled mb-4">
+                        <li>Billed {{plan1.interval}}ly.</li>
+                    </ul>
+                </div>
+                <div class="position-relative">
+                    <i data-toggle="modal" data-target="#planDetails" class="fa fa-info-circle info-align info-icon"
+                        aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="card box-shadow card_hover" [ngClass]="{'grayout': !option2}">
+                <div class="card-header" (click)="selAllColumn(2,productTwo)">
+                    <h4 class="my-0 font-weight-normal">Most Popular</h4>
+                </div>
+                <div class="card-body d-flex flex-column" (click)="selAllColumn(2,productTwo)">
+                    <h4 class="type-premium">{{ productTwo.name}}</h4>
+                    <hr class="hr-padding">
+                    <h1 class="card-title pricing-card-title">${{plan2.amount/100}}/<small>
+                            {{plan2.interval}}</small></h1>
+                    <ul class="list-unstyled mb-4">
+                        <li>Billed {{plan2.interval}}ly.</li>
+                        <!-- <li>2 GB of storage</li>
+                            <li>Email support</li>
+                            <li>Help center access</li> -->
+                    </ul>
+
+                    <!-- <button type="button" class="mt-auto btn btn-lg btn-block btn-outline-primary">Sign up for free</button> -->
+                </div>
+                <div class="position-relative">
+                    <i data-toggle="modal" data-target="#planDetails" class="fa fa-info-circle info-align info-icon"
+                        aria-hidden="true"></i>
+                </div>
+            </div>
+
+            <div class="card box-shadow card_hover" [ngClass]="{'grayout': !option3}">
+                <!-- <div class="card-header">
+                          <h4 class="my-0 font-weight-normal">Free</h4>
+                        </div> -->
+                <div class="card-body d-flex flex-column" (click)="selAllColumn(3,productThree)">
+                    <h4 class="type mt-4">{{ productThree.name}}</h4>
+                    <hr class="hr-padding">
+                    <h1 class="card-title pricing-card-title">${{plan3.amount/100}}/<small>
+                            {{plan3.interval}}</small></h1>
+                    <ul class="list-unstyled mb-4">
+                        <li>Billed {{plan3.interval}}ly.</li>
+                        <!-- <li>2 GB of storage</li>
+                            <li>Email support</li>
+                            <li>Help center access</li> -->
+                    </ul>
+
+                    <!-- <button type="button" class="mt-auto btn btn-lg btn-block btn-outline-primary">Sign up for free</button> -->
+                </div>
+                <div class="position-relative">
+                    <i data-toggle="modal" data-target="#planDetails" class="fa fa-info-circle info-align info-icon"
+                        aria-hidden="true"></i>
+                </div>
+            </div>
+            <img draggable="false" [ngClass]="addClass()" src="assets/images/thumbs_up.png" class="subscribe-select">
+        </div>
+        <hr class="hr-seperator">
+        <div class="row ml-1">
+            <label id="example-radio-group-label">BILLED:</label>
+            <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" name="options">
+                <mat-radio-button class="example-radio-button" *ngFor="let option of plansArr;let i = index"
+                    name="option" [value]="option" [checked]="i === 0 ? selectedPremium.interval === 'year' :
+                        selectedPremium.interval === 'month'" (click)="selectedPlan(option)">
+                    {{option.interval | titlecase}}ly</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div class="mt-4 mb-3">
+            <h6 class="form-section-label mt-4 mb-0">ORDER SUMMARY</h6>
+            <table class="subscription-summary">
+                <tr>
+                    <td class="left align-baseline">
+                        <b style="font-size: 12px;font-weight: 700;">PROMO CODE {{selectedSubcriptionPlan.name}}
+                            Account</b><br>
+                        <b style="font-weight: lighter;">1 Account</b><br>
+                        <b
+                            style="font-weight: lighter;">${{totalPlanAmount/100}}/{{selectedPremium.interval | titlecase}}ly/{{selectedSubcriptionPlan.name}}</b>
+                    </td>
+                    <td class="right align-baseline"><b style="font-size: 12px;">( $
+                            {{(totalAmountOff ? totalAmountOff : 0)/100}} )</b><br>
+                        <b style="font-size: 8px;">{{selectedPremium.interval | titlecase}}ly</b><br>
+                        <i *ngIf="couponId" class="fa fa-info-circle" aria-hidden="true"
+                            style="font-size:14px;cursor: pointer;" data-toggle="modal" data-target="#promoCode"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="left"><b class="bold-char">Today’s
+                            Charge</b><br>{{selectedPremium.interval | titlecase}}ly Charge</td>
+                    <td class="right"><b class="bold-char">${{totalPlanAmount/100}}</b><br><b
+                            style="font-size: 8px;">Before
+                            taxes</b><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="left" style="width: 75%;vertical-align: baseline;">
+                        <div class="left-border">
+                            <input class="coupon-text-width" type="text" name="coupon" placeholder="Enter coupon code"
+                                [(ngModel)]="coupon" (input)="couponCheck()" (focus)="inValidCoupon= null" />
+                        </div>
+                        <p *ngIf="inValidCoupon" class="invalid_coupon">{{inValidCoupon}}</p>
+                        <p *ngIf="appliedCoupon" class="success_coupon">{{appliedCoupon}}</p>
+                    </td>
+                    <td class="right" style="width: 15%;vertical-align: baseline;">
+                        <button mat-flat-button color="primary" class="matButton" (click)="couponCode()"
+                            [disabled]="!coupon || coupon === couponId">Apply
+                            Code</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div *ngIf="!pageSettings.isFromDashBoard">
+            <button type="button" class="goback-button" (click)="goBack()">{{'BackButton' | translate}}</button>
+            <button type="button" class="button" (click)="next()">{{'NextButton' | translate}}</button>
+        </div>
+        <div *ngIf="pageSettings.isFromDashBoard" style="float: right;">
+            <div *ngIf="pageSettings.displayChangeSubscription">
+                <div style="display: inline-block; margin-right: 10px;" *ngIf="isChangeSubscriptionInprogress">
+                    <mat-spinner strokeWidth="3" [diameter]="25" class="spinner"></mat-spinner>
+                </div>
+                <span style="color: red; margin-right: 10px;" *ngIf="!isChangeSubscriptionInprogress && csError">An
+                    error
+                    occurred, please try again later</span>
+                <button type="button" class="button" style="margin-right: 0px;"
+                    (click)="changeSubscription()">{{'Update' | translate}}</button>
+            </div>
+            <button type="button" class="button" style="margin-right: 0px;" *ngIf="pageSettings.displayUserSubscription"
+                (click)="next()">{{'NextButton' | translate}}</button>
+        </div>
+
+    </form>
+</div>
+
+<!--401K Pricing  Modal -->
+<div class="modal fade" id="planDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="width: 1200px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Intelligent 401k Products and Pricing</h5>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Basic</th>
+                            <th scope="col">Signature (Most Popular)</th>
+                            <th scope="col">Premium</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="plan1">
+                            <th scope="row"></th>
+                            <td>$ {{(plan1.amount)/100}}/
+                                {{plan1.interval | slice:0:1 | uppercase}}</td>
+                            <td>$ {{(plan2.amount)/100}}/
+                                {{plan2.interval | slice:0:1 | uppercase}}</td>
+                            <td>$ {{(plan3.amount)/100}}/
+                                {{plan3.interval | slice:0:1 | uppercase}}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Portfolio Optimization</th>
+                            <td>X</td>
+                            <td>X</td>
+                            <td>X</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Automated Allocation  </th>
+                            <td></td>
+                            <td>X</td>
+                            <td>X</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">$200 first time user setup fee waived</th>
+                            <td>X</td>
+                            <td>X</td>
+                            <td>X</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Personalized Portfolio</th>
+                            <td></td>
+                            <td>X</td>
+                            <td>X</td>
+                            <td>Non-personalized means just asset allocation, no diversification or fund allocation.
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Cost Savings Optimization</th>
+                            <td></td>
+                            <td>X</td>
+                            <td>X</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Additional Accounts Discounted</th>
+                            <td>1 Account*</td>
+                            <td>Up to 3 Accounts*</td>
+                            <td>Unlimited Accounts*</td>
+                            <td>$6 per additional account</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Direct Advisor Access</th>
+                            <td></td>
+                            <td></td>
+                            <td>X</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h6>*Note: All accounts must be for the same user, by name or similar</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- PromoCode Details Modal -->
+<div class="modal fade" id="promoCode" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="margin-left:150px;width: 500px">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Promo Code</h5>
+            </div>
+            <div class="modal-body">
+                <table class="subscription-summary promoCodeModal">
+                    <tr>
+                        <td class="left">
+                            <b class="bold-char_info">Total amount</b><br><br>
+                            <b class="bold-char_info">% of discount</b><br><br>
+                            <b class="bold-char_info">Amount saved by applying promo code</b><br><br>
+                        </td>
+                        <td class="right" *ngIf="selectedPremium">
+                            <b class="bold-char_info">$ {{selectedPremium.amount/100}}</b> <br><br>
+                            <b class="bold-char_info">{{couponOff ? couponOff:0 }} %</b> <br><br>
+                            <b class="bold-char_info">$ {{(totalAmountOff ? totalAmountOff : 0)/100}}</b><br> <br>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

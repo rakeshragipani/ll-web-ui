@@ -1,0 +1,45 @@
+{
+  "Payments": {
+    "cardNumber": 6353535353532369,
+    "last4Digits": 2369,
+    "subscriptionType": "Basic Manual",
+    "billingCycle": "Monthly",
+    "numberOfAccounts": 1,
+    "lastPaymentDate": "4/15/2020",
+    "nextPaymentDate": "7/15/2020",
+    "amount": "$29.0",
+    "cardType": "Visa",
+    "paymentHistory": [
+      {
+        "date": "05/11/2020",
+        "cardNumber": "6353535353531233",
+        "paymentStatus": "Succeeded",
+        "amount": "$29.0"
+      },
+      {
+        "date": "04/10/2019",
+        "cardNumber": "6353535353535412",
+        "paymentStatus": "Succeeded",
+        "amount": "$29.0"
+      },
+      {
+        "date": "01/01/2018",
+        "cardNumber": "6353535353539883",
+        "paymentStatus": "Succeeded",
+        "amount": "$29.0"
+      },
+      {
+        "date": "01/01/2017",
+        "cardNumber": "6353535353531233",
+        "paymentStatus": "Succeeded",
+        "amount": "$29.0"
+      },
+      {
+        "date": "01/01/2016",
+        "cardNumber": "6353535353533444",
+        "paymentStatus": "Succeeded",
+        "amount": "$29.0"
+      }
+    ]
+  }
+}

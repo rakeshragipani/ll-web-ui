@@ -1,0 +1,164 @@
+<div class="row b-bottom b-blue m-0 b-2">
+    <div class="col sidebar-switch p-0">
+        <div id="sidebar-swtich">
+            <span class="d-block">
+                <i class="fa fa-bars"></i>
+            </span>
+            <span class="d-block">
+                <i class="fa fa-times"></i>
+            </span>
+        </div>
+    </div>
+    <aside class="main col p-0 b-right b-blue b-2">
+        <header class="brand bg-blue px-1 card card-block b-radius-0 h-100">
+            <img src="assets/images/left_lane_logo_white.png" alt="LeftLane" class="img-responsive m-auto">
+        </header>
+    </aside>
+    <div class="col px-3 py-2 text-right my-auto">
+        <div class="row" style="float: right;">
+            <!-- <div class="help" (click)="needHelp()"></div> -->
+            <div class="dropdown help">
+                <i class="fa fa-question-circle-o fa-2x" data-toggle="dropdown" aria-hidden="true"></i>
+
+                <div class="dropdown-menu helpbar " (click)="needHelp()">
+                    <span class="dropdown-menu-arrow helparrow"></span>
+                    <i class="fa fa-question-circle-o " style="font-size: 1.2rem;" aria-hidden="true"></i><span
+                        class="helptext">Need a help?</span>
+                </div>
+            </div>
+            <div class="dropdown">
+                <i class="fa fa-bars fa-2x" style="margin-top: 27px;margin-right:22px" data-toggle="dropdown"
+                    aria-hidden="true"></i>
+                <div class="dropdown-menu menubar">
+                    <span class="dropdown-menu-arrow menuarrow"></span>
+                    <a class="dropdown-item" (click)="myProfile()">My Profile</a>
+                    <a class="dropdown-item" (click)="billing()">Billing</a>
+                    <a class="dropdown-item" (click)="activityHistory()">Activity History</a>
+                    <a class="dropdown-item" (click)="tools()">Tools</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" (click)="signout()">Log Out</a>
+                </div>
+            </div>
+        </div>
+        <div class="timechanges" *ngIf="user.login_time">
+            <span>Last Login {{user.login_time|date:'MM/dd/yy h:mm a'}}</span>
+        </div>
+    </div>
+</div>
+<div class="row m-0 h-100">
+
+    <aside id="sidebar" class="main col b-right b-blue b-2 p-0" [ngClass]="{sidebarE:!showToggle,sidebarC:showToggle}">
+        <div (click)="Togglebar()" class="toggleIcon">
+            <!-- Tooltip template-->
+            <ng-template #expandContent>Expand</ng-template>
+            <ng-template #collapseContent>Collapse</ng-template>
+            <img *ngIf="!showToggle" class="sidebar-arrow" src="assets/images/icon/LeftLane_Arrow_Left.svg"
+                tooltipClass="my-custom-class" placement="right" [ngbTooltip]="collapseContent">
+            <img *ngIf="showToggle" class="sidebar-arrow" src="assets/images/icon/LeftLane_Arrow_Right.svg"
+                tooltipClass="my-custom-class" placement="right" [ngbTooltip]="expandContent">
+        </div>
+        <header class="mt-3 text-blue mb-2">
+            <div class="clearfix mb-2">
+                <div class="hoverable float-left mr-3">
+                    <img [src]="profileimage ? profileimage : 'assets/images/profileImage.jpg'">
+                </div>
+                <div class="float-left" [style.marginLeft]="showToggle ? '25px' : '0px'">
+                    <h5 class="user-name">{{showToggle ? userShortName : userName}}</h5>
+                    <div class="user-age" *ngIf="user.age">
+                        <label *ngIf="!showToggle">Age: </label>
+                        <label *ngIf="!showToggle">{{user.age}} years</label>
+                        <i class="fa fa-pencil ml-2" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+            <small class="creationDate" *ngIf="!showToggle">Member since {{user.createTime|date:'longDate'}}</small>
+        </header>
+        <nav class="b-top b-blue b-1" [style.borderWidth]="showToggle ? '0px' : '1px'">
+            <!-- Display side menu list -->
+            <ul class="nav flex-column" [ngClass]="{'disable': showToggle}">
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                        [ngClass]="{'active': (selectedSection=='retirementAccounts'|| selectedSection=='addretirementAccount')}"
+                        (click)="redirectToRetirementAccounts()">RETIREMENT ACCOUNTS
+                        <i class="icon-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="redirectToRetirementSavings()"
+                        [ngClass]="{'active': selectedSection=='retirementSavings'}">RETIREMENT SAVINGS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [ngClass]="{'active': selectedSection=='riskAnalysis'}"
+                        (click)="redirectToRiskAnalysis()">RISK ANALYSIS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [ngClass]="{'active': selectedSection=='accountInfo'}"
+                        (click)="redirectToAccountInfo()">ACCOUNT INFO</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [ngClass]="{'active': selectedSection=='reports'}"
+                        (click)="reportsAndStatements()">REPORTS AND STATEMENTS</a>
+                </li>
+                <!-- <li class="nav-item">
+                  <a class="nav-link" [ngClass]="{'active': showSubscription}" (click)="subscription()">SUBSCRIPTION</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [ngClass]="{'active': showAccountInfo}" (click)="accountInfo()">ACCOUNT INFO</a>
+                </li> -->
+            </ul>
+            <!-- Display side menu icons -->
+            <ul class="nav flex-column" [ngClass]="{'disable': !showToggle}">
+                <!-- Tooltip template -->
+                <ng-template #retirementAccounts>Retirement Accounts</ng-template>
+                <ng-template #retirementSavings>Retirement Savings</ng-template>
+                <ng-template #riskAnalysis>Risk Analysis</ng-template>
+                <ng-template #accountInfo>Account Info</ng-template>
+                <ng-template #reports>Reports and Statements</ng-template>
+                <li class="nav-icon-item">
+                    <img class="nav-icon"
+                        src="assets/images/Retirement-Accounts-{{(selectedSection=='retirementAccounts'|| selectedSection=='addretirementAccount') ? 'blue': 'black'}}.svg"
+                        tooltipClass="my-custom-class" placement="right" [ngbTooltip]="retirementAccounts"
+                        (click)="redirectToRetirementAccounts()">
+                </li>
+                <li class="nav-icon-item">
+                    <img class="nav-icon"
+                        src="assets/images/Retirement-Savings-{{selectedSection=='retirementSavings' ? 'blue': 'black'}}.svg"
+                        tooltipClass="my-custom-class" placement="right" [ngbTooltip]="retirementSavings"
+                        (click)="redirectToRetirementSavings()">
+                </li>
+                <li class="nav-icon-item">
+                    <img class="nav-icon"
+                        src="assets/images/Risk-Analysis-{{selectedSection=='riskAnalysis' ? 'blue': 'black'}}.svg"
+                        tooltipClass="my-custom-class" placement="right" [ngbTooltip]="riskAnalysis"
+                        (click)="redirectToRiskAnalysis()">
+                </li>
+                <li class="nav-icon-item">
+                    <img class="nav-icon"
+                        src="assets/images/Account-Info-{{selectedSection=='accountInfo' ? 'blue': 'black'}}.svg"
+                        tooltipClass="my-custom-class" placement="right" [ngbTooltip]="accountInfo"
+                        (click)="redirectToAccountInfo()">
+                </li>
+                <li class="nav-icon-item">
+                    <img class="nav-icon"
+                        src="assets/images/Account-Info-{{selectedSection=='reports' ? 'blue': 'black'}}.svg"
+                        tooltipClass="my-custom-class" placement="right" [ngbTooltip]="reports"
+                        (click)="reportsAndStatements()">
+                </li>
+            </ul>
+        </nav>
+        <div class="footer">
+            <img src="assets/images/landingimage.png" alt="LeftLane" class="footerImage">
+        </div>
+    </aside>
+    <section class="col p-3 page-main-content">
+        <router-outlet></router-outlet>
+    </section>
+    <div *ngIf="getStatus && getStatus === 'Pending' || getStatus === 'Failed'" class="alert" role="alert" style=" position: fixed;bottom: 0;width:76%;margin-left:330px;background-color: #2A368E;color:
+        white;border-color: #2A368E;">
+        <b>Email not verified. Please verify your Email before you begin your retirement journey with Left Lane.</b>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true" style="color: white;">&times;</span>
+        </button>
+    </div>
+</div>

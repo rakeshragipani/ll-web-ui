@@ -1,0 +1,51 @@
+<mat-spinner strokeWidth="3" [diameter]="25" class="mat_spinner" *ngIf="showLoader"></mat-spinner>
+            <form #pageHeight *ngIf="!showLoader" >
+              <div class="row ml-1">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                  <label class="label-color">{{'RiskAssessment5Heading' | translate}}</label>
+                </div>
+              </div>
+              <div class="row md-5 ml-1 position-relative">
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                  <div class="center">
+                    <div class="md-5 mt-3 risk-number risk-number-lg">
+                      <span>{{riskassessmentInfo5.temp}}</span>
+                  </div>
+                  </div>
+                </div>                
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9" style="
+                width: 400px;
+            ">
+                  <div class="risk-summary-sub-label">
+                    <span>YOUR ONE YEAR COMFORT ZONE IS</span>
+                  </div>
+                </div>
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 mt-3 ml-3" style="
+                width: 400px;
+            ">
+                  <div class="range-graph-simple">
+                    <input class="range" type="range" name="" [value]="riskassessmentInfo5.totalvalue" min="0" max="{{riskassessmentInfo5.maxValue}}" disabled>
+                    <div id="outer-circle-red">
+                      <div id="inner-circle-red">                      
+                      </div>
+                    </div>
+                    <div id="outer-circle-green">
+                      <div id="inner-circle-green">                      
+                      </div>
+                    </div>
+                    <div class="risk-summary-loss">{{riskassessmentInfo5.temp1}}<span>{{riskassessmentInfo5.temp4}}</span></div>
+                    <div class="risk-summary-gain">{{riskassessmentInfo5.temp2}}<span>{{riskassessmentInfo5.temp5}}</span></div>
+                    <div class="total"><span class="">{{riskassessmentInfo5.temp3}}</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="row ml-1 mt-4" style="padding-top: 17px;position: relative;">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                  <span class="startover-span-color">Let’s ﬁnd the retirement goal that ﬁts your needs or</span>&nbsp;&nbsp;
+                  <img (click) = "goBackToRetirementSavingsPage()" class="startover-img" src="assets/images/LeftLane_StartOver.svg" />
+                </div>                
+            </div>             
+
+              <button type="button" class="goback-button" (click)="goBack()">{{'BackButton' | translate}}</button>
+              <button type="button" class="button" (click)="next()">{{'NextButton' | translate}}</button>  
+          </form>

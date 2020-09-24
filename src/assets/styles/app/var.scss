@@ -1,0 +1,62 @@
+/* ===================== font-family ====================== */
+$fontFamily: 'Lato', sans-serif;
+
+/* ===================== font-size ====================== */
+$fontSizeLabel: 16px;
+$fontSizeSm: 10px;
+$fontSizeSmPlus: 12px;
+$fontSizeMd: 14px;
+$fontSizeLg: 16px;
+$fontSizeXl: 18px;
+
+/* ===================== spl-sizes ====================== */
+$sideBarW: 300px;
+$iconSizeXs: 15px;
+$iconSizeSm: 25px;
+$iconSizeMd: 50px;
+$iconSizeLg: 100px;
+$iconSizeXl: 150px;
+
+/* ===================== color ====================== */
+$colorGrayDark: #555555;
+$colorGray: #808080;
+$colorGrayLight: #ccc;
+$colorGrayL: #ccc;
+$colorGrayLightMore: #f0f0f0;
+$colorBlue: #2a368e;
+$colorBlueM: #7f84a9;
+$colorBlueMd: #7f84a9;
+$colorBlueL: #c0c3dc;
+$colorBlueLight: #c1c5e9;
+$colorBlueLightMore: #ebecf3;
+
+/* ===================== border ====================== */
+$border-b: 1px solid $colorBlue;
+
+/* ===================== radius ====================== */
+$radiusSm: 3px;
+$radiusMd: 5px;
+$radiusLg: 11px;
+$radiusXl: 33px;
+$radiusCircle: 50%;
+
+/* ===================== space ====================== */
+$spaceSm: 7px;
+$spaceSmPlus: 10px;
+$spaceMd: 15px;
+$spaceLg: 30px;
+$spaceXl: 60px;
+$spaceXXL: 3rem;
+
+/* ===================== hover ====================== */
+@mixin btn-hover {
+    &:hover{
+        box-shadow: inset 0px 0.1rem 0.6rem $colorGray;
+        background-color: $colorBlueLightMore;
+    }
+}
+
+/* ===================== selected ====================== */
+@mixin activeSelectedBox {
+    box-shadow: 2px 2px 2px $colorGray;
+}

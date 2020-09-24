@@ -1,0 +1,97 @@
+<mat-spinner strokeWidth="3" [diameter]="25" class="mat_spinner" *ngIf="showLoader"></mat-spinner>
+<form #pageHeight class="form-bottom">
+   <div class="row md-5 ml-1">
+      <!-- <div class="col-12"> -->
+      <label class="label-color">{{'AccountAnalysis5Header' | translate}}</label>
+      <!-- </div>                    -->
+   </div>
+   <div class="row md-5 ml-1">
+      <span class="span-sub-heading">{{'AccountAnalysis5SubHeader1' | translate}}</span>
+   </div>
+   <div class="row md-5 mt-3 ml-1 position-relative" style="width: 850px;">
+      <div class="col-md-12 row">
+         <div class="block1">
+            <div class="card" style="height: 100%;" *ngIf="accountAnalysisData">
+               <div class="card-header px-3 py-2"> Balance<br _ngcontent-cjm-c322="" >
+                  <span class="balance">${{accountAnalysisData.projections.summary_bar.current_balance.toLocaleString('en-GB')}}</span>
+               </div>
+               <div class="card-body py-2 px-3">
+                  <p class="accountanalysis-p-5 mb-0 mt-2">Risk Level</p>
+                  <input id="inputsm" type="text" disabled="" value="{{accountAnalysisData.projections.summary_bar.risk_level}}"
+                     class="form-control accountanalysis-input input-sm">
+                  <p class="accountanalysis-p-5 mb-0 mt-2">Retirement Age</p>
+                  <input id="inputsm" type="text" disabled="" value="{{accountAnalysisData.projections.summary_bar.retirement_age}}"
+                     class="form-control accountanalysis-input input-sm">
+                  <p class="accountanalysis-p-5 mb-0 mt-2">Current Retirement Account Value</p>
+                  <input id="inputsm" type="text" disabled="" value="${{accountAnalysisData.projections.summary_bar.current_account_balance.toLocaleString('en-GB')}}"
+                     class="form-control accountanalysis-input input-sm">
+                  <p class="accountanalysis-p-5 mb-0 mt-2">Projected Retirement Account Value with Left Lane</p>
+                  <!-- <input id="inputsm" type="text" disabled="" value="$ 240,000" class="form-control accountanalysis-input input-sm"><span class="percent1">+ 118 %</span> -->
+                  <div class="inner-addon left-addon">
+                     <span class="percent1">+ {{accountAnalysisData.projections.summary_bar.projected_LL_balance_pct_change}} %</span>
+                     <input id="inputsm" type="text" disabled value="${{accountAnalysisData.projections ? accountAnalysisData.projections.summary_bar.projected_LL_balance_value.toLocaleString('en-GB'):123}}"
+                        class="form-control accountanalysis-input input-sm">
+                  </div>
+                  <p class="accountanalysis-p-5 mb-0 mt-2">Projected Retirement Account Value for Current account</p>
+                  <div class="inner-addon left-addon">
+                     <span class="percent2">- {{accountAnalysisData.projections.summary_bar.projected_current_balance_pct_change}} %</span>
+                     <input id="inputsm" type="text" disabled value="${{accountAnalysisData.projections.summary_bar.projected_current_balance_value.toLocaleString('en-GB')}}"
+                        class="form-control accountanalysis-input input-sm mb-2">
+                  </div>
+               </div>
+               <div class="card-footer text-muted"></div>
+            </div>
+         </div>
+         <div class="block2">
+            <div class="card" style="
+               height: 100%;
+               ">
+               <div class="card-header">
+                  <div [ngClass]="clickTab()" class="ribbon-split-p5">
+                     <span style="flex: 1;" [ngClass]="tabTextColor1()" (click)="click1(true)">PERFORMANCE
+                        COMPARISON</span>
+                     <span style="flex: 1;" [ngClass]="tabTextColor2()" (click)="click1(false)">PROJECTED FEES</span>
+                  </div>
+               </div>
+               <div class="card-body mt-1 px-0 py-0" style="
+                  display: inline-block;
+                  ">
+                  <div>
+                     <div class="chartjs-size-monitor">
+                        <div class="chartjs-size-monitor-expand">
+                           <div class=""></div>
+                        </div>
+                        <div class="chartjs-size-monitor-shrink">
+                           <div class=""></div>
+                        </div>
+                     </div>
+                     <div class="chartjs-size-monitor">
+                        <div class="chartjs-size-monitor-expand">
+                           <div class=""></div>
+                        </div>
+                        <div class="chartjs-size-monitor-shrink">
+                           <div class=""></div>
+                        </div>
+                     </div>
+                     <canvas id="canvas" style="display: block; width: 477px; height: 238px;" width="477" height="238"
+                        class="chartjs-render-monitor"></canvas>
+                  </div>
+                  <div class="accountA5-bg"><span _ngcontent-cjm-c322="">The estimated retirement <b
+                           _ngcontent-cjm-c322="">account</b> balance at your retirement age is <b
+                           _ngcontent-cjm-c322="">$256,252.</b></span><br _ngcontent-cjm-c322=""><span
+                        _ngcontent-cjm-c322="">Assuming the average lifespan in the US, your retirement account may provide you a monthly income of 
+                        <b _ngcontent-cjm-c322="">$1,744</b> during your retirement.</span></div>
+               </div>
+               <div class="accountA5-span"><i aria-label="right" class="fa fa-question-circle fa-question-circle-A5"
+                     style="font-size: 20px; color: #2a368e;"></i><span style="padding-top: 3px; font-size: 10px;">
+                     &nbsp; Learn more about this graph</span></div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="row md-5 ml-1 mt-3">
+    <span class="span-color">{{'AccountAnalysis5Span' | translate}}</span>
+  </div>
+   <button type="button" class="goback-button graph_button" (click)="goBack()">{{'BackButton' | translate}}</button>
+   <button type="button" class="button graph_button" (click)="next()">{{'NextButton' | translate}}</button>
+</form>

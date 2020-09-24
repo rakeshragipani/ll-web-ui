@@ -1,0 +1,91 @@
+
+@import "../../../assets/styles/app/var.scss";
+
+.text-color{
+    color : $colorBlue !important;
+    font-style: oblique;
+    padding-left: 38px;
+    font-size: 11px;
+}
+.text-alignmet{
+    padding-left: 30px;
+    margin-top: 10px;
+}
+
+.signup-font{
+    font-size: 16px;
+}
+
+.add-credentials-btn{
+    background : $colorBlue !important;
+    
+
+    span {
+        color : white;
+        font-weight: bolder;
+    }
+    
+}
+.add-credentials-btn-margin{
+  margin-top: 20px;
+}
+.addbtn{
+    padding-left:10px; 
+}
+//subscribed
+.retirement-accounts-card-header {
+    img {
+        height : 80px;
+        width : 80px;
+    }
+    color : $colorBlue;
+    .inline-header{
+        display: inline;
+    }
+}
+.subscribed-add-btn {
+    padding-left:25px; 
+    
+}
+.main-div {
+    height : 320px;
+    width: 500px;
+}
+.risk-allignment {
+    font-size: 14px !important;
+    text-align: center;
+     
+}
+.risk-color{
+   color: gray;
+}
+/* Red border */
+hr.new1 {
+    border-top: 1px solid $colorBlue !important;
+  }
+.icon-color 
+{
+      color: $colorBlue !important;
+}
+.divone-padding {
+    padding-top: 10px;
+}
+.improvements-btn-alignment{
+    background : $colorBlue !important;
+    padding-left:15px; 
+    padding-top: 10px;
+    span {
+        color : white;
+       
+    }
+}
+.account-btn-alignment {
+    background : none;
+    padding-left:15px; 
+    padding-top: 10px;
+    margin-top: 10px;
+    span {
+        color :$colorBlue !important;
+       
+    }
+}

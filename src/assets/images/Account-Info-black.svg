@@ -1,0 +1,20 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="4.74cm" height="4.73cm" viewBox="0 0 134.37 134.03">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #000000;
+      }
+    </style>
+  </defs>
+  <title>LeftLane_BlueGraph</title>
+  <g>
+    <path class="cls-1" d="M101.3,117H74.76V3.85H101.3Z" transform="translate(-2.94 -3.85)"/>
+    <path class="cls-1" d="M38.9,84.42H65.43v53.37H38.9Z" transform="translate(-2.94 -3.85)"/>
+    <path class="cls-1" d="M65.46,39.62V78.05H38.86V39.62Z" transform="translate(-2.94 -3.85)"/>
+    <path class="cls-1" d="M112.17,102V62.09h25.11V102Z" transform="translate(-2.94 -3.85)"/>
+    <path class="cls-1" d="M28,109.51H3V77H28Z" transform="translate(-2.94 -3.85)"/>
+    <path class="cls-1" d="M112.28,108.33h25v29.46h-25Z" transform="translate(-2.94 -3.85)"/>
+    <path class="cls-1" d="M28,115.84v22H2.94v-22Z" transform="translate(-2.94 -3.85)"/>
+    <path class="cls-1" d="M101.41,123.38v14.5H74.89v-14.5Z" transform="translate(-2.94 -3.85)"/>
+  </g>
+</svg>

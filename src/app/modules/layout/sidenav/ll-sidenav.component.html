@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="steps-form-3" [style.height.px]="470">
+            <div class="steps-row-3 setup-panel-3 d-flex justify-content-between" style="padding-top: 15px;">
+                <ul class="menu">
+                    <li><strong class="nav-menu-button"  *ngIf="child >= 0 || child === undefined" [ngClass]="{'bgColor': child >= 1,'disabled': child > 1}" (click)="child > 1?'':click(0)">Your Info</strong></li>
+                    <li><strong class="nav-menu-button" *ngIf="child >= 1" [ngClass]="{'bgColor': child >= 2,'disabled': child > 1}" (click)="child > 1?'':click(1)">Create Account</strong></li>
+                    <li><strong class="nav-menu-button" *ngIf="child >= 2" [ngClass]="{'bgColor': child >= 3}" (click)="click(2)">Retirement Savings</strong></li>
+                    <li><strong class="nav-menu-button" *ngIf="child >= 3" [ngClass]="{'bgColor': child >= 4}" (click)="click(3)">Risk Assessment</strong></li>
+                    <li><strong class="nav-menu-button" *ngIf="child >= 4" [ngClass]="{'bgColor': child >= 5}" (click)="click(4)">Register Retirement Account</strong></li>
+                    <li><strong class="nav-menu-button" *ngIf="child >= 5" [ngClass]="{'bgColor': child >= 6}" (click)="click(5)">Account Analysis</strong></li>
+                    <li><strong class="nav-menu-button" *ngIf="child >= 6" [ngClass]="{'bgColor': child >= 7}" (click)="click(6)">Subscription</strong></li>
+                </ul>
+            </div>
+            <div class="nav-circle" [ngClass]="{'circle-bg': child >= 6}">
+                <i *ngIf="child >= 6" class="fa fa-check check-class" aria-hidden="true"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <ul class="menu">
+    <li><strong class="nav-menu-button" *ngIf="child >= 0 || child === undefined" [ngClass]="{'bgColor': child >= 1,'disabled': child > 1}" (click)="child > 1?'':click(0)">Your Info</strong></li>
+    <li><strong class="nav-menu-button" *ngIf="child >= 1" [ngClass]="{'bgColor': child >= 2,'disabled': child > 1}" (click)="child > 1?'':click(1)">Create Account</strong></li>
+    <li><strong class="nav-menu-button" *ngIf="child >= 2" [ngClass]="{'bgColor': child >= 3}" (click)="click(2)">Retirement Savings</strong></li>
+    <li><strong class="nav-menu-button" *ngIf="child >= 3" [ngClass]="{'bgColor': child >= 4}" (click)="click(3)">Risk Assessment</strong></li>
+    <li><strong class="nav-menu-button" *ngIf="child >= 4" [ngClass]="{'bgColor': child >= 5}" (click)="click(4)">Register Retirement Account</strong></li>
+    <li><strong class="nav-menu-button" *ngIf="child >= 5" [ngClass]="{'bgColor': child >= 6}" (click)="click(5)">Account Analysis</strong></li>
+    <li><strong class="nav-menu-button" *ngIf="child >= 6" [ngClass]="{'bgColor': child >= 7}" (click)="click(6)">Subscription</strong></li>
+</ul> -->
+
+<!-- <div class="nav-circle" [ngClass]="{'circle-bg': child >= 6}">
+    <i *ngIf="child >= 6" class="fa fa-check check-class" aria-hidden="true"></i>
+</div> -->

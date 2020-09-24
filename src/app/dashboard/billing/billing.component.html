@@ -1,0 +1,494 @@
+<header class="profile-menu-header">
+  <h1>BILLING</h1>
+</header>
+<mat-spinner strokeWidth="3" [diameter]="25" class="mat_spinner" *ngIf="isLoading"></mat-spinner>
+<div class="container">
+  <!-- <div class="row">
+    <div class="col-md-4 col-sm-12 row-content">
+      <span class="fa fa-credit-card fa-icon" aria-hidden="true"></span>
+      <span *ngIf="customer.sources.data[0]" class="page-text">{{ customer.sources.data[0].brand}} ending with
+        {{ customer.sources.data[0].last4 }}</span>
+    </div>
+  </div> -->
+
+  <div class="row">
+    <div class="col-md-7 col-sm-12 row-content">
+      <span class="page-text">Subscription Type</span>
+      <span class="page-text-value" *ngIf="!isLoading">{{
+        subscriptionType ? subscriptionType : "Not subscribed"
+      }}</span>
+      <br /><br />
+      <span class="page-text">Billing Cycle</span>
+      <span class="page-text-value" *ngIf="invoice">{{
+        invoice.invoiceCycle == "year"
+          ? "Yearly "
+          : invoice.invoiceCycle == "month"
+          ? "Monthly"
+          : invoice.invoiceCycle
+      }}</span>
+      <br /><br />
+      <span class="page-text">Number of Accounts</span>
+      <span class="page-text-value" *ngIf="retirementAccounts">{{
+        retirementAccounts.length
+      }}</span>
+    </div>
+    <div class="col-md-2 col-sm-12 button-elem row-content">
+      <button class="default-button" *ngIf="!isLoading && (SessionData && SessionData.state == 'subscription')"
+        (click)="changeSubscriptionButtonEvent()">CHANGE SUBSCRIPTION</button>
+      <button class="default-button" *ngIf="!isLoading && (SessionData && SessionData.state != 'subscription')"
+        (click)="subscribeButtonEvent()">SUBSCRIBE</button>
+      <br /><br /><br /><br />
+      <button class="default-button" (click)="cancelSubscription()" *ngIf="invoice && invoice.activeSubscriptionsFlag">
+        CANCEL SUBSCRIPTION
+      </button>
+    </div>
+  </div>
+  <div class="row flex-nowrap">
+    <div class="col-md-9 col-sm-12 hr-table-line">
+      <b>
+        <hr class="table-line" /></b>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-7 col-sm-12 row-content">
+      <span class="page-text">Last Payment</span>
+      <span *ngIf="billingData" class="page-text cardAlignment">{{ billingData[0].cardType }} ending with
+        {{ billingData[0].cardLast4 }}</span>
+      <span class="page-text-value" *ngIf="invoice">{{ invoice.lastInvoiceAmount | currency: "USD":"symbol" }} -
+        {{ invoice.lastInvoiceDate | date: "MM/dd/yyyy" }}</span>
+      <br /><br />
+      <span class="page-text">Next Payment</span>
+      <span class="page-text-value" *ngIf="invoice">{{ invoice.nextInvoiceAmount | currency: "USD":"symbol" }} -
+        {{
+          invoice.nextInvoiceDate == null
+            ? "Subscription Cancelled"
+            : (invoice.nextInvoiceDate | date: "MM/dd/yyyy")
+        }}</span>
+    </div>
+  </div>
+  <div class="row flex-nowrap">
+    <div class="col-md-9 col-sm-12 hr-table-line">
+      <b>
+        <hr class="table-line" /></b>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-9 col-sm-12" id="paymentHistory" data-toggle="collapse" href="#collapseExample1"
+      (click)="collapseConditionCheck1()">
+      <span class="page-text" aria-expanded="false" aria-controls="collapseExample">List of Cards
+      </span>
+
+      <span>
+        <i class="fa fa-2x pull-right" [ngClass]="{
+            'fa-angle-up ': !showLine1,
+            'fa-angle-down ': showLine1
+          }" aria-hidden="true"></i>
+      </span>
+      <button class="default-button" data-toggle="modal" id="addModalClose" data-target="#createModal" *ngIf="!isLoading && (SessionData && SessionData.state == 'subscription')"
+        (click)="addCard()">
+        Add Card
+      </button>
+       <button class="default-button" *ngIf="!isLoading && (SessionData && SessionData.state != 'subscription')"
+        (click)="subscribeToAddCard()">
+        Add Card
+      </button>
+    </div>
+  </div>
+
+  <div class="row flex-nowrap hider" [ngClass]="classForCollapse1()">
+    <div class="col-md-9 col-sm-12 hr-table-line">
+      <b>
+        <hr class="table-line" /></b>
+    </div>
+  </div>
+
+  <div class="collapse" id="collapseExample1" *ngIf="customerCards">
+    <table class="table  table-fixed" style="width: 60% !important;">
+      <tbody style="color: #2a368e;">
+        <tr *ngFor="let item of customerCards; let i = index;first as isFirst" [class.first]="isFirst">
+          <td>
+            <span>
+              <input type="radio" id="card" name="cardSelecter" [checked]="i == 0 ? true:false"
+                (click)="defaultPaymentRenewalCard(item)" />
+              <span class="fa fa-2x fa-credit-card fa-icon" aria-hidden="true"></span>
+              <span class="alignmentForCard">
+                &nbsp;&nbsp;&nbsp; {{ item.brand }}: ************{{ item.last4 }}
+              </span>
+
+            </span>
+            <button class="default-button" (click)="deleteCustomerCard(i, item)">
+              DELETE
+            </button>
+            <button class="default-button" data-toggle="modal" (click)="editCustomerCard(item.id)"
+              data-target="#editModal">
+              EDIT
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- <div
+      class="row mt-2 ml-1"
+      *ngFor="let item of customerCards; let i = index"
+    >
+      <span class="fa fa-2x fa-credit-card fa-icon" aria-hidden="true"></span>
+      <span style="margin-left: 1%;"
+        >{{ item.brand }}: ************{{ item.last4 }}</span
+      >
+     
+      <div style="margin-left: 10%;">
+        <button class="default-button" (click)="deleteCustomerCard(i, item)">
+          DELETE
+        </button>
+        <button
+          class="default-button"
+          data-toggle="modal"
+          (click)="editCustomerCard(item.id)"
+          data-target="#editModal"
+        >
+          EDIT
+        </button>
+      </div>
+    </div> -->
+    <br />
+    <p *ngIf="deleted" style="color: green;">
+      <b>{{ deleted }}</b>
+    </p>
+    <!-- <p *ngIf="updated" style="color: green;">
+      <b>{{ updated }}</b>
+    </p> -->
+    <div class="row flex-nowrap lline">
+      <div class="col-md-9 col-sm-12 hr-table-line">
+        <b>
+          <hr class="table-line" /></b>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-9 col-sm-12" id="paymentHistory" data-toggle="collapse" href="#collapseExample"
+      (click)="collapseConditionCheck()">
+      <span class="page-text" aria-expanded="false" aria-controls="collapseExample">Payment History </span><i
+        class="fa fa-2x pull-right" [ngClass]="{
+          'fa-angle-up ': !showLine,
+          'fa-angle-down ': showLine
+        }" aria-hidden="true"></i>
+    </div>
+  </div>
+
+  <div class="row flex-nowrap hider" [ngClass]="classForCollapse()">
+    <div class="col-md-9 col-sm-12 hr-table-line">
+      <b>
+        <hr class="table-line" /></b>
+    </div>
+  </div>
+
+  <div class="collapse" id="collapseExample" *ngIf="billingData">
+    <div class="row mt-2 ml-1" *ngFor="let item of billingData">
+      <div class="col-md-2 col-sm-3">
+        <span class="page-text-value float-left">{{ item.paymentDate | date:'MM/dd/yyyy' }}</span>
+      </div>
+      <div class="col-md-3 col-sm-3">
+        <span class="page-text-value float-left">{{item.cardType}}:{{ maskCreditCard(item.cardLast4) }}
+        </span>
+      </div>
+      <div class="col-md-2 col-sm-3">
+        <span class="page-text-value float-left">{{ item.status }}</span>
+      </div>
+      <div class="col-md-1 cold-sm-3">
+        <span class="page-text-value float-left">{{ item.amount | currency:'USD':'symbol'}}</span>
+      </div>
+    </div>
+    <!-- <div class="row mt-2 ml-1">
+            <div class="col-md-2 col-sm-3">
+                <span class="page-text-value float-left">04/10/2020</span>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <span class="page-text-value float-left">Visa: **** **** **** 2369</span>
+            </div>
+            <div class="col-md-2 col-sm-3">
+                <span class="page-text-value float-left">Succeeded</span>
+            </div>
+            <div class="col-md-1 cold-sm-3">
+                <span class="page-text-value float-left">$29.00</span>
+            </div>
+        </div> -->
+    <div class="row flex-nowrap lline">
+      <div class="col-md-9 col-sm-12 hr-table-line">
+        <b>
+          <hr class="table-line" /></b>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModal" aria-hidden="true"
+    data-backdrop="">
+
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <p data-dismiss="modal" class="fa fa-times-circle modal-close-button" aria-hidden="true"
+            style="cursor: pointer"></p>
+        </div>
+        <div class="modal-body" style="margin-top: -6%;">
+          <form [formGroup]="createBillingForm" (ngsubmit)="saveCard()">
+            <div class="row">
+              <div class="col-6 mt-2">
+                <label class="subscription-label-color mb-0">Name</label>
+                <div class="left-border">
+                  <input type="text" class="form-control" formControlName="firstName" placeholder="Name as on your Card"
+                    [ngClass]="{ 'is-invalid': fsubmitted && g.firstName.errors }" required ngDefaultControl />
+                </div>
+                <div *ngIf="fsubmitted && g.firstName.errors" class="text-danger">
+                  <div *ngIf="g.firstName.errors.required" style="color: red;">
+                    Please enter Name on your Card
+                  </div>
+                  <div *ngIf="g.firstName.errors.pattern" style="color: red;">
+                    Please enter valid Name on your Card.
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <label class="subscription-label-color mb-0">Address</label>
+                <div class="left-border">
+                  <input type="text" placeholder="Address" formControlName="address" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6 mt-2">
+                <label class="subscription-label-color mb-0">State</label>
+                <div class="left-border">
+                  <input type="text" placeholder="State" formControlName="state" class="form-control" />
+                </div>
+                <div *ngIf="fsubmitted && g.state.errors" class="text-danger">
+                  <div *ngIf="g.state.errors.pattern" style="color: red;">
+                    Please enter valid State.
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <label class="subscription-label-color mb-0">City</label>
+                <div class="left-border">
+                  <input type="text" placeholder="City" formControlName="city" class="form-control" />
+                </div>
+                <div *ngIf="fsubmitted && g.city.errors" class="text-danger">
+                  <div *ngIf="g.city.errors.pattern" style="color: red;">
+                    Please enter valid City.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6 mt-2">
+                <label class="subscription-label-color mb-0">Apt/Suite</label>
+                <div class="left-border">
+                  <input type="text" placeholder="Apt/Suite" formControlName="addressLine2" class="form-control" />
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <label class="subscription-label-color mb-0">Zip/Postal</label>
+                <div class="left-border">
+                  <input type="text" placeholder="Zip/Postal" formControlName="zipOrPostal" maxlength="5" minlength="5"
+                    class="form-control" [ngClass]="{
+                    'is-invalid': fsubmitted && g.zipOrPostal.errors
+                  }" required ngDefaultControl />
+                </div>
+                <div *ngIf="fsubmitted && g.zipOrPostal.errors" class="text-danger">
+                  <div *ngIf="g.zipOrPostal.errors.required" style="color: red;">
+                    Please enter Zip/Postal code.
+                  </div>
+                  <div *ngIf="
+                    g.zipOrPostal.errors.pattern ||
+                    g.zipOrPostal.errors.minlength
+                  " style="color: red;">
+                    Please enter valid 5 digit Zip/Postal code.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6 mt-2">
+                <label class="subscription-label-color mb-0" for="card-number">Credit Card Number</label>
+                <div class="left-border left-border-Strip" id="card-number">
+                  <input type="number" placeholder="Credit Card Number" class="form-control" required />
+                </div>
+                <!-- <div
+                *ngIf="fsubmitted && g.cardNumber.errors"
+                class="text-danger"
+              >
+                <div *ngIf="g.cardNumber.errors.required" style="color: red;">
+                  Please enter Card Number
+                </div>
+              
+              </div> -->
+                <p class="stripErrMesg" id="cardErr"></p>
+              </div>
+              <div class="col-3 mt-2">
+                <label class="subscription-label-color mb-0" for="card-cvc">CVC</label>
+                <div class="left-border left-border-Strip" id="card-cvc">
+                  <input type="number" placeholder="CVC" class="form-control">
+                </div>
+                <p class="stripErrMesg" id="cvcErr"></p>
+              </div>
+              <div class="col-3 mt-2">
+                <label class="subscription-label-color mb-0" for="card-expiry">Expiry Month/Year</label>
+                <div class="left-border left-border-Strip" id="card-expiry">
+                  <input type="text" placeholder="MM/YY" min="1" max="5" id="expDatemount" class="form-control" />
+                </div>
+                <p class="stripErrMesg" id="expiryErr"></p>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer" style="margin-right: 1%;">
+          <button type="submit" style="margin-right: 0px !important;" (click)="saveCard()" class="btn btn-primary">
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade in" id="editModal" aria-hidden="true" data-backdrop="">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <p data-dismiss="modal" id="modalClose" class="fa fa-times-circle modal-close-button" aria-hidden="true"
+            style="cursor: pointer"></p>
+        </div>
+        <div class="modal-body" style="margin-top: -6%;">
+          <form [formGroup]="updateBillingForm" (ngsubmit)="updateCard()">
+            <div class="row">
+              <div class="col-6 mt-2">
+                <label class="subscription-label-color mb-0">Name</label>
+                <div class="left-border">
+                  <input type="text" formControlName="firstName" class="form-control" placeholder="Name as on your Card"
+                    [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" required />
+                </div>
+                <div *ngIf="submitted && f.firstName.errors" class="text-danger">
+                  <div *ngIf="f.firstName.errors.required" style="color: red;">
+                    Please enter Name on your Card
+                  </div>
+                  <div *ngIf="f.firstName.errors.pattern" style="color: red;">
+                    Please enter valid Name on your Card.
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <label class="subscription-label-color mb-0">Address</label>
+                <div class="left-border">
+                  <input type="text" placeholder="Address" formControlName="address" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6 mt-2">
+                <label class="subscription-label-color mb-0">State</label>
+                <div class="left-border">
+                  <input type="text" placeholder="State" formControlName="state" class="form-control" />
+                </div>
+                <div *ngIf="submitted && f.state.errors" class="text-danger">
+                  <div *ngIf="f.state.errors.pattern" style="color: red;">
+                    Please enter valid State.
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <label class="subscription-label-color mb-0">City</label>
+                <div class="left-border">
+                  <input type="text" placeholder="City" formControlName="city" class="form-control" />
+                </div>
+                <div *ngIf="submitted && f.city.errors" class="text-danger">
+                  <div *ngIf="f.city.errors.pattern" style="color: red;">
+                    Please enter valid City.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6 mt-2">
+                <label class="subscription-label-color mb-0">Apt/Suite</label>
+                <div class="left-border">
+                  <input type="text" placeholder="Apt/Suite" formControlName="addressLine2" class="form-control" />
+                </div>
+              </div>
+              <div class="col-6 mt-2">
+                <label class="subscription-label-color mb-0">Zip/Postal</label>
+                <div class="left-border">
+                  <input type="text" placeholder="Zip/Postal" maxlength="5" minlength="5" formControlName="zipOrPostal"
+                    class="form-control" [ngClass]="{
+                    'is-invalid': submitted && f.zipOrPostal.errors
+                  }" required ngDefaultControl />
+                </div>
+                <div *ngIf="submitted && f.zipOrPostal.errors" class="text-danger">
+                  <div *ngIf="f.zipOrPostal.errors.required" style="color: red;">
+                    Please enter Zip/Postal code.
+                  </div>
+                  <div *ngIf="
+                    f.zipOrPostal.errors.pattern ||
+                    f.zipOrPostal.errors.minlength
+                  " style="color: red;">
+                    Please enter valid 5 digit Zip/Postal code.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <!-- <div class="col-6 mt-2">
+              <label class="subscription-label-color mb-0" for="card-number"
+                >Credit Card Number</label
+              >
+              <div class="left-border left-border-Strip" id="card-number">
+                <input
+                  type="number"
+                  placeholder="Credit Card Number"
+                  class="form-control"
+                />
+              </div>
+              <p class="stripErrMesg" id="cardErr"></p>
+            </div> -->
+              <!-- <div class="col-3 mt-2">
+              <label class="subscription-label-color mb-0" for="card-cvc"
+                >CVC</label
+              >
+              <div class="left-border left-border-Strip" id="card-cvc">
+                <input type="number" placeholder="CVC" class="form-control" />
+              </div>
+              <p class="stripErrMesg" id="cvcErr"></p>
+            </div> -->
+              <div class="col-3 mt-2">
+                <label class="subscription-label-color mb-0">Expiry Month/Year</label>
+                <div class="left-border">
+                  <input type="text" placeholder="MM/YY" formControlName="expDate" min="1" maxlength="5"
+                    class="form-control" (keyup)="formatString($event)" />
+                </div>
+                <div *ngIf="submitted && f.expDate.errors" class="text-danger">
+                  <div *ngIf="f.expDate.errors.required" style="color: red;">
+                    Please enter Expiry Month and Year
+                  </div>
+                </div>
+                <p class="stripErrMesg" *ngIf="expError">{{expError}}</p>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer" style="margin-right: 1%;">
+          <button type="button" style="margin-right: 0px !important;" (click)="updateCard()" class="btn btn-primary">
+            Update
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div
+  class="modal"
+  id="editModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="editModal"
+  aria-hidden="true"
+  [hidden]="hideButton"
+> -->

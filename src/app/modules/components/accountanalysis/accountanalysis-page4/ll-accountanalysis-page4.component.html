@@ -1,0 +1,97 @@
+<mat-spinner
+  strokeWidth="3"
+  [diameter]="25"
+  class="mat_spinner"
+  *ngIf="showLoader"
+></mat-spinner>
+<form #pageHeight  class="form-bottom" *ngIf="accountAnalysisData">
+  <div class="row md-5">
+      <div class="col-12">
+        <label class="label-color">{{ 'AccountAnalysis4Header' | translate}}</label>
+      </div>
+  </div>
+  <div class="row md-5 Image">
+    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+        <div class="table-responsive">
+            <table class="table-sm current">
+              <thead>
+                <tr class="th">
+                    <th colspan="2">CURRENT</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of accountAnalysisData.current.improvement_values">
+                    <td class="col-md-1 left">{{getkey(item)}}</td>
+                    <td class="col-md-1 right">{{item[getkey(item)]}}%</td>
+                </tr>
+                <!-- <tr>
+                    <td class="col-md-1 left">QQQ</td>
+                    <td class="col-md-1 right">25%</td>
+                </tr>
+                <tr>
+                    <td class="col-md-1 left">Uncategorized</td>
+                    <td class="col-md-1 right">21%</td>
+                </tr>
+                <tr>
+                    <td class="col-md-1 left">CMGIX</td>
+                    <td class="col-md-1 right">12%</td>
+                </tr>
+                <tr>
+                    <td class="col-md-1 left">APGCX</td>
+                    <td class="col-md-1 right">10%</td>
+                </tr> -->
+                <tr>
+                    <td colspan="2">{{accountAnalysisData.current.current_div_mesg == "[div_details_current_div_mesg]" ? currentDivMessage : currentDivMessage}}</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="increase-img">
+            <img class="img-responsive" src="assets/images/arrow.png">
+    </div>
+    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+        <div class="table-responsive">
+            <table class="table-sm recommended">
+              <thead>
+                <tr class="th">
+                  <th colspan="2">RECOMMENDED</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of accountAnalysisData.recommended.improvement_values">
+                    <td class="left blur">{{getkey(item)}}</td>
+                    <td class="col-md-1 right">{{item[getkey(item)]}}%</td>
+                </tr>
+                <!-- <tr>
+                    <td class="left blur">QQQ</td>
+                    <td class="col-md-1 right">25%</td>
+                </tr>
+                <tr>
+                    <td class="left blur">Uncategorized</td>
+                    <td class="col-md-1 right">21%</td>
+                </tr>
+                <tr>
+                    <td class="left blur">CMGIX</td>
+                    <td class="col-md-1 right">12%</td>
+                </tr>
+                <tr>
+                    <td class="left blur">APGCX</td>
+                    <td class="col-md-1 right">10%</td>
+                </tr> -->
+                <tr>
+                    <td colspan="2">{{accountAnalysisData.recommended.recommended_div_mesg == "[div_details_recommended_div_mesg]" ? recommendedDivMessage : recommendedDivMessage}}</td>
+                </tr>
+              </tbody>
+            
+            </table>
+        </div>
+    </div>
+  </div>
+  
+<div class="row md-5 ml-1 mt-3">
+    <span class="span-color">{{'AccountAnalysis4Span' | translate}}</span>
+  </div>
+  <button type="button" class="goback-button" (click)="goBack()">{{'BackButton' | translate}}</button>
+  <button type="button" class="button" (click)="next()">{{'NextButton' | translate}}</button>
+</form>

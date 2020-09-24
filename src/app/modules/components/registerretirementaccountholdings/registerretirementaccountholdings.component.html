@@ -1,0 +1,62 @@
+<mat-spinner strokeWidth="3" [diameter]="25" class="mat_spinner" *ngIf="showLoader"></mat-spinner>
+<header class="profile-menu-header">
+    <h1>SELECT AN ACCOUNT FOR FURTHER ANALYSIS</h1>
+</header>
+<br>
+<div class="md-8" #pageHeight>
+    <div class="text-center table-wrapper-scroll-y myBox" *ngIf="accountData?.length > 0">
+        <table class="table table-bordered table-striped table-fixed">
+            <thead style="color: #2A368E;font-size: 13px;text-align: left">
+                <tr>
+                    <th><span class="material-icons">radio_button_checked</span></th>
+                    <th>Name of Account holder</th>
+                    <th>Account Name</th>
+                    <th>Account Number</th>
+                    <th>Account Type</th>
+                    <th>Total holdings</th>
+                </tr>
+            </thead>
+            <tbody style="color: #2A368E;font-size: 13px;font-weight:bold;">
+
+                <tr *ngFor="let item of accountData" [ngClass]="{'selectedItem': selectedData === item}">
+                    <th><input type="radio" [(ngModel)]="radioSelected" name="list_name" value="{{item.id}}"
+                            (change)="onItemChange(item)" (click)="selectAccount = null" /></th>
+                    <td class="text-left">{{ item.displayedName }}</td>
+                    <td class="text-left">{{ item.accountName }}</td>
+                    <td class="text-left">{{ item.accountNumber }}</td>
+                    <td class="text-left">{{ item.accountType }}</td>
+                    <td class="text-left">{{ item.balance.currency }} {{ item.balance.amount.toLocaleString('en') }}
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p *ngIf="noAccountsMessage" style="color:red">
+        <span (click)="showFriendlyTable()">{{noAccountsMessage}}<span class="material-icons"
+                style="font-size: 24px;">help</span></span>
+    </p>
+
+    <div class="text-center table-wrapper-scroll-y myBox" *ngIf="showTable">
+        <table class="table table-bordered table-striped table-fixed">
+            <thead style="color: #2A368E;font-size: 13px;text-align: left">
+                <tr>
+                    <th scope="col">Category</th>
+                    <th scope="col">Yodlee Name</th>
+                    <th scope="col">Friendly Name</th>
+                </tr>
+            </thead>
+            <tbody style="color: #2A368E;font-size: 13px;font-weight:bold;" *ngIf="friendlyNames">
+                <tr *ngFor="let item of friendlyNames">
+                    <th scope="row">{{item.account_type | uppercase}}</th>
+                    <td class="text-left">{{item.yodleename}}</td>
+                    <td class="text-left">{{item.friendlyname}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<br>
+<p style="color:red;margin-bottom: 10px;">{{selectAccount}}</p>
+<button class="goback-button" (click)="goBack()">{{'BackButton' | translate}}</button>
+<button class="button" type="submit" (click)="next()" *ngIf="!noAccountsMessage">{{'NextButton' | translate}}</button>

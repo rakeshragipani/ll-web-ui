@@ -1,0 +1,245 @@
+[
+    {
+      "id": 1001,
+      "institutioncode": "ic_1001",
+      "institutionname": "Fidelity Investments",
+      "logo": "assets/institutions/Fidelity.jpg",
+      "url": "https://www.fidelity.com",
+      "active": "Y",
+      "order": 1
+    },
+    {
+      "id": 1002,
+      "institutioncode": "ic_1002",
+      "institutionname": "Vanguard",
+      "logo": "assets/institutions/vanguard.png",
+      "url": "",
+      "active": "Y",
+      "order": 2
+    },
+    {
+      "id": 1003,
+      "institutioncode": "ic_1003",
+      "institutionname": "Empower Retirement",
+      "logo": "assets/institutions/empower.png",
+      "url": "",
+      "active": "Y",
+      "order": 3
+    },
+    {
+      "id": 1004,
+      "institutioncode": "ic_1004",
+      "institutionname": "Principal Financial",
+      "logo": "assets/institutions/principal.jpg",
+      "url": "",
+      "active": "N",
+      "order": 4
+    },
+    {
+      "id": 1005,
+      "institutioncode": "ic_1005",
+      "institutionname": "TIAA CREF",
+      "logo": "assets/institutions/TIAA.png",
+      "url": "",
+      "active": "Y",
+      "order": 5
+    },
+    {
+      "id": 1006,
+      "institutioncode": "ic_1006",
+      "institutionname": "Wells Fargo",
+      "logo": "assets/institutions/wellsfargo.png",
+      "url": "",
+      "active": "N",
+      "order": 6
+    },
+    {
+      "id": 1007,
+      "institutioncode": "ic_1007",
+      "institutionname": "Merril Lynch",
+      "logo": "assets/institutions/merrill.jpg",
+      "url": "",
+      "active": "Y",
+      "order": 7
+    },
+    {
+      "id": 1008,
+      "institutioncode": "ic_1008",
+      "institutionname": "ADP Retirement Services",
+      "logo": "assets/institutions/ADP.png",
+      "url": "",
+      "active": "Y",
+      "order": 8
+    },
+    {
+      "id": 1009,
+      "institutioncode": "ic_1009",
+      "institutionname": "T. Rowe Price",
+       "logo": "assets/institutions/T-rowe-price.png",
+      "url": "",
+      "active": "Y",
+      "order": 9
+    },
+    {
+      "id": 1010,
+      "institutioncode": "ic_1010",
+      "institutionname": "Prudential",
+      "logo": "assets/institutions/Prudential.jpg",
+      "url": "",
+      "active": "Y",
+      "order": 10
+    },
+    {
+      "id": 1011,
+      "institutioncode": "ic_1011",
+      "institutionname": "John Hancock",
+      "logo": "assets/institutions/john-hancock.png",
+      "url": "",
+      "active": "Y",
+      "order": 11
+    },
+    {
+      "id": 1012,
+      "institutioncode": "ic_1012",
+      "institutionname": "Thrift Savings Plan",
+      "logo": "assets/institutions/thrift.png",
+      "url": "",
+      "active": "Y",
+      "order": 12
+    },
+    {
+      "id": 1013,
+      "institutioncode": "ic_1013",
+      "institutionname": "Charles Schwab",
+      "logo": "assets/institutions/charles.png",
+      "url": "",
+      "active": "N",
+      "order": 13
+    },
+    {
+      "id": 1014,
+      "institutioncode": "ic_1014",
+      "institutionname": "Mass Mutual Financial",
+      "logo": "assets/institutions/Mass_Mutual.png",
+      "url": "",
+      "active": "N",
+      "order": 14
+    },
+    {
+      "id": 1015,
+      "institutioncode": "ic_1015",
+      "institutionname": "Voya Financial",
+      "logo": "assets/institutions/voya-financial.png",
+      "url": "",
+      "active": "N",
+      "order": 15
+    },
+    {
+      "id": 1016,
+      "institutioncode": "ic_1016",
+      "institutionname": "Paychex",
+      "logo": "assets/institutions/paychex.png",
+      "url": "",
+      "active": "N",
+      "order": 16
+    },
+    {
+      "id": 1017,
+      "institutioncode": "ic_1017",
+      "institutionname": "Lincoln Financial",
+      "logo": "logo_1017.gif",
+      "url": "",
+      "active": "N",
+      "order": 17
+    },
+    {
+      "id": 1018,
+      "institutioncode": "ic_1018",
+      "institutionname": "Ubiquity",
+      "logo": "logo_1018.gif",
+      "url": "",
+      "active": "N",
+      "order": 18
+    },
+    {
+      "id": 1019,
+      "institutioncode": "ic_1019",
+      "institutionname": "American Funds/Capital Group",
+      "logo": "logo_1019.gif",
+      "url": "",
+      "active": "N",
+      "order": 19
+    },
+    {
+      "id": 1020,
+      "institutioncode": "ic_1020",
+      "institutionname": "Nationwide",
+      "logo": "logo_1020.gif",
+      "url": "",
+      "active": "N",
+      "order": 20
+    },
+    {
+      "id": 1021,
+      "institutioncode": "ic_1021",
+      "institutionname": "Newport Group",
+      "logo": "logo_1021.gif",
+      "url": "",
+      "active": "N",
+      "order": 21
+    },
+    {
+      "id": 1022,
+      "institutioncode": "ic_1022",
+      "institutionname": "Valic",
+      "logo": "logo_1022.gif",
+      "url": "",
+      "active": "N",
+      "order": 22
+    },
+    {
+      "id": 1023,
+      "institutioncode": "ic_1023",
+      "institutionname": "IMCARC",
+      "logo": "logo_1023.gif",
+      "url": "",
+      "active": "N",
+      "order": 23
+    },
+    {
+      "id": 1024,
+      "institutioncode": "ic_1024",
+      "institutionname": "ETrade?",
+      "logo": "logo_1024.gif",
+      "url": "",
+      "active": "N",
+      "order": 24
+    },
+    {
+      "id": 1025,
+      "institutioncode": "ic_1025",
+      "institutionname": "TD Ameritrade?",
+      "logo": "logo_1025.gif",
+      "url": "",
+      "active": "N",
+      "order": 25
+    },
+    {
+      "id": 1026,
+      "institutioncode": "ic_1026",
+      "institutionname": "Ally Financial?",
+      "logo": "logo_1026.gif",
+      "url": "",
+      "active": "N",
+      "order": 26
+    },
+    {
+      "id": 1027,
+      "institutioncode": "ic_1027",
+      "institutionname": "Interactive Brokers",
+      "logo": "logo_1027.gif",
+      "url": "",
+      "active": "N",
+      "order": 27
+    }
+  ]

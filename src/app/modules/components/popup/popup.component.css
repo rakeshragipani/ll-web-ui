@@ -1,0 +1,69 @@
+.popUpYodleeHeader {
+  /* text-align: center; */
+  color: #2a368e;
+  font-weight: bold;
+}
+.YodleePointsNumbers {
+  margin-bottom: 15px;
+  font-size: 22px;
+  padding: 14px 21px;
+  border-radius: 22px;
+  color: white;
+}
+.YodleePoints {
+  margin-bottom: 30px;
+}
+
+.YodleeContent {
+  font-weight: 400;
+  font-size: 15px;
+}
+.paymentFailed{
+  color:red;
+}
+.custom-dialog-backdrop {
+  color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  opacity: 0.5;
+}
+.cancelIcon {
+  float: right;
+  margin: -15px;
+  cursor: pointer;
+}
+.cancel_icon {
+  color: #f17474;
+  margin-top: -40px;
+  font-size: 70px;
+}
+.modifiy_email_btn {
+  float: right !important;
+  margin-left: 90px !important;
+}
+.text_color {
+  font-weight: 700;
+  font-size: 17px;
+}
+.mat-stroked-button:not([disabled]) {
+  border-color: #434d9b;
+  border-radius: 0%;
+}
+.mat-dialog-actions {
+  padding: 8px 0;
+  /* display: flex; */
+  flex-wrap: wrap;
+  min-height: 52px;
+  align-items: center;
+  margin-bottom: -24px;
+}
+.line-btw {
+  height: 1px;
+  width: 250px;
+  background-color: #2a368e;
+}
+.step-background {
+  width: 100px;
+  background: linear-gradient(to right, #419ad5 0%, #3d6796 100%);
+  border-radius: 30px;
+  color: white;
+}

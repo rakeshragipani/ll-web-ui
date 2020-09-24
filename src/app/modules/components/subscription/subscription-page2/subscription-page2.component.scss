@@ -1,0 +1,90 @@
+$fontFamily: 'Lato',
+sans-serif;
+$colorBlue: #2a368e;
+$fontsize-label: 16px;
+$border-b: 1px solid $colorBlue;
+
+::ng-deep {
+    .mat-checkbox {
+        font-family: $fontFamily;
+
+        .mat-checkbox-frame {
+            border-color: $colorBlue;
+        }
+
+        .mat-checkbox-label {
+            color: $colorBlue;
+            font-size: $fontsize-label;
+            font-weight: 700;
+        }
+
+        &.mat-checkbox-checked {
+            .mat-checkbox-background {
+                background-color: $colorBlue;
+            }
+        }
+    }
+
+    .mat-radio-button {
+        font-family: $fontFamily;
+
+        .mat-radio-outer-circle {
+            border-color: $colorBlue;
+        }
+
+        .mat-radio-label {
+            color: $colorBlue;
+            font-size: $fontsize-label;
+            font-weight: 700;
+        }
+
+        &.mat-radio-checked {
+            .mat-radio-inner-circle {
+                background-color: $colorBlue;
+            }
+        }
+    }
+}
+
+.border-t {
+    border-top: 1px solid;
+}
+
+.border-gray {
+    border-color: #cccccc;
+}
+
+//  Stripe Css	
+.left-border-Strip {
+    border: 1px solid #2a368e;
+    border-left: 5px solid #2a368e;
+    padding-left: 10px;
+    height: calc(1.5em + 0.75rem + 2px);
+    font-weight: normal;
+}
+
+.stripErrMesg {
+    color: red;
+    font-size: 14px;
+    margin: 0px;
+}
+
+.subscription-label-color {
+    color: #2a368e;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.bold-char_info {
+    font-size: 13px;
+}
+
+.promoCodeModal {
+    border-collapse: unset;
+}
+
+.title_font {
+    color: #2a368e;
+    font-weight: 600;
+    font-size: 20px;
+}

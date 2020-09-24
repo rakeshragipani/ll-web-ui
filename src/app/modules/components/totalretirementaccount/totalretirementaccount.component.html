@@ -1,0 +1,200 @@
+<mat-spinner
+  strokeWidth="3"
+  [diameter]="25"
+  class="mat_spinner"
+  *ngIf="showLoader"
+></mat-spinner>
+<form #pageHeight class="form-bottom" *ngIf="accountData">
+  <div class="row md-5">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+      <label class="label-color"
+        >{{ "TotalRetirementAccount" | translate }}
+        {{ accountType.accountType | uppercase }}.</label
+      >
+    </div>
+  </div>
+  <div class="row md-5 mt-3">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+      <span class="span-color" style="font-size: 0.9rem;"
+        >Total Retirement Account Assets</span
+      >
+    </div>
+  </div>
+  <div class="row md-5 ml-1 mt-1">
+    <button class="totalaccount-amount-button" disabled>
+      $ {{ accountData.balance.amount | number: "1.0":"en-US" }}
+    </button>
+    <!-- <input type="text" value="$ {{amount  | number:'1.0-0'}}" readonly=true /> -->
+  </div>
+  <div class="row md-5 ml-1 mt-3">
+    <div
+      class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 border rounded bg-color"
+    >
+      <div class="row">
+        <div class="col-8 mt-2 totalretirement-left-text">
+          <label>{{ accountData.accountName }}</label>
+        </div>
+        <div class="col-4 mt-2 totalretirement-right-text">
+          <label class="alignright">{{ date | date: "shortDate" }}</label>
+        </div>
+        <div class="col-9">
+          <p class="span-sub-heading-totalretirement">
+            $
+            {{ accountData.balance.amount | number: "1.0":"en-US" }}
+          </p>
+        </div>
+        <div class="col-5 mb-3 totalretirement-left-text">
+          <!-- <div class="row"> -->
+          <button
+            class="account-label-color"
+            [disabled]="
+              accountAnalysisData.account.ret_account_status != 'analysis_complete'
+            "
+            (click)="next()"
+          >
+            <div>
+              <img
+                src="assets/images/view-analysis.png"
+                style="vertical-align: baseline;"
+              />
+              <span
+                >&nbsp;
+                {{ accountAnalysisData ? accountAnalysisData.analysis.summary.improvements_count : 0 }} IMPROVEMENTS</span
+              >
+            </div>
+          </button>
+          <!-- </div> -->
+        </div>
+        <div class="col-7 totalretirement-right-text">
+          <button class="account-holding-button" data-toggle="modal" data-target="#holdingsModal" (click)="getHoldingsData()">
+            <img
+              src="assets/images/right-arrow.png"
+              style="vertical-align: baseline; padding: 0 10px;"
+            />
+            <span class="alignright account-holding-span holdings">
+              ACCOUNT HOLDINGS
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row md-5 mt-3" *ngIf="!hideAddAccount">
+    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+      <div class="icon-hover">
+        <i class="material-icons add_account_icon">add_circle_outline</i>
+        <span class="icon-account add_account">&nbsp; Add Account</span>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="accountAnalysisData.account.ret_account_status === 'pending_analysis'">
+    <span class="font-weight-bolder span-color">
+      Analysis is Pending,Please come back later and check it
+    </span>
+  </div>
+  <div
+    *ngIf="
+      accountAnalysisData.account.ret_account_status == 'analysis_complete'
+      else previousModuleNavigation
+    "
+    class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5 px-0 mb-3"
+  >
+    <button class="view_analysis_btn view-analysis-button" (click)="next()">
+      <div class="view_analysis_img">
+        <img src="assets/images/view-analysis-btn.png" />
+        <span>&nbsp;&nbsp; VIEW ANALYSIS</span>
+      </div>
+    </button>
+  </div>
+
+  <ng-template #previousModuleNavigation>
+    <button
+      type="button"
+      class="goback-button"
+      (click)="navigateToParentSection()"
+    >
+      Ok
+    </button>
+  </ng-template>
+
+  <!-- <button
+    *ngIf="registerRetirementAccountNavigationObject.proceedToNextModule"
+    type="button"
+    class="goback-button"
+    (click)="goBack()"
+  >
+    {{ "BackButton" | translate }}
+  </button> -->
+  <!-- <button class="button" (click)="next()">{{'NextButton' | translate}}</button> -->
+</form>
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade in"  id="holdingsModal"  aria-hidden="true" data-backdrop="">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header heading">
+        <h2>Account Holdings Data</h2>  <span *ngIf="!noHoldings" class="lastUpdated">Last Updated&nbsp;:&nbsp;{{lastUpdatedTime | date:'MM/dd/yyyy'}}</span>
+      </div>
+      <div class="modal-body modalheader">
+        <mat-spinner
+  strokeWidth="3"
+  [diameter]="25"
+  class="mat_spinner"
+  *ngIf="showHoldingsLoader"
+></mat-spinner>
+ <table class="table table-bordered table-striped table-fixed" *ngIf="!noHoldings">
+                  <thead class="table-header">
+                    <tr>
+                      <th scope="col">
+                      Description
+                      </th>
+                      <th scope="col">
+                      Symbol
+                      </th>
+                      <th scope="col">
+                       Holdings&nbsp;Type
+                      </th>
+                      <th scope="col">
+                       Quantity
+                      </th>
+                       <th scope="col">
+                       Price
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-body">
+                 <tr *ngFor="let item of holdings">
+                    <td class="text-left">{{ item.description }}</td>
+                    <td class="text-left">{{ item.symbol }}</td>
+                    <td class="text-left">{{ item.holdingType }}</td>
+                    <td class="text-left">{{ item.quantity }}</td>
+                    <td class="text-left">$&nbsp;&nbsp;{{ item.price }}
+                    </td>
+                </tr>
+                    
+                  </tbody>
+                </table>
+                <table *ngIf="noHoldings">
+                  No Holdings Data Found
+                </table>
+      </div>
+      <div class="modal-footer modalfooter">
+        <button
+          type="button"
+          class="btn btn-primary popupbutton"
+          data-dismiss="modal"
+        >
+          Ok
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

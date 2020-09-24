@@ -1,0 +1,695 @@
+<header class="profile-menu-header">
+  <h1>RETIREMENT ACCOUNTS</h1>
+</header>
+<div class="p-4 retirement-accounts-content">
+  <div
+    *ngIf="displayAnalysis; else displayAddedAccount"
+    class="card border-0 mt-4"
+  >
+    <div>
+      <div class="row">
+        <div class="col-4 b-right b-1 b-blue">
+          <div class="d-flex">
+            <div>
+              <img
+                src="assets/images/logos/logo-merill.png"
+                alt="Merill"
+                class="img-responsive mr-4"
+                style="max-width: 80px;"
+              />
+            </div>
+            <div>
+              <h5 class="font-weight-bold">Merril Retirement</h5>
+              <h6 class="mb-0">
+                BALANCE:
+                <label class="font-weight-bold alignment">
+                  $ 71,058
+                </label>
+              </h6>
+              <div class="textalignment">
+                <small>as of 02/02/2020</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-8 pl-4">
+          <button
+            (click)="hideAnalysis()"
+            type="button"
+            class="close text-blue font-size-medium"
+          >
+            Close
+            <i class="fa fa-times-circle"></i>
+          </button>
+          <p>
+            <img
+              src="assets/images/icon/calender-time.png"
+              alt="Calener"
+              class="img-responsive mr-2"
+              style="max-width: 25px;"
+            />
+            <label>
+              You have 2,865 days to save for your retirement
+            </label>
+          </p>
+          <p>
+            <img
+              src="assets/images/icon/exclam-stop.png"
+              alt="Exclam"
+              class="img-responsive mr-2"
+              style="max-width: 25px;"
+            />
+            <label>
+              Your Risk Level is
+              <span class="font-weight-bold">
+                <b>Very Aggressive (8)</b>
+              </span>
+            </label>
+          </p>
+        </div>
+      </div>
+      <hr class="b-blue mt-2 mb-3" />
+
+      <!-- NAV-TABS: BEGIN -->
+      <section class="card blue-tab-box b-blue b-1">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item flex-fill">
+            <a
+              class="nav-link active"
+              id="tabAllocation"
+              data-toggle="tab"
+              href="#tabAllocationCont"
+              role="tab"
+              aria-controls="tabAllocationCont"
+              aria-selected="true"
+              >Allocation</a
+            >
+          </li>
+          <li class="nav-item flex-fill">
+            <a
+              class="nav-link"
+              id="tabDiversification"
+              data-toggle="tab"
+              href="#tabDiversificationCont"
+              role="tab"
+              aria-controls="tabDiversificationCont"
+              aria-selected="false"
+            >
+              Diversification</a
+            >
+          </li>
+          <li class="nav-item flex-fill">
+            <a
+              class="nav-link"
+              id="tabHoldings"
+              data-toggle="tab"
+              href="#tabHoldingsCont"
+              role="tab"
+              aria-controls="tabHoldings"
+              aria-selected="false"
+              >Holdings</a
+            >
+          </li>
+          <li class="nav-item flex-fill">
+            <a
+              class="nav-link"
+              id="tabPlanner"
+              data-toggle="tab"
+              href="#tabPlannerCont"
+              role="tab"
+              aria-controls="tabPlanner"
+              aria-selected="false"
+              >Planner</a
+            >
+          </li>
+        </ul>
+        <!-- TABS CONTENT: BEGIN -->
+        <div class="tab-content" id="myTabContent">
+          <!-- TAB-ALLOCATION: BEGIN -->
+          <div
+            class="tab-pane fade show active"
+            id="tabAllocationCont"
+            role="tabpanel"
+            aria-labelledby="tabAllocation"
+          >
+            <div class="row">
+              <div class="col-4 text-center pietextalignment">
+                <h6 class="chart-title font-weight-bold">
+                  Stock/Bond/Cash Ratio
+                </h6>
+                <!-- Create a div where the graph will take place -->
+                <div id="pichart-1">
+                  <img
+                    src="assets/images/temp/pichart-1.png"
+                    alt="pichart1"
+                    class="img-responsive"
+                    style="max-width: 200px;"
+                  />
+                </div>
+              </div>
+              <div class="col-8 pietextalignment">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col"></th>
+                      <th scope="col">Holding</th>
+                      <th scope="col">Value</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">
+                        <div class="swatch color-1"></div>
+                      </th>
+                      <td>Stocks - 65 %</td>
+                      <td>$ 32,697,49</td>
+                      <td>
+                        <i class="fa fa-chevron-down"></i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        <div class="swatch color-2"></div>
+                      </th>
+                      <td>Bonds - 20 %</td>
+                      <td>$ 8,483,53</td>
+                      <td>
+                        <i class="fa fa-chevron-down"></i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        <div class="swatch color-3"></div>
+                      </th>
+                      <td>Cash - 15 %</td>
+                      <td>$ 6,171,830</td>
+                      <td>
+                        <i class="fa fa-chevron-down"></i>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB-DIVERSIFICATION: BEGIN -->
+          <div
+            class="tab-pane fade"
+            id="tabDiversificationCont"
+            role="tabpanel"
+            aria-labelledby="tabDiversification"
+          >
+            <div class="row">
+              <div class="col-4 text-center pietextalignment">
+                <h6 class="chart-title font-weight-bold">
+                  Diversification
+                </h6>
+                <!-- Create a div where the graph will take place -->
+                <div id="pichart-1">
+                  <img
+                    src="assets/images/temp/pichart-2.png"
+                    alt="pichart1"
+                    class="img-responsive"
+                    style="max-width: 200px;"
+                  />
+                </div>
+              </div>
+              <div class="col-8 pietextalignment">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col"></th>
+                      <th scope="col">CATEGORY</th>
+                      <th scope="col">PERCENT</th>
+                      <th scope="col">VALUE</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">
+                        <div class="swatch color-1"></div>
+                      </th>
+                      <td>US Large Cap</td>
+                      <td>31,7 %</td>
+                      <td>$ 19,734.06</td>
+                      <td>
+                        <i class="fa fa-chevron-down"></i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        <div class="swatch color-2"></div>
+                      </th>
+                      <td>Intermediate Term</td>
+                      <td>23,3 %</td>
+                      <td>$ 14,483.53</td>
+                      <td>
+                        <i class="fa fa-chevron-down"></i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        <div class="swatch color-3"></div>
+                      </th>
+                      <td>International Stocks</td>
+                      <td>19,2 %</td>
+                      <td>$ 11,942.89</td>
+                      <td>
+                        <i class="fa fa-chevron-down"></i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        <div class="swatch color-4"></div>
+                      </th>
+                      <td>US Mid Cap</td>
+                      <td>11,0 %</td>
+                      <td>$ 6,663.01</td>
+                      <td>
+                        <i class="fa fa-chevron-down"></i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        <div class="swatch color-5"></div>
+                      </th>
+                      <td>Emerging Market</td>
+                      <td>7,6 %</td>
+                      <td>$ 4,751.83</td>
+                      <td>
+                        <i class="fa fa-chevron-down"></i>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        <div class="swatch color-6"></div>
+                      </th>
+                      <td>US Small Cap</td>
+                      <td>7,1 %</td>
+                      <td>$ 4,405.70</td>
+                      <td>
+                        <i class="fa fa-chevron-down"></i>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB-HOLDINGS: BEGIN -->
+          <div
+            class="tab-pane fade"
+            id="tabHoldingsCont"
+            role="tabpanel"
+            aria-labelledby="tabHoldings"
+          >
+            <div class="row">
+              <div class="col">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col"></th>
+                      <th scope="col">
+                        SYMBOL /<br />
+                        DESCRIPTION
+                      </th>
+                      <th scope="col">
+                        SHARES /<br />
+                        @COST
+                      </th>
+                      <th scope="col">
+                        MARKET VALUE /<br />
+                        TODAY’S CHANGE
+                      </th>
+                      <th scope="col">
+                        UNREAL <br />
+                        GAIN / LOSS
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">
+                        <div class="swatch color-1"></div>
+                      </th>
+                      <td>VANGUARD INFO TECH ETF (VGT)</td>
+                      <td>
+                        373.000
+                        <label>
+                          @ $227.57
+                        </label>
+                      </td>
+                      <td>
+                        $ 77,550.43
+                        <label class="text-danger">
+                          - $ 3,588.26 (-4.42%)
+                        </label>
+                      </td>
+                      <td>
+                        <label class="text-danger">
+                          - $ 7,332.32
+                        </label>
+                        <label class="text-danger">
+                          - 8.64%
+                        </label>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        <div class="swatch color-2"></div>
+                      </th>
+                      <td>INVESCO QQQ TR ETF (QQQ)</td>
+                      <td>
+                        329.000
+                        <label>
+                          @ $198.57
+                        </label>
+                      </td>
+                      <td>
+                        $ 60,963.70
+                        <label class="text-danger">
+                          - $ 2,171.40 (-3.44%)
+                        </label>
+                      </td>
+                      <td>
+                        <label class="text-danger">
+                          - $ 4,232.81
+                        </label>
+                        <label class="text-danger">
+                          - 6.49%
+                        </label>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        <div class="swatch color-3"></div>
+                      </th>
+                      <td>SPDR S&P 500 TRUST ETF (SPY)</td>
+                      <td>
+                        228.000
+                        <label>
+                          @ $287.34
+                        </label>
+                      </td>
+                      <td>
+                        $ 57,779.76
+                        <label class="text-danger">
+                          - $ 1,773.84 (-2.98%)
+                        </label>
+                      </td>
+                      <td>
+                        <label class="text-danger">
+                          - $ 7,733.43
+                        </label>
+                        <label class="text-danger">
+                          - 11.80%
+                        </label>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        <div class="swatch color-4"></div>
+                      </th>
+                      <td>VANGUARD TOTL STK MK (VTI)</td>
+                      <td>
+                        125.000
+                        <label>
+                          @ $158.71
+                        </label>
+                      </td>
+                      <td>
+                        $ 15,866.25
+                        <label class="text-danger">
+                          - $ 522.50 (-3.19%)
+                        </label>
+                      </td>
+                      <td>
+                        <label class="text-danger">
+                          - $ 3,972.01
+                        </label>
+                        <label class="text-danger">
+                          - 20.02%
+                        </label>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="tabPlannerCont"
+            style="padding-bottom: 0px;"
+            role="tabpanel"
+            aria-labelledby="tabPlanner"
+          >
+            <div class="row">
+              <div class="col-3">
+                <div class="card border-0 h-100 table-content-fit">
+                  <div class="card-header p-1">
+                    <label class="d-block">
+                      Balance
+                    </label>
+                    <h5 class="font-weight-bold">$66,666</h5>
+                  </div>
+                  <div class="card-body">
+                    <p style="margin-top: -5px;">
+                      <label>Risk Level</label>
+                      <input
+                        id="ristLevel"
+                        type="text"
+                        disabled=""
+                        value="77"
+                        class="form-control accountanalysis-input input-sm"
+                      />
+                    </p>
+                    <p style="margin-top: -12px;">
+                      <label>Retirement Age</label>
+                      <input
+                        id="retirementAge"
+                        type="text"
+                        disabled=""
+                        value="67"
+                        class="form-control accountanalysis-input input-sm"
+                      />
+                    </p>
+                    <p style="margin-top: -5px;">
+                      <label>Current Retirement Account Value</label>
+                      <input
+                        id="currentRetirementActVal"
+                        type="text"
+                        disabled=""
+                        value="$ 500,000"
+                        class="form-control accountanalysis-input input-sm"
+                      />
+                    </p>
+                    <p style="margin-top: -8px;">
+                      <label
+                        >Projected Retirement Account Value with Left
+                        Lane</label
+                      >
+                      <span class="inner-addon">
+                        <span class="text-success">+ 118 %</span>
+                        <input
+                          id="inputsm"
+                          type="text"
+                          disabled
+                          value="$ 240,000"
+                          class="form-control accountanalysis-input input-sm"
+                        />
+                      </span>
+                    </p>
+                    <p style="margin-top: -5px;">
+                      <label
+                        >Projected Retirement Account Value for Current
+                        account</label
+                      >
+                      <span class="inner-addon">
+                        <span class="text-danger">- 54 %</span>
+                        <input
+                          id="inputsm"
+                          type="text"
+                          disabled
+                          value="$ 110,000"
+                          class="form-control accountanalysis-input input-sm mb-2"
+                        />
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-9">
+                <div id="graph-1">
+                  <img
+                    src="assets/images/temp/graph-1.png"
+                    alt="Graph-1"
+                    class="img-responsive"
+                    style="max-width: 99%;"
+                  />
+                </div>
+
+                <div class="graph-status text-center plannertext">
+                  The estimated retirement
+                  <span class="font-weight-bold">account</span>
+                  balance at your retirement age is
+                  <span class="font-weight-bold">$256,252</span>.
+                  <br />
+                  Assuming the average lifespan in the US, your retirement account may provide you a monthly income of
+                  <span class="font-weight-bold">$1,744 </span>
+                  <!-- <span class="font-weight-bold"> $1,744 </span> -->
+                  during your retirement.
+                </div>
+                <div style="margin-top: 3%; margin-left: 3%;">
+                  <i
+                    class="fa fa-question-circle-o"
+                    style="font-size: 1rem; color: #2a368e;"
+                    aria-hidden="true"
+                  ></i>
+                  <span
+                    class="font-weight-bold graphtext"
+                    style="margin-left: 10px;"
+                    >Learn more about this graph</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <ng-template #displayAddedAccount>
+<div *ngIf="retirementAccounts" class="retirementAccount">
+    <span *ngIf="retirementAccounts.length==0" class="text-color">Currently, you have no registered retirement account</span>
+        <span *ngIf="retirementAccounts.length>=1" class="text-color">Total Balance across all the Retirement Accounts : ${{retirementAccountsSum.toLocaleString("en-GB")}}</span>
+        <div class="row">
+        <div class="col-md-6 p-2" *ngFor="let item of retirementAccounts">
+        <div  class="card m-2 retirement-accounts-card-header">
+        <div class=" card-body">
+          <div class="text-right">
+            <button
+              (click)="displayAccontDetails()"
+              class="btn btn-primary update-credentials-btn"
+            >
+              <span>VIEW ANALYSIS </span>
+            </button>
+            <ng-template #deletetipContent
+              >Unregister the retirement account and stop associated billing at
+              end of subscription period.</ng-template
+            >
+            <i
+              class="fa fa-trash trash-icon fa-2x trashIcon"
+              aria-hidden="true"
+              tooltipClass="delete-custom-class"
+              placement="right"
+              [ngbTooltip]="deletetipContent"
+              (click)="DeleteRetirementAccount(item)"
+            ></i>
+          </div>
+          <div class="textcontent">
+            <img
+              src="https://yodlee-1.hs.llnwd.net/v1/FAVICON/FAV_16441.PNG"
+              alt="Merill"
+              class="img-responsive"
+            />
+            <h4 class="card-title font-weight-bold">{{ item.accountName }}</h4>
+            <h5 class="card-text">
+              <span class="font-weight-bold"
+                >${{ item.balance.amount.toLocaleString("en-GB") }}
+              </span>
+              <h6 class="inline-header">
+                as of {{ item.createdDate | date: "shortDate" }}
+              </h6>
+            </h5>
+            <h6 class="card-text font-weight-bold">Quarterly Membership</h6>
+          </div>
+        </div>
+      </div>
+        </div>
+     
+        </div>
+    </div>
+    <footer  class="retirement-accounts-footer m-4">
+      <button class="btn" *ngIf="showAddAccountButton && retirementAccounts.length>=1" (click)="addRetirementAccount()">
+        <i class="fa fa-plus-circle add-account"> </i
+        ><span class="add-account-text">ADD RETIREMENT ACCOUNT</span>
+      </button>
+
+       <button *ngIf="showAddAccountButton && retirementAccounts.length==0" class="btn btn-primary add-credentials-btn add-credentials-btn-margin" (click)="addRetirementAccount()">
+    <i class="fa fa-plus-circle"></i>
+    <span class="addbtn">ADD RETIREMENT ACCOUNT</span>
+    </button>
+    </footer>
+    <!-- <footer class='retirement-accounts-footer m-4'>
+                                
+                                <button class="btn" (click)="addRetirementAccount()">
+                                        <i class="fa fa-plus-circle add-account">
+                                        </i><span class="add-account-text">ADD RETIREMENT ACCOUNT</span>
+                                </button>
+                            </footer> -->
+    <hr class="horizontal-line m-4" />
+    <div class="row m-4">
+      <div
+        class="col-sm-12"
+        data-toggle="collapse"
+        href="#legalDocuments"
+        (click)="collapseConditionCheck()"
+      >
+        <span
+          class="page-text font-weight-bold legal-documents-section-header"
+          aria-expanded="false"
+          aria-controls="legalDocuments"
+          >Legal Documents </span
+        ><i
+          class="fa fa-2x pull-right"
+          [ngClass]="{
+            'fa-angle-up ': !showLine,
+            'fa-angle-down ': showLine
+          }"
+          aria-hidden="true"
+        ></i>
+      </div>
+      <div class="col-sm-12 mt-4 collapse" id="legalDocuments">
+        <table class="table legal-documents">
+          <tbody>
+            <tr>
+              <td colspan="4">Legal Document for Ricardo Smith</td>
+              <td>05/10/2020</td>
+              <ng-template #searchTipContent
+                >Display the Legals documents in PDF in browser. You can also
+                download documents.</ng-template
+              >
+              <td class="search-icon">
+                <span
+                  class="fa fa-search search-icon"
+                  tooltipClass="my-custom-class-search"
+                  placement="right"
+                  [ngbTooltip]="searchTipContent"
+                ></span>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4">Privacy Policy</td>
+              <td>04/02/2020</td>
+              <td class="search-icon">
+                <span
+                  class="fa fa-search search-icon"
+                  tooltipClass="my-custom-class-search"
+                  placement="right"
+                  [ngbTooltip]="searchTipContent"
+                ></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <hr class="horizontal-line m-4" />
+  </ng-template>
+</div>

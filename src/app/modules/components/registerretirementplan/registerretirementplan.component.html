@@ -1,0 +1,17 @@
+<form #pageHeight autocomplete="off" [formGroup]="retirementSavingForm" (ngSubmit)="next()" class="form-bottom">
+   <div class="row md-5 ml-1">
+      <label class="label-color">{{'RegisterRetirementPlanHeading' | translate}}</label>
+   </div>
+   <div class="row ml-3 mt-4 md-5">
+      <div class="col-md-7 col-xs-12">
+         <img alt="Lift" src="assets/images/lift.png" class="img-fluid">
+      </div>
+   </div>
+   <div class="row md-5 ml-3 mt-3 mb-2 position-relative">
+      <img class="img-plan" src="assets/images/plan.png">
+      <span class="span-plan-color">{{'RegisterRetirementPlan' | translate}} {{accountType.accountType | uppercase}}
+         plan.</span>
+   </div>
+   <button class="goback-button" (click)="goBack()">{{'BackButton' | translate}}</button>
+   <button class="button" type="submit">{{'NextButton' | translate}}</button>
+</form>

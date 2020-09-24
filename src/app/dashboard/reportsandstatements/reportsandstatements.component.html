@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="col-md-10">
+        <div class="row">
+            <div class="col-md-5 reports_statement_header">
+                <h1>REPORTS AND STATEMENTS</h1>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group mb-3">
+                    <select class="custom-select" #mySelect id="inputGroupSelect01"
+                        (change)="getReportsAndStatements(mySelect.value)">
+                        <option *ngFor="let item of reportsType" [value]="item.type">{{item.type | titlecase}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10 reports_table">
+            <div class="text-center table-wrapper-scroll-y myBox">
+                <table class="table table-bordered table-striped table-fixed">
+                    <thead class="table_head">
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Date/Time</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table_body" *ngIf="reportsandStatemets">
+                        <tr *ngFor="let report of reportsandStatemets">
+                            <td class="text-left">{{report.reportName}}</td>
+                            <td class="text-left">{{report.reportType}}</td>
+                            <td class="text-left">{{report.reportDate |date : 'MM/dd/yyyy h:mm a'}}</td>
+                            <td class="text-left">
+                                <a href={{report.reportHtmlLink}} target="_blank" class="text-dark">
+                                    View/
+                                </a>
+                                <a href={{report.reportPdfLink}} target="_blank" class="text-dark">
+                                    Download
+                                </a>/Print
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

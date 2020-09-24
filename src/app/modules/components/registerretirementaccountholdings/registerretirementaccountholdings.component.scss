@@ -1,0 +1,59 @@
+// .my-custom-scrollbar ::-webkit-scrollbar-track {
+//     position: relative;
+//     height: 450px;
+//     overflow: auto;
+// }
+
+.table-wrapper-scroll-y {
+    display: block;
+    width: 880px;
+}
+
+table td {
+    white-space: nowrap;
+    overflow: hidden;
+    // text-overflow: ellipsis;
+}
+
+.selectedItem {
+    background-color: #e9f5f8;
+}
+
+.table-striped>tbody>tr:nth-child(2n+1)>td,
+.table-striped>tbody>tr:nth-child(2n+1)>th {
+    background-color: #edf2f7;
+}
+
+.material-icons {
+    font-size: 18px;
+    // margin-left: 10px;
+}
+
+.myBox {
+    border: none;
+    padding: 0px 5px;
+    height: 400px;
+    overflow: auto;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 12px;
+    background: #edf2f7;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #edf2f7;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: lightslategray;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: lightslategray;
+}

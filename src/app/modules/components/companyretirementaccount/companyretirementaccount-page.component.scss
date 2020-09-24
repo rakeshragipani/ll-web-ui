@@ -1,0 +1,16 @@
+div.item {
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    width: 120px;
+}
+
+.caption {
+    display: block;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #2a368e;
+    cursor: pointer;
+}

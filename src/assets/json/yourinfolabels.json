@@ -1,0 +1,22 @@
+{
+    
+    "Name": "Hello! Please tell us your name.",
+    "Age": "Age is just a number. We will keep yours a secret.",
+    "DateofBirth":"You can select your date of birth or just simply type your age.",
+    "RetirementAge": "What age do you expect to retire?",
+    "PersonalAccountHeading": "Create your personal account",
+    "RetirementSavingsHeading": "How much do you have saved for Retirement?",
+    "RiskAssessmentHeading": "Let’s ﬁnd the risk level you are comfortable with per year?",
+    "RiskAssessment1Heading": "Which result feels the most comfortable to you?",
+    "RiskAssessment2Heading": "Now which result feels the most comfortable to you?",
+    "RiskAssessment3Heading": "Lastly, which option do feel is best for you?",
+    "RiskAssessment4Heading" : "Here is your Risk Level",
+    "RiskAssessment5Heading" : "Risk Assessment Summary",
+    "RegisterRetirementAccount" : "Congratulations! You made it!",
+    "RegisterRetirementAccountOptions": "You can select one option.Don't worry,if you have multiple accounts you can select another later.",
+    "NextButton": "Next",
+    "BackButton": "Go Back",
+    "CalculateRLButton": "Calculate Risk Level",
+    "ConfirmButton": "Yes, This Feels Right!"
+
+}

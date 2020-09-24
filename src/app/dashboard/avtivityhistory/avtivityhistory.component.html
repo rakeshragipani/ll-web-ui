@@ -1,0 +1,49 @@
+<header class="profile-menu-header">
+  <h1>ACTIVITY HISTORY</h1>
+</header>
+<mat-spinner strokeWidth="3" [diameter]="25" class="mat_spinner" *ngIf="showLoader"></mat-spinner>
+<div class="main">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4 textalignment">
+        <b class="content-color">Select an Account</b>
+        <div class="dropdown">
+          <div>
+            <button class="allbutton" type="button" aria-haspopup="true" aria-expanded="false">
+              All
+              <span class="downarrow">
+                <i class="fa fa-angle-down" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row row-content table-header flex-nowrap">
+      <div class="col-sm-3 column-header-content">Date</div>
+      <div class="col-sm-3 column-header-content">Description</div>
+      <div class="col-sm-3 column-header-content">Account</div>
+    </div>
+    <div class="row flex-nowrap">
+      <div class="col-sm-9 hr-table-line"><b>
+          <hr class="table-line"></b></div>
+    </div>
+    <div class="row row-content flex-nowrap" *ngFor="let item of getActivityHistoryData">
+      <div class="col-sm-3 column-content">{{item.process_time|date :'d/MM/yyyy, h:mm a'}}</div>
+      <div class="col-sm-3 column-content">{{item.what}}</div>
+      <div class="col-sm-3 column-content">{{item.process_info}}<span class="fa fa-search search-icon"></span></div>
+    </div>
+    <!-- <div class="row row-content flex-nowrap">
+      <div class="col-sm-3 column-content">04/26/2020</div>
+      <div class="col-sm-3 column-content">Left Lane Reset Password</div>
+      <div class="col-sm-3 column-content">Primary Account<span class="fa fa-search search-icon"></span></div>
+    </div>
+    <div class="row row-content flex-nowrap">
+      <div class="col-sm-3 column-content">04/26/2020</div>
+      <div class="col-sm-3 column-content">First Anniversary!</div>
+      <div class="col-sm-3 column-content">Primary Account<span class="fa fa-search search-icon"></span></div>
+    </div> -->
+  </div>
+</div>

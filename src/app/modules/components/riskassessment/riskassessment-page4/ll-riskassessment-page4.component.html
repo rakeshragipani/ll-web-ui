@@ -1,0 +1,54 @@
+<mat-spinner strokeWidth="3" [diameter]="25" class="mat_spinner" *ngIf="showLoader"></mat-spinner>
+<form #pageHeight *ngIf="!showLoader">
+  <div class="row ml-1">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+      <label class="label-color">{{'RiskAssessment4Heading' | translate}}</label>
+    </div>
+  </div>
+  <div class="row md-5 mb-3 ml-1 position-relative">
+    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9"  style="
+    width: 400px;
+">
+      <div class="center">
+        <div class="md-5 mt-3 risk-number risk-number-lg">
+          <span>{{temp}}</span>
+      </div>
+      </div>
+    </div>                
+    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9" style="
+    width: 400px;
+">
+      <div class="risk-summary-sub-label">
+        <span>RISK LEVEL METER</span>
+      </div>
+    </div>
+    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 mt-3 ml-3">
+      <div class="range-graph-simple">
+        <input class="range1" type="range" name="" [value]="temp" min="0" max="10" disabled>
+        <div id="outer-circle-red">
+          <div id="inner-circle-red">                      
+          </div>
+        </div>
+        <div id="outer-circle-green">
+          <div id="inner-circle-green">                      
+          </div>
+        </div>
+        <div class="risk-final-loss">{{temp1}}<span>{{temp3}}</span></div>
+        <div class="risk-final-gain">{{temp2}}<span>{{temp4}}</span></div>
+
+        <!-- <div class="row mb-4">
+          <span class="start">{{temp1}}</span>
+          <span class="end">{{temp2}}</span>
+          <span class="sub1">{{temp3}}</span>
+          <span class="sub2">{{temp4}}</span>
+      </div> -->
+      </div>
+    </div>
+  </div>            
+
+  <button *ngIf="riskNavigationInfo.proceedToNextModule" type="button" class="goback-button" (click)="goBack()">{{'BackButton' | translate}}</button>
+  <button *ngIf="riskNavigationInfo.proceedToNextModule" type="button" class="button" (click)="next()">{{'ConfirmButton' | translate}}</button>  
+
+</form>
+
+<img *ngIf="!riskNavigationInfo.proceedToNextModule && !showLoader" (click) = "goBackToRetirementSavingsPage()" class="re-startover-img mt-4" src="assets/images/recalculate.JPG" />

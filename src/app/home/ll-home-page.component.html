@@ -1,0 +1,61 @@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><img class="landing-page-logo" [src]="data.logo1" alt="Apper" /></a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item work-btn active">
+                <a class="nav-link" href="#">how it works</a>
+                </li>
+                <li class="nav-item philosophy-btn">
+                <a class="nav-link" href="#">philosophy</a>
+                </li>
+                <li class="nav-item login-btn">
+                <a class="nav-link" [routerLink] = "['login']">Login</a>
+                </li>
+                <li class="nav-item signup-btn">
+                <a class="nav-link" [routerLink] = "['signup']">Sign up</a>
+                </li>
+            </ul>
+            </div>
+        </div>
+      </nav>
+      <section id="landing-page-home">
+        <div class="container">
+            <div class="row main-content">
+                <div class="col-md-5">
+                    <h1>{{data.homeh2}}</h1>
+                    <p>{{data.homep}}</p>
+                    <div class="landing-page-button">
+                        <a href="#" class="btn startnow-btn">Start now</a>
+                    </div>
+                </div>
+                <div class="offset-md-1 col-md-6">
+                    <div class="image-box">
+                        <img class="img-fluid" [src]="data.logo2" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="about">
+        <div class="container">
+            <div class="row justify-content-center text-center mt-5">
+                <div class="col-md-4">
+                    <p>"{{data.footerdiv1}}"</p>
+                </div>
+                <div class="col-md-4">
+                    <p>"{{data.footerdiv2}}"</p>
+                </div>
+                <div class="col-md-4">
+                    <p>"{{data.footerdiv3}}"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</header>
+

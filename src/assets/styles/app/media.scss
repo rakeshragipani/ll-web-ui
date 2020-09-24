@@ -1,0 +1,11 @@
+@media (max-width: 1026px) {
+
+    html,body{
+        height: auto;
+    }
+
+    .px-xl{
+        padding-left: $spaceSm;
+        padding-right: $spaceSm;
+    }
+}

@@ -1,0 +1,25 @@
+<header class="profile-menu-header">
+  <h1>WE ARE HERE TO HELP YOU!</h1>
+</header>
+<div class="main">
+  <h5 class="text" style="font-style: italic;">Please tell us what you want to know:</h5>
+  <textarea style="padding-top: 10px;" formControlName="message" placeholder="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enter your question here" rows="3" class="input"></textarea>
+  <br>
+  <button mat-button class="button">Send</button>
+  <br>
+  <b class="fa fa-arrow-right text" aria-hidden="true"><b> Find more answers</b></b>
+  <div class="foot" (mouseleave)="mouseLeave()">
+    <div class="fa fa-arrow-right text" (mouseover)="mouseEnter()" aria-hidden="true"><b> Didn't you find your answer?
+      Let's chat with us!</b></div>
+    <div class="div-left" *ngIf="support">
+      <div class="half-width">
+        <img src="../../../assets/images/icon/chat_icon.svg" alt="">
+      </div>
+      <div class="full-width text">
+        <strong>Chat with an advisor</strong> <br>
+        We've here to help you with your questions.<br>
+        <button mat-button class="button">START CHAT</button>
+      </div>
+    </div>
+  </div>
+</div>

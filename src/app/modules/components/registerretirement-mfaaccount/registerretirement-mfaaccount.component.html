@@ -1,0 +1,62 @@
+<mat-spinner strokeWidth="3" [diameter]="25" class="mat_spinner" *ngIf="showLoader"></mat-spinner>
+<form #pageHeight>
+    <div class="row md-5">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <label class="label-color">{{'MfaAccount' | translate}}</label><br>
+            <!-- <label class="label-color" style="margin-top: -8px">{{'YodleeSecurityKey' | translate}}</label> -->
+        </div>
+    </div>
+    <div>
+        <div class="md-5 mt-3">
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 px-0">
+                <p *ngIf="displayStatus">Status:- <span class="t-align-center">{{displayStatus |titlecase}}</span></p>
+                <p *ngIf="timeOutError" style="color: red;">{{timeOutError}}</p>
+                <div class="input-group">
+                    <div *ngIf="loginOption">
+                        <div *ngFor="let items of loginOption;let i = index">
+                            <h6 style="color: #2A368E;">{{items.element.label}}</h6>
+                            <div>
+                                <select class="custom-select" id="inputGroupSelect01" style="width: 500px;"
+                                    name="option" (change)='selectOption($event,items.id,items)'
+                                    selected="optionSelected">
+                                    <option *ngFor="let item of items.data;let i=index" [value]="item.displayText">
+                                        {{item.displayText}}</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <br>
+                <div *ngIf="loginRadio">
+                    <div *ngFor="let items of loginRadio;let i = index">
+                        <h6 style="color: #2A368E;">{{items.element.label}}</h6>
+                        <div *ngFor="let item of items.data">
+                            <input type="radio" name="{{items.id}}" (change)='selectedRadioBtn($event,items.id,items)'
+                                [ngClass]="{ 'is-invalid' :submitted && mfaForm.controls[item].invalid}" required
+                                style="padding-top: 6px;" [value]="item.displayText">&nbsp;{{item.displayText}}
+                        </div>
+
+                    </div>
+                </div>
+
+                <div *ngIf="loginText">
+                    <div *ngFor="let items of loginText;let i = index">
+                        <h6 style="color: #2A368E;">{{items.element.label}}</h6>
+                        <div *ngIf="items.element.field[0].id == 'image'">
+                            <img src="{{'data:image/jpeg;base64,' + items.element.field[0].value}}">
+                        </div>
+                        <div class="left-border" (focusout)='updateText($event,items.id,items)'>
+                            <input type="text" class="form-control  form-control-lg input-padding"
+                                style="padding-top: 6px;">
+                        </div>
+                    </div>
+                </div>
+                <p *ngIf="yodleeErrorHandling" style="color: red;">{{yodleeErrorHandling}}</p>
+            </div>
+        </div>
+    </div>
+    <button class="goback-button" (click)="goBack()">{{'BackButton' | translate}}</button>
+    <button class="button" type="submit" (click)="mfaQuestionAndAnswer()">{{'NextButton' | translate}}</button>
+</form>

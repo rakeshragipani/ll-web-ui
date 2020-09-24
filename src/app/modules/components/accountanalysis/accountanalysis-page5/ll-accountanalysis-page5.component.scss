@@ -1,0 +1,135 @@
+.accountanalysis-input {
+  height: 25px;
+  font-size: .7rem;
+  color: #2a368e;
+  font-weight: bolder;
+  border-color: #2a368e;
+}
+
+.accountanalysis-p-5 {
+  font-size: .5rem;
+  font-weight: 600;
+  text-align: start;
+  // padding: 15px 9px 7px 9px;
+  color: #2a368e;
+}
+
+.form-control:focus {
+  border-color: #2a368e;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.card {
+  border: 1px solid #2a368e;
+}
+
+.card-header {
+  border-bottom: 1px solid #2a368e;
+  background-color: #e8ebf4;
+  color: #2a368e;
+  font-size: 10px;
+  line-height: 14px;
+}
+
+.balance {
+  font-size: 14px;
+  font-weight: bolder;
+}
+
+.card-footer {
+  border-top: 1px solid #2a368e;
+  background-color: #2a368e;
+}
+
+.ribbon-split-p5 {
+  height: 40px;
+  width: 100%;
+  text-align: center;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  // border-bottom: 1px solid #2a368e;
+  color: #2a368e;
+  font-size: .75rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  cursor: pointer;
+}
+
+.textColor1 {
+  color: green;
+  // width: 50%;
+}
+
+.textColor2 {
+  color: #fff;
+  // width: 50%;
+}
+
+.tab2 {
+  background: linear-gradient(to left, #2a368e 50%, #fff 50%);
+  border-top-right-radius: 0px;
+  // margin-top: -0.5px;
+  margin-left: 1px; // width: 50%;
+  font-weight: bolder;
+}
+
+.tab1 {
+  background: linear-gradient(to left, #fff 50%, #2a368e 50%);
+  border-top-left-radius: 0px;
+  // margin-top: -0.5px;
+  font-weight: bolder;
+  // width: 50%;
+}
+
+.accountA5-bg {
+  background-color: #DFE1EE;
+  font-size: 10.5px;
+  padding: 10px 10px 10px 10px;
+  color: #2a368e;
+  text-align: center;
+}
+
+.accountA5-span {
+  padding: 5px;
+  font-size: 9px;
+  color: #2a368e;
+  text-align: start;
+  display: grid;
+  grid-template-columns: 4% 96%;
+}
+
+.percent1 {
+  position: absolute;
+  top: 20%;
+  right: 5%;
+  color: #008000;
+  height: 25px;
+  font-size: 0.7rem;
+}
+
+.percent2 {
+  position: absolute;
+  top: 24%;
+  right: 5%;
+  color: red;
+  height: 25px;
+  font-size: 0.7rem;
+}
+
+
+@media (min-width: 1000px) {
+  .content-padding-top {
+    max-width: 80%;
+    // margin-top: 30px;
+    margin-left: 130px;
+  }
+}
+
+/* enable absolute positioning */
+.inner-addon { 
+  position: relative; 
+}
+
+.left-addon .glyphicon  { left:  0px;}

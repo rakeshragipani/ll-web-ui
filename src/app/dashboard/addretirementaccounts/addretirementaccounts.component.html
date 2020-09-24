@@ -1,0 +1,81 @@
+<header class="profile-menu-header">
+    <h1>MY RETIREMENT ACCOUNT LIST</h1>
+</header>
+<div *ngIf="userInfo.state==='riskanalyzed'" class="text-alignmet">
+    <span class="text-color">Currently, you have no registered retirement account</span>
+    <div>
+    <button class="btn btn-primary add-credentials-btn add-credentials-btn-margin" (click)="addRetirementAccount()">
+    <i class="fa fa-plus-circle"></i>
+    <span class="addbtn">ADD RETIREMENT ACCOUNT</span>
+    </button>
+    </div>
+    </div>
+    <!--------------------------- signed up----------------------------->
+    <div *ngIf="userInfo.state==='signedup'" class="text-alignmet">
+    <span class="text-color signup-font">Let's get the Risk score first by clicking on Retirement Savings which would enable us to Add/View Accounts.
+    </span>
+</div>
+<!------------------------------- Subscribed------------------------------->
+<!--<div *ngIf="userInfo.state === 'subscription'">
+        <div class="card m-4 retirement-accounts-card-header main-div divone-padding">
+            <div >
+                <h5 class="card-text risk-allignment"><span class="risk-color">RISK LEVEL: </span> 
+                <h6 class="inline-header risk-allignment">VERY AGGRESSIVE(8)</h6></h5>
+
+                <hr class="new1">
+            </div>
+            <div class="col-2">
+                <img src="assets/images/logos/logo-merill.png" alt="Merill" class="img-responsive"/>
+                </div>
+                 <div class="col-6">
+                        <h4 class="card-title font-weight-bold ">Merril Retirement</h4>
+                        <h5 class="card-text"><span class="font-weight-bold ">$ 71, 058 </span></h5>
+                        <button  class="btn btn-primary improvements-btn-alignment">
+                            <i class="fa fa-gift" aria-hidden="true"></i>
+                           <span class="addbtn">3 IMPROVEMENTS</span>
+                      </button>
+                      <button  class="btn btn-primary account-btn-alignment">
+                          <i class="fa fa-arrow-right icon-color" aria-hidden="true"></i>
+                         <span class="addbtn font-weight-bold">ACCOUNT DETAILS</span>
+                    </button>
+                 </div>
+             </div>
+            <div class="subscribed-add-btn"> 
+                <button  class="btn btn-primary add-credentials-btn">
+                    <i class="fa fa-plus-circle"></i>
+                   <span class="addbtn">ADD RETIREMENT ACCOUNT</span>
+              </button>
+            </div>
+  </div>-->
+  <!------------------------------- not Subscribed------------------------------->
+
+ <!-- <div *ngIf="userInfo.state === 'subscription'">
+      <div class="card m-4 retirement-accounts-card-header main-div divone-padding">
+          <div >
+              <h5 class="card-text risk-allignment"><span class="risk-color">RISK LEVEL: </span> 
+              <h6 class="inline-header risk-allignment">VERY AGGRESSIVE(8)</h6></h5>
+
+              <hr class="new1">
+          </div>
+          <div class="col-2">
+              <img src="assets/images/logos/logo-merill.png" alt="Merill" class="img-responsive"/>
+              </div>
+               <div class="col-6">
+                      <h4 class="card-title font-weight-bold ">Merril Retirement</h4>
+                      <h5 class="card-text"><span class="font-weight-bold ">$ 71, 058 </span></h5>
+                      <button  class="btn btn-primary improvements-btn-alignment">
+                          <i class="fa fa-gift" aria-hidden="true"></i>
+                         <span class="addbtn">3 IMPROVEMENTS</span>
+                    </button>
+                    <button  class="btn btn-primary account-btn-alignment">
+                        <i class="fa fa-arrow-right icon-color" aria-hidden="true"></i>
+                       <span class="addbtn font-weight-bold">ACCOUNT ANALYSIS</span>
+                  </button>
+               </div>
+           </div>
+  </div>-->
+
+    
+        
+        
+

@@ -1,0 +1,93 @@
+.container {
+  margin: 20px;
+}
+.reports_statement_header {
+  margin-top: 10px;
+  margin-left: 20px;
+  font-size: 18px;
+  color: #2a368e;
+}
+h1 {
+  font-size: 18px;
+}
+.input-group > .custom-select {
+  border-radius: 0px;
+}
+.table-wrapper-scroll-y {
+  display: block;
+  width: 1000px;
+}
+
+table td {
+  white-space: nowrap;
+  overflow: hidden;
+  /* text-overflow: ellipsis; */
+}
+
+.selectedItem {
+  background-color: #e9f5f8;
+}
+
+.table-striped > tbody > tr:nth-child(2n + 1) > td,
+.table-striped > tbody > tr:nth-child(2n + 1) > th {
+  background-color: #edf2f7;
+}
+
+.material-icons {
+  font-size: 18px;
+  /* margin-left: 10px; */
+}
+
+.myBox {
+  border: none;
+  padding: 0px 5px;
+  height: 400px;
+  overflow: auto;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 12px;
+  background: #edf2f7;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #edf2f7;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: lightslategray;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: lightslategray;
+}
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 10px; /* demo only */
+}
+.selectric-customOptions .ico {
+  display: inline-block;
+  vertical-align: middle;
+  zoom: 1;
+  *display: inline;
+  height: 30px;
+  width: 30px;
+  margin: 0 6px 0 0;
+}
+
+.table_head {
+  color: #2a368e;
+  font-size: 13px;
+  text-align: left;
+}
+.table_body {
+  font-size: 13px;
+  font-weight: bold;
+}

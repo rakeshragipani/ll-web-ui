@@ -1,0 +1,52 @@
+<form #pageHeight class="form-bottom">
+  <div class="row md-5 ml-1">
+    <label class="label-color">{{'RegisterRetirementAccount' | translate}}</label>
+  </div>
+  <div class="row md-5 ml-1">
+    <span class="span-sub-heading">Let's continue how we can help you.<br>What kind of retirement plan do you
+      have?</span>
+  </div>
+
+  <div class="row">
+    <div class="row md-5 ml-1 mt-3 col-md-6">
+      <div for="radio1" class="radio-toolbar riskranges">
+        <input type="radio" id="radio1" name="radios" value="401k" checked (click)="setAccountType('401k')">
+        <label for="radio1" style="width: 100%;margin-bottom: 0px;padding: 5px;text-align: center;">
+          <h5>Employee Sponsored</h5>
+          <p>401k, 403b, 401a, or 457</p>
+        </label>
+      </div>
+    </div>
+    <div class="row md-5 ml-1 mt-3 col-md-6">
+      <div for="radio1" class="radio-toolbar riskranges">
+        <input type="radio" id="radio2" name="radios" value="all">
+        <label for="radio2" style="width: 100%;margin-bottom: 0px;padding: 5px;text-align: center;">
+          <h5>Other</h5>
+          <p> HSA, 529 College Savings, Brokerage</p>
+        </label>
+      </div>
+    </div>
+    <div class="row md-5 ml-1 mt-3 col-md-6">
+      <div for="radio1" class="radio-toolbar riskranges">
+        <input type="radio" id="radio3" name="radios" value="ira" (click)="setAccountType('ira')">
+        <label for="radio3" style="width: 100%;margin-bottom: 0px;padding: 5px;text-align: center;">
+          <h5>IRA</h5>
+          <p>Traditional or Roth</p>
+        </label>
+      </div>
+    </div>
+    <div class="row md-5 ml-1 mt-3 col-md-6">
+      <div for="radio1" class="radio-toolbar riskranges">
+        <input type="radio" id="radio4" name="radios" value="all">
+        <label for="radio4" style="width: 100%;margin-bottom: 0px;padding: 16px;text-align: center;">
+          <h5>Not Sure</h5>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="row md-5 ml-1 mt-3">
+    <span class="span-color">{{'RegisterRetirementAccountOptions' | translate}}</span>
+  </div>
+  <button type="button" class="goback-button" (click)="goBack()">{{'BackButton' | translate}}</button>
+  <button type="button" class="button" (click)="next()">{{'NextButton' | translate}}</button>
+</form>

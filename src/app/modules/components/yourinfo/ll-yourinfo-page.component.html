@@ -1,0 +1,110 @@
+<form #pageHeight autocomplete="off" [formGroup]="yourInfoForm" class="form-bottom" (ngSubmit)="next()">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <label class="label-color">{{'Name' | translate}}</label>
+            </div>
+        </div>
+        <div class="row md-5">
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <div class="left-border">
+                    <input type="text" class="form-control form-control-lg input-padding"
+                        formControlName="firstname"
+                        [ngClass]="{ 'is-invalid': isSubmitted && f.firstname.errors }" required>
+                    <span class="floating-label1">First Name</span>
+                </div>
+                <div *ngIf="isSubmitted && f.firstname.errors" class="text-danger">
+                    <div *ngIf="f.firstname.errors.required">Please enter First Name.</div>
+                    <div *ngIf="f.firstname.errors.pattern">Please enter valid First Name.</div>
+                    <div *ngIf="f.firstname.errors.minlength && !f.firstname.errors.pattern">Please input First Name with a minimum of 3 characters/First Name
+                        is too short.</div>
+                </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                <div class="left-border">
+                    <input type="text" class="form-control form-control-lg input-padding"
+                        formControlName="lastname"
+                        [ngClass]="{ 'is-invalid': isSubmitted && f.lastname.errors }" required>
+                    <span class="floating-label1">Last Name</span>
+                </div>
+                <div *ngIf="isSubmitted && f.lastname.errors" class="text-danger">
+                    <div *ngIf="f.lastname.errors.required">Please enter Last Name.</div>
+                    <div *ngIf="f.lastname.errors.pattern">Please enter valid Last Name.</div>
+                    <div *ngIf="f.lastname.errors.minlength && !f.lastname.errors.pattern">Please input Last Name with a minimum of 3 characters/Last Name is
+                        too short.</div>
+                </div>
+            </div>
+        </div>
+        <div class="row ml-1 mt-4">
+            <label class="label-color">{{'Age' | translate}}</label>
+        </div>
+        <div class="row md-5">
+            <div class="col-5 col-sm-5 col-md-5 col-lg-5 col-xl-4">
+                 <div class="left-border-calender">
+                    <div class="calenderInput">
+                    <input class="form-control form-control-lg" placeholder="MM/DD/YYYY" name="dob" formControlName="dob" ngbDatepicker #d="ngbDatepicker" [minDate]='minDate' [maxDate]='maxDate'>
+                    <span>
+                        <i class="fa fa-calendar" aria-hidden="true" (click)="d.toggle()"></i>
+                    </span>
+                </div>
+        </div>
+            <div *ngIf="calenderFormatErrMsg" class="text-danger">
+                Please enter date in MM/DD/YYYY format.
+            </div>
+            <div *ngIf="!calenderFormatErrMsg && (f.age.errors?.pattern || f.age.errors?.max)" class="text-danger">
+                Please enter valid date
+            </div>
+            
+            </div>
+            <div class="col- mt-1">
+                <hr class="someClass">
+            </div>
+            <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-3">
+                <div class="left-border">
+                    <input type="text" class="form-control form-control-lg" name="age" formControlName="age"
+                        [ngClass]="{ 'is-invalid': isSubmitted && f.age.errors || comparingAges }" (keyup)="modifyAge('age')" />
+                </div>
+                <div *ngIf="isSubmitted && f.age.errors" class="text-danger">
+                    <div *ngIf="f.age.errors.required">Please enter Date of Birth or Age.</div>
+                    <div *ngIf="f.age.errors.pattern">Please enter Age in digits</div>
+                    <div *ngIf="f.age.errors.min && !f.age.errors.pattern">
+                        Minimum value for Age should be >= 21
+                    </div>
+                    <div *ngIf="f.age.errors.max && !f.age.errors.pattern">
+                        Maximum value for Age Should be 130
+                    </div>
+                </div>
+                <div *ngIf="isSubmitted && !f.age.errors && comparingAges" class="text-danger">
+                    Age must not be greater than Retirement Age.
+                </div>
+            </div>
+            <div class="row ml-3 mt-1">
+                <span class="span-yourinfo-color">{{'DateofBirth' | translate}}</span>
+            </div>
+        </div>
+        <div class="row ml-1 mt-4">
+            <label class="label-color">{{'RetirementAge' | translate}}</label>
+        </div>
+        <div class="row md-5">
+            <div class="col-5 col-sm-5 col-md-4 col-lg-4 col-xl-3">
+                <div class="left-border">
+                    <input class="form-control form-control-lg" type="text" name="retirementAge"
+                        formControlName="retirementAge"
+                        [ngClass]="{ 'is-invalid': isSubmitted && f.retirementAge.errors }" maxlength="3"
+                        (keyup)="modifyAge('rAge')" />
+                </div>
+                <div *ngIf="isSubmitted && f.retirementAge.errors" class="text-danger">
+                    <div *ngIf="f.retirementAge.errors.required">Please enter Retirement Age.</div>
+                    <div *ngIf="f.retirementAge.errors.pattern">Please enter Retirement Age in digits</div>
+                    <div *ngIf="f.retirementAge.errors.min  && !f.retirementAge.errors.pattern">Minimum value
+                        for Retirement Age should be at least 55</div>
+                    <div *ngIf="f.retirementAge.errors.max && !f.retirementAge.errors.pattern">Maximum value for
+                        Retirement Age should be 100.</div>
+                </div>
+            </div>
+        </div>
+        <div class="ml-0 mt-3 span-footer-color">
+            <span>It means that you are <label class="color">{{yourInfoForm.value.age}} years young</label> and
+                you start to like Mondays again in <label class="color">{{ageDifference}} years!</label></span>
+        </div>
+        <button class="button" type="submit">{{'NextButton' | translate}}</button>
+    </form>

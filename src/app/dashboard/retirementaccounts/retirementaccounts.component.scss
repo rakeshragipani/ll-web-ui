@@ -1,0 +1,139 @@
+
+@import "../../../assets/styles/app/var.scss";
+
+.retirement-accounts-footer {
+    margin-top : 2em;
+}
+
+.navigation-btn {
+    color: rgb(43, 47, 49);
+}
+
+.retirement-accounts-content{
+    width : 80%;
+}
+
+.add-account-text{
+    margin-left : 6px !important;
+    color : $colorBlue;
+    font-weight: bolder;
+}
+
+.add-account {
+color : $colorBlue;
+}
+.plannertext{
+    margin-top: 0.3rem !important;
+}
+.pietextalignment{
+    margin-top: 3%;
+}
+.alignment{
+    margin-bottom: 0;
+}
+.graphtext{
+    color: #2a368e;
+}
+.textalignment{
+    margin-top: -5px;
+}
+
+.legal-documents-section-header {
+    color : $colorBlue;
+}
+
+.legal-documents{
+    tr {
+        background: #eeeff7;
+        border : 10px solid white;
+        border-right : 30px solid white;
+        width : 80%;
+    }
+
+    tr:first-child {
+        border-top : 0px;
+    }
+
+    td {
+        font-weight: bold;
+        color :$colorBlue;
+    }
+
+    .search-icon {
+        background : #a8aed6;
+        text-align: center;
+    }
+}
+
+.trash-icon {
+    display: block;
+    position: absolute;
+    bottom: 0px;
+    right: 18px;
+}
+
+.retirement-accounts-card-header {
+    img {
+        height : 80px;
+        width : 80px;
+    }
+    color : $colorBlue;
+    .inline-header{
+        display: inline;
+    }
+}
+.text-color{
+    color : $colorBlue !important;
+    font-style: oblique;
+    padding-left: 38px;
+    font-size: 20px;
+}
+.addbtn{
+    padding-left:10px; 
+}
+.add-credentials-btn{
+    background : $colorBlue !important;
+    
+
+    span {
+        color : white;
+        font-weight: bolder;
+    }
+    
+}
+.add-credentials-btn-margin{
+  margin-top: 1%;
+}
+.textcontent{
+    padding-left: 5%;
+}
+.retirementAccount{
+    margin-top: -2%;
+}
+.my-custom-class .tooltip-inner{
+max-width: 50px !important;
+}
+.retirementAccount h4{
+    color: $colorBlue;
+}
+.trashIcon{
+    margin-bottom: 2%;
+    cursor: pointer;
+}
+.textcontent img{
+    margin-top: -5%;
+    margin-bottom: 4%;
+}
+
+.horizontal-line {
+  border-top: 1px solid $colorBlue;
+}
+
+.update-credentials-btn{
+    background : $colorBlue !important;
+
+    span {
+        color : white;
+        font-weight: bolder;
+    }
+}

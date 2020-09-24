@@ -1,0 +1,69 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+    <head>
+        <title>RSA Encryption Utility</title>
+        <link href="css/style.css?v=0.4" rel="stylesheet" type="text/css" />
+        <SCRIPT src="E:/LeftLane_Project/LL_Angular_Code/ll-web-ui/src/assets/javascript/assests/javacript/encrypt.js"></SCRIPT>
+    
+    </head>
+    <body>
+        <div id='header'>
+            <div id="position-reference">
+                <div class="left-block">
+                    <a id="yi-logo" href="https://developer.yodlee.com/" target="_blank"><img src="images/logo-white.png" style="width: 50%;margin-top: 4%"/></a>
+                </div>
+                <div class="right-block">
+                    <H2 style="padding-top: 5%">RSA Encryption Utility</H2>
+                </div>
+            </div>
+        </div>   
+        <div id="content">
+            <div id="instructions">
+                <p>
+                    This utility can be used to generate encrypted data for the provided plain text.<br>
+                    Please paste the rsa public key provided by yodlee in the "RSA Public Key" field.
+                </p>
+                <p>
+                    The following data should be sent to yodlee in the encrypted format.
+                </p>
+                <ol type="a">
+                    <li>
+                        Add Account - Login and Password
+                    </li>
+                    <li>
+                        MFA - Answers for Security Q&A
+                    </li>
+                </ol>
+                <p>
+                    To get public key, please use API cobrand/publicKey
+                </p>
+
+            </div>
+            <FORM name="theForm">
+                <strong>Text</strong>:<br/>
+                <INPUT name="input" type="text" VALUE="" maxlength="87" size="65"> <BR>
+                <p>
+                    <INPUT VAlUE="Encrypt" TYPE="BUTTON" onClick="compute('encrypt');">
+                    <!--<INPUT VAlUE="Decrypt" TYPE="BUTTON" onClick="compute('decrypt');">-->
+                <P>
+                    <strong>Encrypted text</strong>:<br/>
+                    <TEXTAREA id="crypted" name="crypted" ROWS="10" COLS="65"></TEXTAREA> <BR>
+<br />
+<p>
+<strong>RSA Public Key</strong>:<br>
+<TEXTAREA id="public_key" name="public_key" ROWS="6" COLS="65"></TEXTAREA><BR>
+<br />
+<p>
+</FORM>
+            
+<script>
+    document.getElementById('public_key').value = public_key_1024;
+</script>
+<p/>
+
+<p/>
+</div>
+</body>
+</html>

@@ -1,0 +1,311 @@
+<div [ngClass]="{'common-content': pageSettings.isFromDashBoard}">
+    <form #pageHeight autocomplete="off" [formGroup]="SubscriptionPaage2Form" (ngSubmit)="getPaymentId()"
+        class="form-bottom">
+
+        <!-- SECTION TABS: BEGIN -->
+        <header class="tabs">
+            <div class="row mb-2">
+                <div class="col">
+                    <h5 class="subscription-label-color title_font mb-0 mb-0 mt-0">Become a member and get your
+                        results.
+                    </h5>
+                    <div class="subscription-span-sub-heading">
+                        <span>With full membership we will proceed with all changes based on your
+                            parameters.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="subscription-tab">
+                <div class="tab11">
+                    <h5>1. Select a plan</h5>
+                </div>
+                <div class="tab22 tab-active">
+                    <h5 class="active">2. Payment</h5>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- SECTION LABEL: BEGIN -->
+        <h6 class="form-section-label mb-0">BILLING CONTACT</h6>
+        <!-- NAME FIELD: BEGIN -->
+        <div class="row">
+            <div class="col-6 mt-2">
+                <label class="subscription-label-color mb-0">{{'First Name' | translate}}</label>
+                <div class="left-border">
+                    <input type="text" formControlName="firstName" class="form-control" placeholder="First name"
+                        [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" required />
+                </div>
+                <div *ngIf="submitted && f.firstName.errors" class="text-danger">
+                    <div *ngIf="f.firstName.errors.required" style="color: red;">Please enter First Name</div>
+                    <div *ngIf="f.firstName.errors.pattern" style="color: red;">Please enter valid First Name.
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 mt-2">
+                <label class="subscription-label-color mb-0">{{'Last Name' | translate}}</label>
+                <div class="left-border">
+                    <input type="text" formControlName="lastName" class="form-control" placeholder="Last name"
+                        [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" required />
+                </div>
+                <div *ngIf="submitted && f.lastName.errors" class="text-danger">
+                    <div *ngIf="f.lastName.errors.required" style="color: red;">Please enter Last Name.</div>
+                    <div *ngIf="f.lastName.errors.pattern" style="color: red;"> Please enter valid Last Name.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EMAIL FIELD: BEGIN -->
+        <div class="row">
+            <div class="col-12 mt-2">
+                <label class="subscription-label-color mb-0">{{'Email' | translate}}</label>
+                <div class="left-border">
+                    <input type="email" formControlName="email" class="form-control" placeholder="Enter valid email id"
+                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required />
+                </div>
+                <div *ngIf="submitted && f.email.errors" class="text-danger">
+                    <div *ngIf="f.email.errors.required" style="color: red;">Please enter Valid Email id.</div>
+                    <div *ngIf="f.email.errors.pattern || f.email.errors.email" style="color: red;"> Please
+                        enter valid Email id.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ADDRESS FIELD: BEGIN -->
+        <div class="row">
+            <div class="col-6 mt-2">
+                <label class="subscription-label-color mb-0">Address</label>
+                <div class="left-border">
+                    <input type="text" placeholder="Address" formControlName="address" class="form-control" />
+                </div>
+                <!-- <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+            <div *ngIf="f.address.errors.required" style="color: red;">Address is required</div>
+            <div *ngIf="f.address.errors.pattern" style="color: red;">Address is required</div>
+        </div> -->
+            </div>
+            <div class="col-6 mt-2">
+                <label class="subscription-label-color mb-0">Apt/Suite</label>
+                <div class="left-border">
+                    <input type="text" placeholder="Apt/Suite" formControlName="aptOrSuite" class="form-control" />
+                </div>
+                <!-- <div *ngIf="submitted && f.aptOrSuite.errors" class="invalid-feedback">
+            <div *ngIf="f.aptOrSuite.errors.required" style="color: red;">Apt/Suite is required</div>
+            <div *ngIf="f.aptOrSuite.errors.pattern" style="color: red;">Apt/Suite is required</div>
+        </div> -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 mt-2">
+                <label class="subscription-label-color mb-0">City</label>
+                <div class="left-border">
+                    <input type="text" placeholder="City" formControlName="city" class="form-control" />
+                </div>
+                <!-- <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+            <div *ngIf="f.city.errors.required" style="color: red;">City is required</div>
+            <div *ngIf="f.city.errors.pattern" style="color: red;">City is required</div>
+        </div> -->
+            </div>
+            <div class="col-6 mt-2">
+                <label class="subscription-label-color mb-0">State/Province</label>
+                <div class="left-border">
+                    <input type="text" placeholder="State/Province" formControlName="stateOrProvince"
+                        class="form-control" />
+                </div>
+                <!-- <div *ngIf="submitted && f.stateOrProvince.errors" class="invalid-feedback">
+            <div *ngIf="f.stateOrProvince.errors.required" style="color: red;">State/Province is required
+            </div>
+            <div *ngIf="f.stateOrProvince.errors.pattern" style="color: red;">State/Province is required
+            </div>
+        </div> -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4 mt-2">
+                <label class="subscription-label-color mb-0">Zip/Postal</label>
+                <div class="left-border">
+                    <input type="text" placeholder="Zip/Postal" maxlength="5" minlength="5"
+                        formControlName="zipOrPostal" class="form-control" [ngClass]="{ 'is-invalid': submitted &&
+                f.zipOrPostal.errors }" required />
+                </div>
+                <div *ngIf="submitted && f.zipOrPostal.errors" class="text-danger">
+                    <div *ngIf="f.zipOrPostal.errors.required" style="color: red;">Please enter Zip/Postal code.
+                    </div>
+                    <div *ngIf="f.zipOrPostal.errors.pattern || f.zipOrPostal.errors.minlength" style="color: red;">
+                        Please
+                        enter valid 5 digit
+                        Zip/Postal
+                        code.</div>
+                    <!-- <div *ngIf="f.zipOrPostal.errors.minlength" style="color: red;">Please enter 5 digit
+                Zip/Postal
+                code.
+            </div> -->
+                    <!-- <div *ngIf="f.zipOrPostal.errors.maxlength" style="color: red;">Max 5 digits only</div> -->
+                </div>
+            </div>
+            <!-- <div class="col-8 mt-2">
+        <label class="subscription-label-color mb-0">Country</label>
+        <div class="left-border">
+            <input type="text" placeholder="Country" formControlName="country"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.country.errors }" required />
+        </div>
+        <div *ngIf="submitted && f.country.errors" class="text-danger">
+            <div *ngIf="f.country.errors.required" style="color: red;">Please enter Country.</div>
+            <div *ngIf="f.country.errors.pattern" style="color: red;">Please enter valid County Name.</div>
+        </div>
+    </div> -->
+        </div>
+
+        <!-- SECTION LABEL: BEGIN -->
+        <h6 class="form-section-label mt-4">PAYMENT METHOD</h6>
+        <mat-radio-group aria-label="Select an option" class="row">
+            <div class="col">
+                <mat-radio-button value="bank" [checked]='true'><span class="icons-finance">
+                        <span class="icon-visa"></span>
+                        <span class="icon-amex"></span>
+                        <span class="icon-master"></span>
+                        <span class="icon-maestro"></span>
+                    </span></mat-radio-button>
+            </div>
+        </mat-radio-group>
+
+        <div class="row">
+            <div class="col">
+                <label class="subscription-label-color mb-0">Name</label>
+                <div class="left-border">
+                    <input type="text" placeholder="Enter name as per your account" formControlName="fullname"
+                        class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fullname.errors }" required
+                        (click)="paymentErr = null || paymentErrorMesg = null " />
+                </div>
+                <div *ngIf="submitted && f.fullname.errors" class="text-danger">
+                    <div *ngIf="f.fullname.errors.required" style="color: red;">Please enter Name as per your
+                        Account.</div>
+                    <div *ngIf="f.fullname.errors.pattern" style="color: red;">Please enter valid Name as per on
+                        your card.</div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-6 mt-2">
+                <label class="subscription-label-color mb-0" for="card-number">Credit Card Number</label>
+                <div class="left-border left-border-Strip" id="card-number">
+                    <input type="number" placeholder="Credit Card Number" class="form-control" />
+                </div>
+                <p class="stripErrMesg" id="cardErr"></p>
+            </div>
+            <div class="col-3 mt-2">
+                <label class="subscription-label-color mb-0" for="card-cvc">CVC</label>
+                <div class="left-border left-border-Strip" id="card-cvc">
+                    <input type="number" placeholder="CVC" class="form-control" />
+                </div>
+                <p class="stripErrMesg" id="cvcErr"></p>
+            </div>
+            <div class="col-3 mt-2">
+                <label class="subscription-label-color mb-0" for="card-expiry">Expiration Date</label>
+                <div class="left-border left-border-Strip" id="card-expiry">
+                    <input type="text" placeholder="MM" min="1" max="5" class="form-control" />
+                </div>
+                <p class="stripErrMesg" id="expiryErr"></p>
+            </div>
+        </div>
+
+        <div class="mt-4 mb-3">
+            <h6 class="form-section-label mt-4 mb-0">ORDER SUMMARY</h6>
+            <table class="subscription-summary">
+                <tr>
+                    <td *ngIf="paymentPlanDetails" class="left">
+                        <b style="font-size: 12px;font-weight: 700;
+            ">PROMO CODE {{paymentPlanDetails.planName}} Account</b><br>
+                        <b style="font-weight: lighter;">1 Account</b><br>
+                        <b *ngIf="paymentPlanDetails"
+                            style="font-weight:
+                    lighter;">${{paymentPlanDetails.totalPlanAmount}}/{{paymentPlanDetails.interval | titlecase}}ly/{{paymentPlanDetails.planName}}</b>
+                    </td>
+                    <td *ngIf="paymentPlanDetails" class="right"><b style="font-size: 12px;">( $
+                            {{paymentPlanDetails.couponAmountOff ? paymentPlanDetails.couponAmountOff : 0 }}
+                            )</b><br>
+                        <b style="font-size: 8px;">{{paymentPlanDetails.interval | titlecase}}ly</b><br>
+                        <i *ngIf="paymentPlanDetails.couponId" class="fa fa-info-circle" aria-hidden="true"
+                            style="font-size:14px;cursor: pointer;" data-toggle="modal" data-target="#promoCode"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td *ngIf="paymentPlanDetails" class="left"><b class="bold-char">Today’s
+                            Charge</b><br>{{paymentPlanDetails.interval | titlecase}}ly Charge</td>
+                    <td *ngIf="paymentPlanDetails" class="right"><b
+                            class="bold-char">${{paymentPlanDetails.totalPlanAmount}}</b><br><b
+                            style="font-size: 8px;">Before
+                            taxes</b><br>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- DEVIDER: HORIZONTAL -->
+        <!-- <div class="row"><div class="col"><div class="hr border-b border-blue"></div></div></div> -->
+
+
+        <div class="row">
+            <div class="col-12 mt-2">
+                <mat-checkbox formControlName="termsConditions" [ngClass]="{ 'is-invalid': submitted &&
+                f.termsConditions.errors }" required>I agree to the Privacy Policy and Terms of
+                    Service.
+                </mat-checkbox>
+                <div *ngIf="submitted && f.termsConditions.errors" class="text-danger">
+                    <div *ngIf="submitted && f.termsConditions.errors.required" style="color: red;">Kindly check
+                        Privacy Policy and Terms of Service.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="row mt-3">
+    <div class="col-12 text-right">
+        <div class="mb-3 border-t border-gray"></div>
+        <p class="font-weight-bold" style="color: #2a368e;">Check out our Privacy Policy.</p>
+    </div>
+
+</div> -->
+        <p *ngIf='paymentErrorMesg' class="stripErrMesg">{{paymentErrorMesg}}</p>
+        <!-- <p *ngIf="paymentErr" class="stripErrMesg">{{paymentErr}}</p> -->
+    </form>
+    <mat-spinner strokeWidth="3" [diameter]="25" *ngIf="showLoader"></mat-spinner>
+    <button type="button" class="button" (click)="goBack()">{{'BackButton' | translate}}</button>
+    <button type="button" class="button" (click)="getPaymentId()">Pay Now</button>
+</div>
+<!-- PromoCode Details Modal -->
+<div class="modal fade" id="promoCode" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="margin-left:150px;width: 500px">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Promo Code</h5>
+            </div>
+            <div class="modal-body">
+                <table class="subscription-summary promoCodeModal">
+                    <tr>
+                        <td class="left">
+                            <b class="bold-char_info">Total amount</b><br><br>
+                            <b class="bold-char_info">% of discount</b><br><br>
+                            <b class="bold-char_info">Amount saved by applying promo code</b><br><br>
+                        </td>
+                        <td class="right">
+                            <b class="bold-char_info">$ {{paymentPlanDetails.amount}}</b> <br><br>
+                            <b class="bold-char_info">{{paymentPlanDetails.couponOff ? paymentPlanDetails.couponOff:0 }}
+                                %</b> <br><br>
+                            <b class="bold-char_info">$
+                                {{paymentPlanDetails.couponAmountOff ? paymentPlanDetails.couponAmountOff : 0}}</b><br>
+                            <br>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
