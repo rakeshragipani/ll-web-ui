@@ -33,11 +33,16 @@ module.exports = function (config) {
     autoWatch: true,
     browsers: ['Chrome'],
     customLaunchers: {
-      ChromeHeadlessCI: {
-        base: 'ChromeHeadless',
-        flags: ['--no-sandbox']
-      }
+       ChromeHeadless: {
+        base: 'Chrome',
+        flags: [
+          '--headless','--disable-gpu',
+          '--no-sandbox',
+          '--remote-debugging-port=9222']
+     }
     },
-    singleRun: false
+    browsers: ['ChromeHeadless'],
+    singleRun: true,
+    restartOnFileChange: true
   });
 };
